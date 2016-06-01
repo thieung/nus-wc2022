@@ -173,6 +173,7 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    settingslogic (2.0.9)
     sexp_processor (4.7.0)
     slop (3.6.0)
     spring (1.7.1)
@@ -224,6 +225,7 @@ DEPENDENCIES
   rails_12factor (~> 0.0.3)
   rolify (~> 5.1)
   sass-rails (~> 5.0)
+  settingslogic (~> 2.0, >= 2.0.9)
   spring
   thin (~> 1.6, >= 1.6.4)
   uglifier (>= 1.3.0)

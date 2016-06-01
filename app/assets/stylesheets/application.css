@@ -11,9 +11,10 @@
  * file per style scope.
  *
  *= require reset
- *= require style
- *= require bootstrap
+ *= require base.min
+ *= require basic.min
+ *= require common
+ *= require teams
  *= require chosen
- *= require_tree .
  *= require_self
  */

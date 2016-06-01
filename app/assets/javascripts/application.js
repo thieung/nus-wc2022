@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
+//= require base.min
+//= require components
+//= require smartbanner.min
 //= require chosen.jquery
 //= require_tree .

@@ -9,6 +9,16 @@ Rails.application.routes.draw do
   end
 
   get 'home/index', to: 'home#index', as: :home
+  resources :matches, only: :show do
+    collection do
+      get :group_stage
+      get :round_of_16
+      get :quarter_final
+      get :semi_final
+      get :final
+    end
+  end
+  resources :statistics, only: :index
 
   root to: 'home#index'
 end

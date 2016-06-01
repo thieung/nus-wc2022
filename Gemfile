@@ -17,6 +17,7 @@ gem 'devise-async'
 gem 'haml-rails', '~> 0.9.0'
 gem 'rolify', '~> 5.1'
 gem 'cancancan', '~> 1.14'
+gem 'settingslogic', '~> 2.0', '>= 2.0.9'
 
 group :development, :test do
   gem 'byebug'

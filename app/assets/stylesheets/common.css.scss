@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'robotoB';
+  src: url('RobotoCondensed-Bold.eot');
+  src: local('â˜º'),
+  url('RobotoCondensed-Bold.ttf') format('truetype'),
+  url('RobotoCondensed-Bold.woff') format('woff'),
+  url('RobotoCondensed-Bold.svg#RobotoCondensed-Bold') format('svg');
+}
+@font-face {
+  font-family: 'robotoR';
+  src: url('RobotoCondensed-Regular.eot');
+  src: local('â˜º'),
+  url('RobotoCondensed-Regular.ttf') format('truetype'),
+  url('RobotoCondensed-Regular.woff') format('woff'),
+  url('RobotoCondensed-Regular.svg#RobotoCondensed-Regular') format('svg');
+}
+body{
+  font-family: 'robotoR',Helvetica,Arial,sans-serif;
+}
+.uefa-link, .uefa-link:focus{
+  color: #fff;
+}
+.money-for-final{
+  margin-bottom: 20px;
+}

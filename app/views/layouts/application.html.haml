@@ -1,0 +1,69 @@
+!!!
+%html
+  %head
+    %title Euro2016
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .container-fluid.main-wrap
+      / Content wrapper
+      .body.row
+        .content-wrap
+          / Matches strip
+          .matchstrip{"data-offset-bottom" => "0", "data-offset-top" => "40", "data-spy" => "affix"}
+          / Navigation
+          .navigation{style: "height: 182px;"}
+            %nav.navbar-lv2.d3-plugin{"data-plugin" => "navigation", role: "navigation"}
+              / Logo
+              .competition-logo
+                %a.logolink{href: root_path, title: "UEFA EURO 2016"} UEFA EURO 2016
+              / Navigation
+              .navbar-lv2-wrap.js-nav-wrap.affix
+                .container-fluid
+                  .competition-logo-affix
+                    %a.logolink{href: root_path, title: "UEFA EURO 2016"} UEFA EURO 2016
+                  %a.navbar-lv2-toggle.hidden-md.hidden-lg.js-toggle{href: "#"}
+                    %span.toggle-text Menu
+                    %span.toggle-hamburger
+                      %span.icon-bar
+                      %span.icon-bar
+                      %span.icon-bar
+                    %span.toggle-close.icon-close
+                  %ul.navbar-lv2-nav.js-nav
+                    %li.navbar-lv2-item.navbar-lv2-breadcrumb.hidden-md.hidden-lg{role: "presentation"}
+                      %a.navbar-lv2-item-link{href: root_path}
+                        Home
+                        %span.icon-arrow-thin-right
+                    %li.navbar-lv2-item.first-link.active{role: "presentation"}
+                      %a.navbar-lv2-item-link{href: root_path} Tất cả trận đấu
+                    %li.navbar-lv2-item{role: "presentation"}
+                      %a.navbar-lv2-item-link{href: group_stage_matches_path} Vòng bảng
+                    %li.navbar-lv2-item{role: "presentation"}
+                      %a.navbar-lv2-item-link{href: round_of_16_matches_path} Vòng 16 đội
+                    %li.navbar-lv2-item{role: "presentation"}
+                      %a.navbar-lv2-item-link{href: quarter_final_matches_path} Tứ kết
+                    %li.navbar-lv2-item{role: "presentation"}
+                      %a.navbar-lv2-item-link{href: semi_final_matches_path} Bán kết
+                    %li.navbar-lv2-item{role: "presentation"}
+                      %a.navbar-lv2-item-link{href: final_matches_path} Chung kết
+                    %li.navbar-lv2-item{role: "presentation"}
+                      %a.navbar-lv2-item-link{href: statistics_path} Bảng xếp hạng
+                    %li.navbar-lv2-item.last-link{role: "presentation"}
+                      - if current_user
+                        %a.navbar-lv2-item-link{href: ""} Thông tin cá nhân
+                      - else
+                        %a.navbar-lv2-item-link{href: ""} Đăng nhập
+          = yield
+          / Footer
+          %footer.footer-wrap{:xtcz => "Footer"}
+            %section.section.footer-bottom
+              .container-fluid
+                .col-xs-12
+                  / DISCLAIMER
+                  .footer-disclaimer
+                    %p{style: 'font-size: 16px;'} NUS Technology Long-term Event - Dự đoán tỷ số từng trận đấu.
+                    %p{style: 'font-size: 13px;'}
+                      Website sử dụng giao diện của
+                      %a.uefa-link{:href => "http://www.uefa.com/uefaeuro/", :target => "_blank"} UEFA.com
+            .watermark-footer

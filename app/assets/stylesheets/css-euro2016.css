@@ -1,0 +1,270 @@
+.head_euro{    position: relative;
+    background-image: -webkit-radial-gradient(top center,circle farthest-corner,#2c6a93,#000a34);
+    background-image: radial-gradient(circle farthest-corner at top center,#2c6a93,#000a34);
+    min-height: 70px;
+    padding: 0;}
+.head_euro:before {
+    background: url(http://img.uefa.com/imgml/2016/euro/bg_pattern.png) top center #007cba;
+    background-size: 100%;
+    opacity: .2;
+    filter: alpha(opacity=20);
+    z-index: 1;
+  content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+}
+.content_head_euro{position:relative;z-index:3}
+.menu_euro li{float:left;color:#fff}
+.menu_euro li a{font-family:'robotoR';font-size:16px;text-transform:uppercase;padding:0px 0 15px;display:inline-block;color:#fff;}
+.menu_euro li{margin-right:60px;}
+.menu_euro li:last-child{margin-right:0}
+.menu_euro li a:hover,.menu_euro li a.active{color:#ffea00;border-bottom:3px solid #ffea00;padding-bottom:12px}
+.content_euro{margin:0}
+.col440{width:450px;border-right:1px solid #ddd;padding-right:10px}
+.col190{width:190px;border-left:1px solid #ddd;padding-left:14px;margin-left:-1px}
+img{max-width:100%}
+.head_cate_euro{font-family:'robotoB';font-size:20px;text-transform:uppercase;color:#286795;line-height:20px;margin-bottom:15px}
+.list_hot_euro, .list_hot_euro h2, .list_hot_euro h3, .list_hot_euro h4{font-size:14px;}
+.list_hot_euro li{margin-top:10px;padding-top:10px;border-top:1px solid #ddd}
+.list_topeuro{border-top:1px solid #ddd;padding:15px 0;border-bottom:1px solid #ddd}
+.list_topeuro li{float:left;width:155px;margin-right:15px;}
+.list_topeuro li:last-child{margin-right:0}
+.soccer-schedule{margin-top:15px}
+
+.soccer-schedule>header:before, .soccer-schedule>header:after {
+  content: " ";
+  display: table
+}
+.soccer-schedule>header:after {
+  clear: both
+}
+.soccer-schedule>header {
+  zoom: 1
+}
+.soccer-schedule {
+  position: relative;
+
+}
+.soccer-schedule>header {
+  border-bottom: 4px solid #abd120;
+  width: 100%;
+  line-height: 35px
+}
+.soccer-schedule>header .title {
+  text-transform: uppercase;
+  font-size: 18px;
+  font-size: 18px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 35px;
+  padding-right: 17px;
+  padding: 0 13px;
+  display: inline-block;
+  float: left
+}
+.soccer-schedule .select-league {
+  width: 200px;
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+
+}
+.soccer-schedule .calendar {
+  text-align: center;
+  padding: 10px
+}
+.soccer-schedule .calendar>.wrap {
+  margin-top: 10px;
+  height: 194px;
+  overflow: hidden
+}
+.soccer-schedule .calendar a {
+  cursor: pointer
+}
+.soccer-schedule .calendar .prev {
+  background-position: 7px 5px;
+  float: left;
+  margin-left: -5px
+}
+.soccer-schedule .calendar .next {
+  background-position: -42px 5px;
+  float: right;
+  margin-right: -5px
+}
+.soccer-schedule .calendar ul {
+  vertical-align: middle;
+  display: inline-block
+}
+.soccer-schedule .calendar ul li {
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap
+}
+.soccer-schedule .calendar ul li a {
+  padding: 5px 7px;
+  display: block;
+  color: #000
+}
+.soccer-schedule .calendar ul li.active {
+  background-color: #abd120
+}
+.soccer-schedule .calendar ul li.active a {
+  padding: 5px 14px;
+  color: #fff
+}
+.soccer-schedule .soccer-table {
+  width: 100%;
+  border: 1px solid #ddd
+}
+.soccer-schedule .soccer-table td {
+  height: 30px;
+  line-height: 30px;
+  padding: 0
+}
+.soccer-schedule .soccer-table .league-name td {
+  width: 100%!important;
+  background-color: #ccc;
+  color: #fff;
+  text-align: left!important;
+  padding-left: 10px
+}
+.soccer-schedule .soccer-table a {
+  cursor: pointer
+}
+.soccer-schedule .soccer-table tr td {
+  text-align: center
+}
+.soccer-schedule .soccer-table tr td:nth-child(1) {
+  width: 10%;
+  text-align: left;
+  padding-left: 10px
+}
+.soccer-schedule .soccer-table tr td:nth-child(2) {
+  width: 35%;
+  text-align: right;
+  padding-right: 10px
+}
+.soccer-schedule .soccer-table tr td:nth-child(3) {
+  width: 5%
+}
+.soccer-schedule .soccer-table tr td:nth-child(4) {
+  width: 10%
+}
+.soccer-schedule .soccer-table tr td:nth-child(5) {
+  width: 5%
+}
+.soccer-schedule .soccer-table tr td:nth-child(6) {
+  padding-left: 10px;
+  width: 35%;
+  text-align: left
+}
+.soccer-schedule .soccer-table tr:nth-child(odd) {
+  background-color: #eee
+}
+.soccer-schedule .expand {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: right;
+  margin-top: 3px
+}
+.soccer-schedule .expand:hover {
+  color: #15a1b1
+}
+
+.soccer-landing {
+
+  position: relative
+}
+.soccer-landing a {
+  cursor: pointer
+}
+.soccer-landing>.select-league {
+  width: 145px;
+  height: 30px;
+  border-radius: 3px;
+  border: 0;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  left: 12px;
+  font-weight: 700;
+  font-size: 12px;
+  font-size: 12px;
+  font-size: 1.2rem
+}
+.soccer-landing .wrap {
+  height: 300px;
+  overflow: hidden;
+  border-left: 1px solid #e6e6e6;
+  border-right: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6
+}
+.soccer-landing .wrap::-webkit-scrollbar-button {
+width:0;
+height:0
+}
+.soccer-landing .wrap::-webkit-scrollbar {
+width:5px;
+height:5px
+}
+.soccer-landing .wrap::-webkit-scrollbar-thumb {
+background:#000000;
+background:rgba(0,0,0,.3);
+border:0 none #000;
+border-radius:50px
+}
+.soccer-landing table {
+  width: 100%
+}
+.soccer-landing table td {
+  height: 30px;
+  line-height: 30px;
+  text-align: center
+}
+.soccer-landing table .title {
+  background-color: #fff!important
+}
+.soccer-landing table .group td {
+  background-color: #999;
+  color: #fff;
+  text-align: left!important;
+  padding-left: 10px
+}
+.soccer-landing table tr.pos td:nth-child(1) {
+  width: 10%;
+  text-align: center
+}
+.soccer-landing table tr.pos td:nth-child(2) {
+  width: 60%;
+  text-align: left
+}
+.soccer-landing table tr.pos td:nth-child(3) {
+  width: 15%;
+  text-align: center
+}
+.soccer-landing table tr.pos td:nth-child(4) {
+  width: 15%;
+  text-align: center
+}
+.soccer-landing table tr.pos.top {
+  background-color: #eff6d3
+}
+.soccer-landing table tr:nth-child(odd) {
+  background-color: #eee
+}
+.soccer-landing .expand {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-align: right;
+  margin-top: 3px
+}
+.soccer-landing .expand:hover {
+  color: #15a1b1
+}

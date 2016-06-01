@@ -1,0 +1,26 @@
+defaults: &defaults
+  group_stage:
+    start: 2016/06/10
+    end: 2016/06/23
+  round_of_16:
+    start: 2016/06/25
+    end: 2016/06/28
+  quarter_final:
+    start: 2016/06/30
+    end: 2016/07/04
+  semi_final:
+    start: 2016/07/06
+    end: 2016/07/08
+  final:
+    start: 2016/07/10
+    end: 2016/07/11
+
+development:
+  <<: *defaults
+  neat_setting: 800
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

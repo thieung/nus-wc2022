@@ -1,0 +1,801 @@
+/ Main content
+.content
+  %section.section
+    .container-fluid
+      .section--content.clearfix
+        .row
+          .grid-box.col-xs-12.col-sm-12.col-md-10.col-lg-10.col-md-offset-1
+            = render "shared/total_money_for_final"
+            %header.box-header
+              %h2.section--title.bigTitle
+                Matches
+            .box-content.clearfix
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"0\", \"hour\": \"21\", \"day\": \"19\", \"month\": \"6\", \"year\": \"2016\", \"monthS\": \"June\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 20 June 2016
+              .matches
+                .match-row.d3-plugin.match-finalTrn.match-groupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"0\", \"hour\": \"21\", \"day\": \"19\", \"month\": \"6\", \"year\": \"2016\", \"monthS\": \"June\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000448/match=2017893/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Group stage
+                    .match.m_2017893.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2017893,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "1"}
+                      .team-home
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                        %span.team-flag.flag-SUI
+                      .text-center.match--score
+                        %span.js-tolocaltime.match--score_time{"data-status" => "1", "data-tag" => "HH:mm", "data-useformat" => "true"} 03:00
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 0
+                          \-
+                          %span.js-team--away-score 0
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-FRA
+                        .team-code
+                          FRA
+                        .team-name
+                          %span.team-name_name France
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+                  %a.match-row_group{:href => "/uefaeuro/season=2016/standings/round=2000448/group=2002441/index.html"}
+                    .match-group
+                      %span.group-label
+                        Group
+                      %span.group-name A
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"0\", \"hour\": \"18\", \"day\": \"15\", \"month\": \"6\", \"year\": \"2016\", \"monthS\": \"June\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 16 June 2016
+              .matches
+                .match-row.d3-plugin.match-finalTrn.match-groupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"0\", \"hour\": \"18\", \"day\": \"15\", \"month\": \"6\", \"year\": \"2016\", \"monthS\": \"June\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000448/match=2017886/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Group stage
+                    .match.m_2017886.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2017886,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "1"}
+                      .team-home
+                        .team-code
+                          ROU
+                        .team-name
+                          %span.team-name_name Romania
+                        %span.team-flag.flag-ROU
+                      .text-center.match--score
+                        %span.js-tolocaltime.match--score_time{"data-status" => "1", "data-tag" => "HH:mm", "data-useformat" => "true"} 00:00
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 0
+                          \-
+                          %span.js-team--away-score 0
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-SUI
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+                  %a.match-row_group{:href => "/uefaeuro/season=2016/standings/round=2000448/group=2002441/index.html"}
+                    .match-group
+                      %span.group-label
+                        Group
+                      %span.group-name A
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"0\", \"hour\": \"15\", \"day\": \"11\", \"month\": \"6\", \"year\": \"2016\", \"monthS\": \"June\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 11 June 2016
+              .matches
+                .match-row.d3-plugin.match-finalTrn.match-groupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"0\", \"hour\": \"15\", \"day\": \"11\", \"month\": \"6\", \"year\": \"2016\", \"monthS\": \"June\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000448/match=2017878/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Group stage
+                    .match.m_2017878.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2017878,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "1"}
+                      .team-home
+                        .team-code
+                          ALB
+                        .team-name
+                          %span.team-name_name Albania
+                        %span.team-flag.flag-ALB
+                      .text-center.match--score
+                        %span.js-tolocaltime.match--score_time{"data-status" => "1", "data-tag" => "HH:mm", "data-useformat" => "true"} 21:00
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 0
+                          \-
+                          %span.js-team--away-score 0
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-SUI
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+                  %a.match-row_group{:href => "/uefaeuro/season=2016/standings/round=2000448/group=2002441/index.html"}
+                    .match-group
+                      %span.group-label
+                        Group
+                      %span.group-name A
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"0\", \"hour\": \"18\", \"day\": \"3\", \"month\": \"6\", \"year\": \"2016\", \"monthS\": \"June\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 04 June 2016
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"0\", \"hour\": \"18\", \"day\": \"3\", \"month\": \"6\", \"year\": \"2016\", \"monthS\": \"June\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/friendlies/season=2016/matches/round=2000582/match=2019601/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Friendlies
+                    .match.m_2019601.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2019601,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "1"}
+                      .team-home
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                        %span.team-flag.flag-SUI
+                      .text-center.match--score
+                        %span.js-tolocaltime.match--score_time{"data-status" => "1", "data-tag" => "HH:mm", "data-useformat" => "true"} 00:00
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 0
+                          \-
+                          %span.js-team--away-score 0
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-MDA
+                        .team-code
+                          MDA
+                        .team-name
+                          %span.team-name_name Moldova
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"15\", \"hour\": \"16\", \"day\": \"28\", \"month\": \"5\", \"year\": \"2016\", \"monthS\": \"May\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 28 May 2016
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"15\", \"hour\": \"16\", \"day\": \"28\", \"month\": \"5\", \"year\": \"2016\", \"monthS\": \"May\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/friendlies/season=2016/matches/round=2000582/match=2019594/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Friendlies
+                    .match.m_2019594.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2019594,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                        %span.team-flag.flag-SUI
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 1
+                          \-
+                          %span.js-team--away-score 2
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--winner
+                        %span.team-flag.flag-BEL
+                        .team-code
+                          BEL
+                        .team-name
+                          %span.team-name_name Belgium
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"30\", \"hour\": \"20\", \"day\": \"29\", \"month\": \"3\", \"year\": \"2016\", \"monthS\": \"March\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 30 March 2016
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"30\", \"hour\": \"20\", \"day\": \"29\", \"month\": \"3\", \"year\": \"2016\", \"monthS\": \"March\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/friendlies/season=2016/matches/round=2000582/match=2019549/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Friendlies
+                    .match.m_2019549.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2019549,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                        %span.team-flag.flag-SUI
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 0
+                          \-
+                          %span.js-team--away-score 2
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--winner
+                        %span.team-flag.flag-BIH
+                        .team-code
+                          BIH
+                        .team-name
+                          %span.team-name_name Bosnia and Herzegovina
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"19\", \"day\": \"25\", \"month\": \"3\", \"year\": \"2016\", \"monthS\": \"March\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 26 March 2016
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"25\", \"month\": \"3\", \"year\": \"2016\", \"monthS\": \"March\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/friendlies/season=2016/matches/round=2000582/match=2019534/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Friendlies
+                    .match.m_2019534.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2019534,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home.match--winner
+                        .team-code
+                          IRL
+                        .team-name
+                          %span.team-name_name Republic of Ireland
+                        %span.team-flag.flag-IRL
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 1
+                          \-
+                          %span.js-team--away-score 0
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-SUI
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"17\", \"month\": \"11\", \"year\": \"2015\", \"monthS\": \"November\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 18 November 2015
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"17\", \"month\": \"11\", \"year\": \"2015\", \"monthS\": \"November\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/friendlies/season=2016/matches/round=2000582/match=2018559/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Friendlies
+                    .match.m_2018559.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2018559,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home
+                        .team-code
+                          AUT
+                        .team-name
+                          %span.team-name_name Austria
+                        %span.team-flag.flag-AUT
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 1
+                          \-
+                          %span.js-team--away-score 2
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--winner
+                        %span.team-flag.flag-SUI
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"13\", \"month\": \"11\", \"year\": \"2015\", \"monthS\": \"November\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 14 November 2015
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"13\", \"month\": \"11\", \"year\": \"2015\", \"monthS\": \"November\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/friendlies/season=2016/matches/round=2000582/match=2018566/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Friendlies
+                    .match.m_2018566.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2018566,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home.match--winner
+                        .team-code
+                          SVK
+                        .team-name
+                          %span.team-name_name Slovakia
+                        %span.team-flag.flag-SVK
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 3
+                          \-
+                          %span.js-team--away-score 2
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-SUI
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"21\", \"day\": \"12\", \"month\": \"10\", \"year\": \"2015\", \"monthS\": \"October\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 13 October 2015
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"12\", \"month\": \"10\", \"year\": \"2015\", \"monthS\": \"October\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000446/match=2014059/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Qualifying round (Group E)
+                    .match.m_2014059.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2014059,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home
+                        .team-code
+                          EST
+                        .team-name
+                          %span.team-name_name Estonia
+                        %span.team-flag.flag-EST
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 0
+                          \-
+                          %span.js-team--away-score 1
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--winner
+                        %span.team-flag.flag-SUI
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"9\", \"month\": \"10\", \"year\": \"2015\", \"monthS\": \"October\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 10 October 2015
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"9\", \"month\": \"10\", \"year\": \"2015\", \"monthS\": \"October\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000446/match=2014035/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Qualifying round (Group E)
+                    .match.m_2014035.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2014035,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home.match--winner
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                        %span.team-flag.flag-SUI
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 7
+                          \-
+                          %span.js-team--away-score 0
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-SMR
+                        .team-code
+                          SMR
+                        .team-name
+                          %span.team-name_name San Marino
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"19\", \"day\": \"8\", \"month\": \"9\", \"year\": \"2015\", \"monthS\": \"September\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 09 September 2015
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"8\", \"month\": \"9\", \"year\": \"2015\", \"monthS\": \"September\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000446/match=2014016/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Qualifying round (Group E)
+                    .match.m_2014016.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2014016,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home.match--winner
+                        .team-code
+                          ENG
+                        .team-name
+                          %span.team-name_name England
+                        %span.team-flag.flag-ENG
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 2
+                          \-
+                          %span.js-team--away-score 0
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-SUI
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"5\", \"month\": \"9\", \"year\": \"2015\", \"monthS\": \"September\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 06 September 2015
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"5\", \"month\": \"9\", \"year\": \"2015\", \"monthS\": \"September\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000446/match=2013992/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Qualifying round (Group E)
+                    .match.m_2013992.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2013992,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home.match--winner
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                        %span.team-flag.flag-SUI
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 3
+                          \-
+                          %span.js-team--away-score 2
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-SVN
+                        .team-code
+                          SVN
+                        .team-name
+                          %span.team-name_name Slovenia
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"21\", \"day\": \"14\", \"month\": \"6\", \"year\": \"2015\", \"monthS\": \"June\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 15 June 2015
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"14\", \"month\": \"6\", \"year\": \"2015\", \"monthS\": \"June\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000446/match=2013966/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Qualifying round (Group E)
+                    .match.m_2013966.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2013966,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home
+                        .team-code
+                          LTU
+                        .team-name
+                          %span.team-name_name Lithuania
+                        %span.team-flag.flag-LTU
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 1
+                          \-
+                          %span.js-team--away-score 2
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--winner
+                        %span.team-flag.flag-SUI
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"15\", \"hour\": \"20\", \"day\": \"10\", \"month\": \"6\", \"year\": \"2015\", \"monthS\": \"June\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 11 June 2015
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"15\", \"hour\": \"20\", \"day\": \"10\", \"month\": \"6\", \"year\": \"2015\", \"monthS\": \"June\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/friendlies/season=2016/matches/round=2000582/match=2016399/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Friendlies
+                    .match.m_2016399.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2016399,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home.match--winner
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                        %span.team-flag.flag-SUI
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 3
+                          \-
+                          %span.js-team--away-score 0
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-LIE
+                        .team-code
+                          LIE
+                        .team-name
+                          %span.team-name_name Liechtenstein
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"5\", \"hour\": \"18\", \"day\": \"31\", \"month\": \"3\", \"year\": \"2015\", \"monthS\": \"March\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 01 April 2015
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"5\", \"hour\": \"18\", \"day\": \"31\", \"month\": \"3\", \"year\": \"2015\", \"monthS\": \"March\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/friendlies/season=2016/matches/round=2000582/match=2016063/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Friendlies
+                    .match.m_2016063.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2016063,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                        %span.team-flag.flag-SUI
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 1
+                          \-
+                          %span.js-team--away-score 1
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-USA
+                        .team-code
+                          USA
+                        .team-name
+                          %span.team-name_name USA
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"27\", \"month\": \"3\", \"year\": \"2015\", \"monthS\": \"March\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 28 March 2015
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"27\", \"month\": \"3\", \"year\": \"2015\", \"monthS\": \"March\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000446/match=2013923/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Qualifying round (Group E)
+                    .match.m_2013923.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2013923,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home.match--winner
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                        %span.team-flag.flag-SUI
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 3
+                          \-
+                          %span.js-team--away-score 0
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-EST
+                        .team-code
+                          EST
+                        .team-name
+                          %span.team-name_name Estonia
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"18\", \"month\": \"11\", \"year\": \"2014\", \"monthS\": \"November\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 19 November 2014
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"18\", \"month\": \"11\", \"year\": \"2014\", \"monthS\": \"November\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/friendlies/season=2016/matches/round=2000582/match=2015328/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Friendlies
+                    .match.m_2015328.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2015328,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home
+                        .team-code
+                          POL
+                        .team-name
+                          %span.team-name_name Poland
+                        %span.team-flag.flag-POL
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 2
+                          \-
+                          %span.js-team--away-score 2
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-SUI
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"15\", \"month\": \"11\", \"year\": \"2014\", \"monthS\": \"November\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 16 November 2014
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"15\", \"month\": \"11\", \"year\": \"2014\", \"monthS\": \"November\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000446/match=2013904/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Qualifying round (Group E)
+                    .match.m_2013904.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2013904,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home.match--winner
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                        %span.team-flag.flag-SUI
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 4
+                          \-
+                          %span.js-team--away-score 0
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-LTU
+                        .team-code
+                          LTU
+                        .team-name
+                          %span.team-name_name Lithuania
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"14\", \"month\": \"10\", \"year\": \"2014\", \"monthS\": \"October\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 15 October 2014
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"14\", \"month\": \"10\", \"year\": \"2014\", \"monthS\": \"October\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000446/match=2013885/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Qualifying round (Group E)
+                    .match.m_2013885.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2013885,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home
+                        .team-code
+                          SMR
+                        .team-name
+                          %span.team-name_name San Marino
+                        %span.team-flag.flag-SMR
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 0
+                          \-
+                          %span.js-team--away-score 4
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--winner
+                        %span.team-flag.flag-SUI
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"9\", \"month\": \"10\", \"year\": \"2014\", \"monthS\": \"October\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 10 October 2014
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"9\", \"month\": \"10\", \"year\": \"2014\", \"monthS\": \"October\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000446/match=2013845/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Qualifying round (Group E)
+                    .match.m_2013845.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2013845,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home.match--winner
+                        .team-code
+                          SVN
+                        .team-name
+                          %span.team-name_name Slovenia
+                        %span.team-flag.flag-SVN
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 1
+                          \-
+                          %span.js-team--away-score 0
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--looser
+                        %span.team-flag.flag-SUI
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
+              %h3.match--date.d3-plugin{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"8\", \"month\": \"9\", \"year\": \"2014\", \"monthS\": \"September\"}}", "data-plugin" => "tolocaltime"}
+                %span.js-tolocaltime.match--score_time{"data-tag" => "dd MMMM yyyy", "data-useformat" => "true", :style => "width: 16px;"} 09 September 2014
+              .matches
+                .match-row.d3-plugin.match-notFinalTrn.match-notGroupStage.match-notFake.match-row--horizontal{"data-options" => "{\"targetDate\": {\"sec\": \"0\", \"min\": \"45\", \"hour\": \"20\", \"day\": \"8\", \"month\": \"9\", \"year\": \"2014\", \"monthS\": \"September\"}}", "data-plugin" => "tolocaltime"}
+                  %a.match-row_link{:href => "/uefaeuro/season=2016/matches/round=2000446/match=2013827/index.html"}
+                    .match-row_info
+                      .match-row_info-wrap
+                        .match-data-round
+                          %span.round-name
+                            Qualifying round (Group E)
+                    .match.m_2013827.match-row_match.d3-plugin{"data-options" => "{\"matchId\":2013827,\"lang\":\"en\",\"daas\":\"http://daas.stg.euro2016.infra.uefa.com\",\"daasApiKey\":null}", "data-plugin" => "matchlive", "data-status" => "0"}
+                      .team-home
+                        .team-code
+                          SUI
+                        .team-name
+                          %span.team-name_name Switzerland
+                        %span.team-flag.flag-SUI
+                      .text-center.match--score
+                        %span.match--score_score{"data-status" => "0,3,4,26"}
+                          %span.js-team--home-score> 0
+                          \-
+                          %span.js-team--away-score 2
+                        %span.match--score_null{"data-status" => "7,8"} -
+                        .js-match--minute.match--minute
+                      .team-away.match--winner
+                        %span.team-flag.flag-ENG
+                        .team-code
+                          ENG
+                        .team-name
+                          %span.team-name_name England
+                      .match-row_status.match--info
+                        %span.match-row_match-status
+                      .match-row_broadcaster
+                        %span.match-row_broadcaster_icon TBD
+                        %span.match-row_broadcaster_label TBD
