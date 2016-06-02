@@ -954,9 +954,7 @@
     font-size: 12.03703704px;
   }
 }
-.match-row_match .match--score > span {
-  display: none;
-}
+
 .match-row_match[data-status="1"] .match--score > span[data-status*="1"] {
   display: inline-block;
 }

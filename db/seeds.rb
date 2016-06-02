@@ -235,34 +235,34 @@ csv_teams.each do |row|
 end
 
 # Generate groups
-raw_data_groups = [{"title"=>"Group A", "pos"=>1},
- {"title"=>"Group B", "pos"=>2},
- {"title"=>"Group C", "pos"=>3},
- {"title"=>"Group D", "pos"=>4},
- {"title"=>"Group E", "pos"=>5},
- {"title"=>"Group F", "pos"=>6}]
+raw_data_groups = [{"title"=>"Group A", "title_vi" => "Bảng A", "pos"=>1},
+ {"title"=>"Group B", "title_vi" => "Bảng B", "pos"=>2},
+ {"title"=>"Group C", "title_vi" => "Bảng C", "pos"=>3},
+ {"title"=>"Group D", "title_vi" => "Bảng D", "pos"=>4},
+ {"title"=>"Group E", "title_vi" => "Bảng E", "pos"=>5},
+ {"title"=>"Group F", "title_vi" => "Bảng F", "pos"=>6}]
 raw_data_groups.each do |attribute|
   Group.create(attribute)
 end
 
 # Generate rounds
-raw_data_rounds = [{"title"=>"Matchday 1", "pos"=>1, "start_at"=>"2016-06-11", "end_at"=>"2016-06-11", "money_rate"=>10000},
- {"title"=>"Matchday 2", "pos"=>2, "start_at"=>"2016-06-12", "end_at"=>"2016-06-12", "money_rate"=>10000},
- {"title"=>"Matchday 3", "pos"=>3, "start_at"=>"2016-06-13", "end_at"=>"2016-06-13", "money_rate"=>10000},
- {"title"=>"Matchday 4", "pos"=>4, "start_at"=>"2016-06-14", "end_at"=>"2016-06-14", "money_rate"=>10000},
- {"title"=>"Matchday 5", "pos"=>5, "start_at"=>"2016-06-15", "end_at"=>"2016-06-15", "money_rate"=>10000},
- {"title"=>"Matchday 6", "pos"=>6, "start_at"=>"2016-06-16", "end_at"=>"2016-06-16", "money_rate"=>10000},
- {"title"=>"Matchday 7", "pos"=>7, "start_at"=>"2016-06-17", "end_at"=>"2016-06-17", "money_rate"=>10000},
- {"title"=>"Matchday 8", "pos"=>8, "start_at"=>"2016-06-18", "end_at"=>"2016-06-18", "money_rate"=>10000},
- {"title"=>"Matchday 9", "pos"=>9, "start_at"=>"2016-06-19", "end_at"=>"2016-06-19", "money_rate"=>10000},
- {"title"=>"Matchday 10", "pos"=>10, "start_at"=>"2016-06-20", "end_at"=>"2016-06-20", "money_rate"=>10000},
- {"title"=>"Matchday 11", "pos"=>11, "start_at"=>"2016-06-21", "end_at"=>"2016-06-21", "money_rate"=>10000},
- {"title"=>"Matchday 12", "pos"=>12, "start_at"=>"2016-06-22", "end_at"=>"2016-06-22", "money_rate"=>10000},
- {"title"=>"Matchday 13", "pos"=>13, "start_at"=>"2016-06-23", "end_at"=>"2016-06-23", "money_rate"=>10000},
- {"title"=>"Round of 16", "pos"=>14, "start_at"=>"2016-06-25", "end_at"=>"2016-06-28", "money_rate"=>20000},
- {"title"=>"Quarter-finals", "pos"=>15, "start_at"=>"2016-07-01", "end_at"=>"2016-07-04", "money_rate"=>30000},
- {"title"=>"Semi-finals", "pos"=>16, "start_at"=>"2016-07-07", "end_at"=>"2016-07-08", "money_rate"=>40000},
- {"title"=>"Final", "pos"=>17, "start_at"=>"2016-07-11", "end_at"=>"2016-07-11", "money_rate"=>50000}]
+raw_data_rounds = [{"title"=>"Matchday 1", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>1, "start_at"=>"2016-06-11", "end_at"=>"2016-06-11", "money_rate"=>10000},
+ {"title"=>"Matchday 2", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>2, "start_at"=>"2016-06-12", "end_at"=>"2016-06-12", "money_rate"=>10000},
+ {"title"=>"Matchday 3", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>3, "start_at"=>"2016-06-13", "end_at"=>"2016-06-13", "money_rate"=>10000},
+ {"title"=>"Matchday 4", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>4, "start_at"=>"2016-06-14", "end_at"=>"2016-06-14", "money_rate"=>10000},
+ {"title"=>"Matchday 5", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>5, "start_at"=>"2016-06-15", "end_at"=>"2016-06-15", "money_rate"=>10000},
+ {"title"=>"Matchday 6", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>6, "start_at"=>"2016-06-16", "end_at"=>"2016-06-16", "money_rate"=>10000},
+ {"title"=>"Matchday 7", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>7, "start_at"=>"2016-06-17", "end_at"=>"2016-06-17", "money_rate"=>10000},
+ {"title"=>"Matchday 8", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>8, "start_at"=>"2016-06-18", "end_at"=>"2016-06-18", "money_rate"=>10000},
+ {"title"=>"Matchday 9", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>9, "start_at"=>"2016-06-19", "end_at"=>"2016-06-19", "money_rate"=>10000},
+ {"title"=>"Matchday 10", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>10, "start_at"=>"2016-06-20", "end_at"=>"2016-06-20", "money_rate"=>10000},
+ {"title"=>"Matchday 11", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>11, "start_at"=>"2016-06-21", "end_at"=>"2016-06-21", "money_rate"=>10000},
+ {"title"=>"Matchday 12", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>12, "start_at"=>"2016-06-22", "end_at"=>"2016-06-22", "money_rate"=>10000},
+ {"title"=>"Matchday 13", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>13, "start_at"=>"2016-06-23", "end_at"=>"2016-06-23", "money_rate"=>10000},
+ {"title"=>"Round of 16", title_vi: "Vòng 16 đội", is_group_stage: false, "pos"=>14, "start_at"=>"2016-06-25", "end_at"=>"2016-06-28", "money_rate"=>20000},
+ {"title"=>"Quarter-finals", title_vi: "Tứ kết", is_group_stage: false, "pos"=>15, "start_at"=>"2016-07-01", "end_at"=>"2016-07-04", "money_rate"=>30000},
+ {"title"=>"Semi-finals", title_vi: "Bán kết", is_group_stage: false, "pos"=>16, "start_at"=>"2016-07-07", "end_at"=>"2016-07-08", "money_rate"=>40000},
+ {"title"=>"Final", title_vi: "Chung kết", is_group_stage: false, "pos"=>17, "start_at"=>"2016-07-11", "end_at"=>"2016-07-11", "money_rate"=>50000}]
 raw_data_rounds.each do |attribute|
   Round.create(attribute)
 end
@@ -285,6 +285,8 @@ csv_matches.each do |row|
     play_at: DateTime.parse(row['play_at']),
     team1_id: row['team1_title_vi'].present? ? Team.find_by_title_vi(row['team1_title_vi']).try(:id) : nil,
     team2_id: row['team2_title_vi'].present? ? Team.find_by_title_vi(row['team2_title_vi']).try(:id) : nil,
+    unknown_team1_title_vi: row['unknown_team1_title_vi'],
+    unknown_team2_title_vi: row['unknown_team2_title_vi'],
     round_id: Round.find_by_pos(row['round_pos']).try(:id),
     group_id: Group.find_by_pos(row['group_pos']).try(:id)
   )

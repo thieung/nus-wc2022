@@ -12,15 +12,7 @@ Rails.application.routes.draw do
 
   get 'home/index', to: 'home#index', as: :home
   get 'predict_champion', to: 'home#predict_champion', as: :predict_champion
-  resources :matches, only: :show do
-    collection do
-      get :group_stage
-      get :round_of_16
-      get :quarter_final
-      get :semi_final
-      get :final
-    end
-  end
+  resources :matches, only: [:index, :show]
   resources :statistics, only: :index
   resources :users do
     member do
@@ -28,5 +20,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: 'home#index'
+  root to: 'matches#index'
 end

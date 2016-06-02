@@ -7,4 +7,14 @@ class Game < ActiveRecord::Base
 
   scope :not_locked, -> { where(locked: false) }
   scope :ordered, -> {order(:pos)}
+  scope :all_matches, -> { where(pos: [1..51]) }
+  scope :group_stage, -> { where(pos: [1..36]) }
+  scope :round_of_16, -> { where(pos: [37..44]) }
+  scope :quarter_final, -> { where(pos: [45..48]) }
+  scope :semi_final, -> { where(pos: [49, 50]) }
+  scope :final, -> { where(pos: 51) }
+
+  def valid?
+    team1_id && team2_id
+  end
 end

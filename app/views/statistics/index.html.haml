@@ -1,0 +1,25 @@
+%h3.text-center{style: "margin: 20px 0 5px 0;"}
+  THỐNG KÊ TOP TRIỆU PHÚ, TRỌC PHÚ MÙA EURO 2016
+%p.text-center{style: "margin-bottom: 20px;"} (Đơn vị tiền tệ: VNĐ)
+%p * Click vào từng hàng để xem thống kê chi tiết từng trận đấu
+.table-responsive.statistics-table
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th #
+        %th Nhà đầu tư
+        %th.text-center Số trận tham gia
+        %th.text-center Tổng tỉ số đã cược
+        %th.text-center Tổng tiền đầu tư
+        %th.text-center Tổng tiền thắng cược
+        %th.text-center Tổng lợi nhuận
+    %tbody
+      - @statistics.each_with_index do |record, index|
+        %tr{class: index == 0 ? "success bold-win" : ([1,2].include?(index) ? 'active' : (@statistics.size-1 == index ? 'danger bold-lose' : ([@statistics.size-2, @statistics.size-3].include?(index) ? 'warning' : ''))), "data-url" => user_statistics_url(record[:user])}
+          %td= index+1
+          %td= record[:user].full_name
+          %td.text-center= record[:total_matches]
+          %td.text-center= record[:total_scores]
+          %td.text-center= number_with_delimiter(record[:total_money_bet], delimiter: '.')
+          %td.text-center= number_with_delimiter(record[:total_money_win], delimiter: '.')
+          %td.text-center= number_with_delimiter(record[:total_money_profits], delimiter: '.')

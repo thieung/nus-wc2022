@@ -18,6 +18,7 @@ gem 'haml-rails', '~> 0.9.0'
 gem 'rolify', '~> 5.1'
 gem 'cancancan', '~> 1.14'
 gem 'settingslogic', '~> 2.0', '>= 2.0.9'
+gem 'rails-i18n', '~> 4.0', '>= 4.0.8'
 
 group :development, :test do
   gem 'byebug'

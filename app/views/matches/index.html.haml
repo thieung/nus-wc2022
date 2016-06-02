@@ -8,7 +8,7 @@
             = render "shared/total_money_for_final"
             %header.box-header
               %h2.section--title.bigTitle
-                Các trận đấu
+                = I18n.t("common.#{@type}")
             .box-content.clearfix
               - @all_matches.each do |occur_date, games|
                 %h3.match--date
@@ -17,7 +17,7 @@
                 .matches
                   - games.sort_by(&:pos).each do |game|
                     .match-row.match-row--horizontal.match-finalTrn.match-groupStage.match-notFake
-                      %a.match-row_link{href: game.valid? ? match_path(game.id) : 'javascrip:;'}
+                      %a.match-row_link{href: game.valid? ? match_path(game.id) : 'javascript:;'}
                         .match-row_info
                           .match-row_info-wrap
                             .match-data-round
@@ -26,7 +26,9 @@
                         .match.match-row_match
                           - team1 = @teams[game.team1_id]
                           - team2 = @teams[game.team2_id]
-                          .team-home
+                          - team1_class = game.winner ? (game.winner == game.team1_id ? 'match--winner' : 'match--loser') : ''
+                          - team2_class = game.winner ? (game.winner == game.team2_id ? 'match--winner' : 'match--loser') : ''
+                          .team-home{class: "#{team1_class}"}
                             .team-code
                               = team1.try(:code)
                             .team-name
@@ -40,7 +42,7 @@
                                 %span.js-team--away-score= game.score2
                             - else
                               %span.match--score_time= game.play_at.strftime("%H:%M")
-                          .team-away.match--looser
+                          .team-away{class: "#{team2_class}"}
                             %span.team-flag{class: "flag-#{team2.try(:code)}"}
                             .team-code
                               = team2.try(:code)

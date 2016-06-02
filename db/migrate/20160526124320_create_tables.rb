@@ -32,6 +32,7 @@ class CreateTables < ActiveRecord::Migration
 
     create_table :groups do |t|
       t.string :title
+      t.string :title_vi
       t.integer :pos
     end
 
@@ -50,10 +51,12 @@ class CreateTables < ActiveRecord::Migration
 
     create_table :rounds do |t|
       t.string :title
+      t.string :title_vi
       t.integer :pos
       t.integer :money_rate, default: 0
       t.date :start_at
       t.date :end_at
+      t.boolean :is_group_stage, default: true
     end
 
     create_table :games do |t|
@@ -62,6 +65,8 @@ class CreateTables < ActiveRecord::Migration
       t.integer :pos
       t.integer :team1_id
       t.integer :team2_id
+      t.string :unknown_team1_title_vi
+      t.string :unknown_team2_title_vi
       t.datetime :play_at
       t.integer :score1
       t.integer :score2

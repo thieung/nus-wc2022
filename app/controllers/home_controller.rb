@@ -1,6 +1,9 @@
 class HomeController < ApplicationController
   def index
-    today = Date.today
+    today   = Date.today
+    @groups  = Group.all.index_by(&:id)
+    @rounds = Round.all.index_by(&:id)
+    @teams  = Team.all.index_by(&:id)
     if Date.parse(Settings.group_stage.start) <= today && today >= Date.parse(Settings.group_stage.end)
       redirect_to group_stage_matches_path and return
     elsif Date.parse(Settings.round_of_16.start) <= today && today >= Date.parse(Settings.round_of_16.end)
@@ -12,7 +15,7 @@ class HomeController < ApplicationController
     elsif Date.parse(Settings.final.start) <= today && today >= Date.parse(Settings.final.end)
       redirect_to final_matches_path and return
     else
-      @all_matches = Game.ordered
+      @all_matches = Game.select("games.*, date(play_at) as occur_date").group_by(&:occur_date)
     end
   end
 

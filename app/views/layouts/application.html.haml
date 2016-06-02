@@ -35,18 +35,18 @@
                       %a.navbar-lv2-item-link{href: root_path}
                         Home
                         %span.icon-arrow-thin-right
-                    %li.navbar-lv2-item.first-link{role: "presentation", class: "#{controller_name == 'home' && action_name == 'index' ? 'active' : ''}"}
+                    %li.navbar-lv2-item.first-link{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type].blank? ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: root_path} Tất cả trận đấu
-                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'group_stage' ? 'active' : ''}"}
-                      %a.navbar-lv2-item-link{href: group_stage_matches_path} Vòng bảng
-                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'round_of_16' ? 'active' : ''}"}
-                      %a.navbar-lv2-item-link{href: round_of_16_matches_path} Vòng 16 đội
-                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'quarter_final' ? 'active' : ''}"}
-                      %a.navbar-lv2-item-link{href: quarter_final_matches_path} Tứ kết
-                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'semi_final' ? 'active' : ''}"}
-                      %a.navbar-lv2-item-link{href: semi_final_matches_path} Bán kết
-                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'final' ? 'active' : ''}"}
-                      %a.navbar-lv2-item-link{href: final_matches_path} Chung kết
+                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'group_stage' ? 'active' : ''}"}
+                      %a.navbar-lv2-item-link{href: matches_path({type: 'group_stage'})} Vòng bảng
+                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'round_of_16' ? 'active' : ''}"}
+                      %a.navbar-lv2-item-link{href: matches_path({type: 'round_of_16'})} Vòng 16 đội
+                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'quarter_final' ? 'active' : ''}"}
+                      %a.navbar-lv2-item-link{href: matches_path({type: 'quarter_final'})} Tứ kết
+                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'semi_final' ? 'active' : ''}"}
+                      %a.navbar-lv2-item-link{href: matches_path({type: 'semi_final'})} Bán kết
+                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'final' ? 'active' : ''}"}
+                      %a.navbar-lv2-item-link{href: matches_path({type: 'final'})} Chung kết
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'home' && action_name == 'predict_champion' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: predict_champion_path} Dự đoán đội vô địch
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'statistics' && action_name == 'index' ? 'active' : ''}"}
@@ -58,15 +58,15 @@
                       %li.navbar-lv2-item.last-link{role: "presentation", class: "#{controller_name == 'sessions' && action_name == 'new' ? 'active' : ''}"}
                         %a.navbar-lv2-item-link{href: login_path} Đăng nhập
           = yield
-          / Footer
-          %footer.footer-wrap{:xtcz => "Footer"}
-            %section.section.footer-bottom
-              .container-fluid
-                .col-xs-12
-                  / DISCLAIMER
-                  .footer-disclaimer
-                    %p{style: 'font-size: 16px;'} NUS Technology Long-term Event - Dự đoán tỷ số từng trận đấu.
-                    %p{style: 'font-size: 13px;'}
-                      Website sử dụng giao diện của
-                      %a.uefa-link{:href => "http://www.uefa.com/uefaeuro/", :target => "_blank"} UEFA.com
-            .watermark-footer
+        / Footer
+        %footer.footer-wrap{:xtcz => "Footer"}
+          %section.section.footer-bottom
+            .container-fluid
+              .col-xs-12
+                / DISCLAIMER
+                .footer-disclaimer
+                  %p{style: 'font-size: 16px;'} NUS Technology Long-term Event - Dự đoán tỷ số từng trận đấu.
+                  %p{style: 'font-size: 13px;'}
+                    Website sử dụng giao diện của
+                    %a.uefa-link{:href => "http://www.uefa.com/uefaeuro/", :target => "_blank"} UEFA.com
+          .watermark-footer

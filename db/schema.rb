@@ -50,18 +50,21 @@ ActiveRecord::Schema.define(version: 20160527061706) do
     t.integer  "pos"
     t.integer  "team1_id"
     t.integer  "team2_id"
+    t.string   "unknown_team1_title_vi"
+    t.string   "unknown_team2_title_vi"
     t.datetime "play_at"
     t.integer  "score1"
     t.integer  "score2"
     t.integer  "score_id"
     t.integer  "winner"
-    t.boolean  "locked",     default: false
+    t.boolean  "locked",                 default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "groups", force: :cascade do |t|
     t.string  "title"
+    t.string  "title_vi"
     t.integer "pos"
   end
 
@@ -94,10 +97,12 @@ ActiveRecord::Schema.define(version: 20160527061706) do
 
   create_table "rounds", force: :cascade do |t|
     t.string  "title"
+    t.string  "title_vi"
     t.integer "pos"
-    t.integer "money_rate", default: 0
+    t.integer "money_rate",     default: 0
     t.date    "start_at"
     t.date    "end_at"
+    t.boolean "is_group_stage", default: true
   end
 
   create_table "scores", force: :cascade do |t|
