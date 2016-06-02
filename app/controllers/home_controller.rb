@@ -15,4 +15,8 @@ class HomeController < ApplicationController
       @all_matches = Game.ordered
     end
   end
+
+  def predict_champion
+
+  end
 end

@@ -15,6 +15,7 @@
  *= require basic.min
  *= require common
  *= require teams
+ *= require matches
  *= require chosen
  *= require_self
  */
