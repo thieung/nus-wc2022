@@ -1,19 +1,20 @@
-%h2 Change your password
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-  = devise_error_messages!
-  = f.hidden_field :reset_password_token
-  .field
-    = f.label :password, "New password"
-    %br/
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-      %br/
-    = f.password_field :password, autofocus: true, autocomplete: "off"
-  .field
-    = f.label :password_confirmation, "Confirm new password"
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .actions
-    = f.submit "Change my password"
-= render "devise/shared/links"
+.grid-box.col-xs-12.col-sm-12.col-md-6.col-lg-6.col-md-offset-3
+  %header.box-header
+    %h2.section--title.bigTitle Thay đổi mật khẩu
+  .box-content.clearfix
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      = devise_error_messages!
+      = f.hidden_field :reset_password_token
+      .form-group
+        %label.sr-only{for: "user_password"} Mật khẩu mới
+        - if @minimum_password_length
+          %em
+            * Mật khẩu tối thiểu là #{@minimum_password_length} ký tự
+          %br/
+          %br/
+        = f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control', placeholder: "Mật khẩu mới"
+      .form-group
+        %label.sr-only{for: "user_password_confirmation"} Xác nhận mật khẩu mới
+        = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: "Xác nhận mật khẩu mới"
+      .form-group.clear-both.pull-right
+        %button.btn.btn-primary.submit-btn-custom{type: "submit"} Cập nhật

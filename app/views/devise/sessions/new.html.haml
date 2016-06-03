@@ -1,40 +1,21 @@
-.content
-  %section.section
-    .container-fluid
-      .section--content.clearfix
-        .row
-          .grid-box.col-xs-12.col-sm-12.col-md-6.col-lg-6.col-md-offset-3
-            %header.box-header
-              %h2.section--title.bigTitle
-                Đăng nhập
-            .box-content.clearfix
-              = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-                .field.form-group
-                  = f.label :email
-                  %br/
-                  = f.email_field :email, autofocus: true, class: 'form-control'
-                .field.form-group
-                  = f.label :password
-                  %br/
-                  = f.password_field :password, autocomplete: "off", class: 'form-control'
-                - if devise_mapping.rememberable?
-                  .field.form-group
-                    = f.check_box :remember_me
-                    = f.label :remember_me
-                .actions.form-group
-                  = f.submit "Log in"
-              .form-group{"data-js" => "login-input"}
-                %label.sr-only{:for => "uefa-login-email"} Email
-                %input#uefa-login-email.form-control{:maxlength => "50", :name => "Email", :placeholder => "Email", :type => "email", :value => ""}/
-              .form-group{"data-js" => "login-input"}
-                %label.sr-only{:for => "uefa-login-password"} Password
-                %input#uefa-login-password.form-control{:maxlength => "50", :name => "Password", :placeholder => "Password", :type => "password", :value => ""}/
-              .form-group
-                .checkbox
-                  %input#uefa-login-keep{:name => "keeplogin", :type => "checkbox"}/
-                  %label{:for => "uefa-login-keep"}
-                    Keep me signed in
-                %a#uefa-login-forgot.uefa-login-pw-forgot.more-link-inverse{:href => "http://user.uefa.com/ForgottenPassword"} Forgot your password?
-              .form-group
-                %button.btn.btn-primary.submit-login-btn{:type => "submit"}
-                  Login
+.grid-box.col-xs-12.col-sm-12.col-md-6.col-lg-6.col-md-offset-3
+  %header.box-header
+    %h2.section--title.bigTitle
+      Đăng nhập
+  .box-content.clearfix
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      = devise_error_messages!
+      .form-group
+        %label.sr-only{for: "login_input"} Email
+        = f.text_field :login, autofocus: true, id: 'login_input', class: 'form-control', placeholder: "Username or Email"
+      .form-group
+        %label.sr-only{for: "password_input"} Password
+        = f.password_field :password, autocomplete: "off", id: 'password_input', class: 'form-control', placeholder: "Password"
+      - if devise_mapping.rememberable?
+        .form-group
+          .checkbox.pull-left
+            = f.check_box :remember_me
+            = f.label :remember_me
+        %a#forgot_password.pull-right.uefa-login-pw-forgot.more-link-inverse{href: new_password_path(resource_name)} Quên mật khẩu?
+      .form-group.clear-both.pull-right
+        %button.btn.btn-primary.submit-btn-custom{type: "submit"} Đăng nhập

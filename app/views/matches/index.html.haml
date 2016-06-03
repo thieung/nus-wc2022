@@ -1,56 +1,50 @@
-/ Main content
-.content
-  %section.section
-    .container-fluid
-      .section--content.clearfix
-        .row
-          .grid-box.col-xs-12.col-sm-12.col-md-10.col-lg-10.col-md-offset-1
-            = render "shared/total_money_for_final"
-            %header.box-header
-              %h2.section--title.bigTitle
-                = I18n.t("common.#{@type}")
-            .box-content.clearfix
-              - @all_matches.each do |occur_date, games|
-                %h3.match--date
-                  %span.js-tolocaltime.match--score_time
-                    = I18n.localize(occur_date, format: :full)
-                .matches
-                  - games.sort_by(&:pos).each do |game|
-                    .match-row.match-row--horizontal.match-finalTrn.match-groupStage.match-notFake
-                      %a.match-row_link{href: game.valid? ? match_path(game.id) : 'javascript:;'}
-                        .match-row_info
-                          .match-row_info-wrap
-                            .match-data-round
-                              %span.round-name
-                                = @rounds[game.round_id].is_group_stage? ? @groups[game.group_id].title_vi : @rounds[game.round_id].title_vi
-                        .match.match-row_match
-                          - team1 = @teams[game.team1_id]
-                          - team2 = @teams[game.team2_id]
-                          - team1_class = game.winner ? (game.winner == game.team1_id ? 'match--winner' : 'match--loser') : ''
-                          - team2_class = game.winner ? (game.winner == game.team2_id ? 'match--winner' : 'match--loser') : ''
-                          .team-home{class: "#{team1_class}"}
-                            .team-code
-                              = team1.try(:code)
-                            .team-name
-                              %span.team-name_name= team1.try(:title_vi)||team1.try(:title)||game.unknown_team1_title_vi
-                            %span.team-flag{class: "flag-#{team1.try(:code)}"}
-                          .text-center.match--score
-                            - if game.score_id
-                              %span.match--score_score
-                                %span.js-team--home-score= game.score1
-                                \-
-                                %span.js-team--away-score= game.score2
-                            - else
-                              %span.match--score_time= game.play_at.strftime("%H:%M")
-                          .team-away{class: "#{team2_class}"}
-                            %span.team-flag{class: "flag-#{team2.try(:code)}"}
-                            .team-code
-                              = team2.try(:code)
-                            .team-name
-                              %span.team-name_name= team2.try(:title_vi)||team2.try(:title)||game.unknown_team2_title_vi
-                      %a.match-row_group{href: "javascript:;"}
-                        .match-group
-                          %span.group-label
-                            Trận
-                          %span.group-name
-                            = game.pos
+.grid-box.col-xs-12.col-sm-12.col-md-10.col-lg-10.col-md-offset-1
+  = render "shared/total_money_for_final"
+  %header.box-header
+    %h2.section--title.bigTitle
+      = I18n.t("common.#{@type}")
+  .box-content.clearfix
+    - @all_matches.each do |occur_date, games|
+      %h3.match--date
+        %span.js-tolocaltime.match--score_time
+          = I18n.localize(occur_date, format: :full)
+      .matches
+        - games.sort_by(&:pos).each do |game|
+          .match-row.match-row--horizontal.match-finalTrn.match-groupStage.match-notFake
+            %a.match-row_link{href: game.can_bet? ? match_path(game.id) : 'javascript:;'}
+              .match-row_info
+                .match-row_info-wrap
+                  .match-data-round
+                    %span.round-name
+                      = @rounds[game.round_id].is_group_stage? ? @groups[game.group_id].title_vi : @rounds[game.round_id].title_vi
+              .match.match-row_match
+                - team1 = @teams[game.team1_id]
+                - team2 = @teams[game.team2_id]
+                - team1_class = game.winner ? (game.winner == game.team1_id ? 'match--winner' : 'match--loser') : ''
+                - team2_class = game.winner ? (game.winner == game.team2_id ? 'match--winner' : 'match--loser') : ''
+                .team-home{class: "#{team1_class}"}
+                  .team-code
+                    = team1.try(:code)
+                  .team-name
+                    %span.team-name_name= team1.try(:title_vi)||team1.try(:title)||game.unknown_team1_title_vi
+                  %span.team-flag{class: "flag-#{team1.try(:code)}"}
+                .text-center.match--score
+                  - if game.score_id
+                    %span.match--score_score
+                      %span.js-team--home-score= game.score1
+                      \-
+                      %span.js-team--away-score= game.score2
+                  - else
+                    %span.match--score_time= game.play_at.strftime("%H:%M")
+                .team-away{class: "#{team2_class}"}
+                  %span.team-flag{class: "flag-#{team2.try(:code)}"}
+                  .team-code
+                    = team2.try(:code)
+                  .team-name
+                    %span.team-name_name= team2.try(:title_vi)||team2.try(:title)||game.unknown_team2_title_vi
+            %a.match-row_group{href: "javascript:;"}
+              .match-group
+                %span.group-label
+                  Trận
+                %span.group-name
+                  = game.pos

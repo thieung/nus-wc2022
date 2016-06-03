@@ -26,7 +26,7 @@ class MatchesController < ApplicationController
   end
 
   def show
-
+    @game = Game.find_by id: params[:id]
   end
 
   def check_valid_match

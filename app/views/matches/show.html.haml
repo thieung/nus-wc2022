@@ -1,0 +1,143 @@
+#match_detail.grid-box.col-xs-12.col-sm-12.col-md-12.col-lg-12
+  .box-content.clearfix.m-b-xlarge
+    .deadline-section
+      %p
+        Hạn chót đặt cược:
+        %span.deadline-time= I18n.localize(@game.deadline, format: :full)
+    .match-row.match-row--horizontal.match-finalTrn.match-groupStage.match-notFake
+      .match.match-row_match
+        .text-center
+          %p.match--score_time= @game.round.is_group_stage? ? @game.group.title_vi : @game.round.title_vi
+          %p.match--score_time= @game.play_at.strftime("%-d/%m - %H:%M %p")
+        - team1 = @game.team1
+        - team2 = @game.team2
+        - team1_class = @game.winner ? (@game.winner == @game.team1_id ? 'match--winner' : 'match--loser') : ''
+        - team2_class = @game.winner ? (@game.winner == @game.team2_id ? 'match--winner' : 'match--loser') : ''
+        .team-home{class: "#{team1_class}"}
+          .team-code
+            = team1.try(:code)
+          .team-name
+            %span.team-name_name= team1.try(:title_vi)||team1.try(:title)
+          %span.team-flag{class: "flag-#{team1.try(:code)}"}
+        .text-center.match--score
+          %span.match--score_score
+            %span.js-team--home-score= @game.score1
+            \-
+            %span.js-team--away-score= @game.score2
+        .team-away{class: "#{team2_class}"}
+          %span.team-flag{class: "flag-#{team2.try(:code)}"}
+          .team-code
+            = team2.try(:code)
+          .team-name
+            %span.team-name_name= team2.try(:title_vi)||team2.try(:title)
+    - if current_user && current_user.is_admin?
+      .admin-actions
+        .block.m-b-xs
+          = link_to "Cập nhật tỉ số", "", class: 'btn btn-secondary'
+        .block
+          = link_to "Cập nhật cá cược", "", class: 'btn btn-secondary'
+
+  / Statistic
+  .box-header
+    %h2.section--title.bigTitle
+      Thống kê
+  .box-content.clearfix
+    .statistic-detail-wrap
+      .row
+        .col-xs-12.col-md-9
+          %h5 Thông tin cá cược
+          .underline.hidden-sm.hidden-xs
+          %p.text-desc
+            Có 14 người đã tham gia dự đoán tỉ số trận đấu này.
+          %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
+            %thead
+              %th.text-center
+                %strong Nhà đầu tư
+              %th.text-center
+                %strong Các tỉ số
+            %tbody
+              %tr
+                %td
+                  Thiệu Nguyễn
+                %td.text-center
+                  0-0, 1-2, 2-1
+              %tr
+                %td.current_user
+                  Thiệu Nguyễn
+                %td.text-center
+                  0-0, 1-2, 2-1
+        .col-xs-12.col-md-3
+          %h5 Tổng tiền đầu tư
+          .underline.hidden-sm.hidden-xs
+          .total-money-bet= "#{number_with_delimiter(1443000, delimiter: '.')} VNĐ"
+          %table.table.table-responsive.money-detail-table
+            %tbody
+              - if @game.final_match?
+                %tr
+                  %td
+                    Tiền được chuyển vào CK:
+                  %td.play-font
+                    = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
+              %tr
+                %td
+                  Trận trước:
+                %td.play-font
+                  = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
+              %tr
+                %td
+                  Trận này:
+                %td.play-font
+                  = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
+              %tr
+                %td
+                  Công ty NUS:
+                %td.play-font
+                  = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
+
+  - if current_user && !current_user.is_admin?
+    / Your bet
+    .box-header
+      %h2.section--title.bigTitle
+        Dự đoán kết quả
+    .box-content.m-b-xlarge.clearfix
+      .your-bet-detail-wrap
+        AAAA
+
+  / Result
+  .box-header
+    %h2.section--title.bigTitle
+      Kết quả
+  .box-content.clearfix
+    .result-detail-wrap
+      - if false
+        %p.text-desc Không có nhà đầu tư nào dự đoán trúng tỉ số trận đấu này.
+        - unless @game.final_match?
+          %p.text-desc Một nửa số tiền sẽ được chuyển vào trận sau và một nửa còn lại sẽ được chuyển vào trận chung kết.
+      - else
+        %p Xin chúc mừng những nhà đầu tư sau đây đã dự đoán chính xác tỉ số trận đấu:
+        .row.m-t
+          .col-xs-12.col-md-8.col-md-offset-2
+            %table.table-responsive.table.table-bordered.bet-result-tbl
+              %thead
+                %th.text-center
+                  %strong Nhà đầu tư
+                %th.text-center
+                  %strong Số tiền nhận được
+              %tbody
+                %tr
+                  %td
+                    Thiệu Nguyễn
+                  %td.middle.text-center.money-win{rowspan: 5}
+                    = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
+                %tr
+                  %td.current-user
+                    Thiệu Nguyễn
+                %tr
+                  %td
+                    Thiệu Nguyễn
+                %tr
+                  %td
+                    Thiệu Nguyễn
+                %tr
+                  %td
+                    Thiệu Nguyễn

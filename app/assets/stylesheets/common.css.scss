@@ -17,6 +17,18 @@
 body{
   font-family: 'robotoR',Helvetica,Arial,sans-serif;
 }
+.m-t{
+  margin-top: 15px;
+}
+.m-b{
+  margin-bottom: 15px;
+}
+.m-b-xlarge{
+  margin-bottom: 50px;
+}
+.m-b-xs{
+  margin-bottom: 5px;
+}
 .uefa-link, .uefa-link:focus{
   color: #fff;
 }
@@ -29,20 +41,174 @@ body{
 .match--score_score{
   font-size: 150%;
 }
-.grid-box .box-header{
-  margin: 0 !important;
+.grid-box .section--title.bigTitle {
+  margin-bottom: 0 !important;
 }
 .match--score_score{
   color: #111 !important;
 }
-.submit-login-btn{
+.submit-btn-custom{
   clear: both;
   background-color: #007cba;
   border-color: #007cba;
   color: #FFF;
 }
-.submit-login-btn:hover{
+.submit-btn-custom:hover{
   background-color: #65beec;
   border-color: #65beec;
   color: #FFF;
+}
+.block{
+  display: block !important;
+}
+.clear-both{
+  clear: both;
+}
+.error-content{
+  padding: 15px 10px;
+  margin: 0 0 20px 0;
+  background: none repeat scroll 0 0 #ffd9d9;
+  box-shadow: 2px 2px 2px #ccc;
+  -moz-box-shadow: 2px 2px 2px #ccc;
+  -webkit-box-shadow: 2px 2px 2px #ccc;
+  font-size: 1.1em;
+  ul{
+    color: #111;
+  }
+}
+
+.deadline-section{
+  text-align: center;
+  margin: -10px 0 20px 0;
+  font-size: 18px;
+  .deadline-time{
+    font-family: robotoB;
+    font-size: 20px;
+  }
+}
+
+#match_detail{
+  .match-row{
+    border-top: none !important;
+    .match-row_match{
+      width: 50% !important;
+      margin-left: 25% !important;
+      .team-name_name{
+        font-size: 130%;
+        color: #111;
+        font-weight: 400;
+      }
+      .match--winner{
+        .team-name_name{
+          color: blue !important;
+        }
+      }
+    }
+  }
+  .admin-actions{
+    text-align: center;
+    margin-top: 20px;
+    a{
+      width: 200px;
+    }
+  }
+  .underline {
+    display: block;
+    width: 30px;
+    border-bottom: 3px solid #007cba;
+    margin: 5px 0 10px;
+  }
+  .total-money-bet{
+    color: red;
+    font-weight: 800;
+    font-size: 24px;
+  }
+}
+
+.statistic-detail-wrap{
+  margin-bottom: 30px;
+  .money-detail-table{
+    margin-top: 10px;
+  }
+}
+
+.result-detail-wrap{
+  .money-win{
+    color: blue;
+    font-size: 120%;
+  }
+  table.bet-result-tbl>tbody>tr>td{
+    padding: 8px 10px;
+  }
+}
+
+.middle{
+  vertical-align: middle;
+}
+.current-user{
+  font-weight: bold;
+  color: #1D7CF2;
+}
+.text-desc{
+  color: #767676;
+}
+
+.user-info-section{
+  display: none;
+  margin-top: 16px;
+  float: left;
+  margin-left: -3px;
+  .user-info-wrapper{
+    display: block;
+    text-align: left;
+    border-radius: 3px;
+    width: auto;
+    height: auto;
+    padding: 8px 16px;
+    background-color: rgba(255,255,255,.3);
+    font-size: 16.38px;
+    font-weight: 500;
+    font-style: normal;
+    color: #FFF;
+    .user-info-content{
+      display: table-cell;
+      vertical-align: middle;
+      height: 24px;
+      line-height: 1;
+    }
+  }
+  a{
+    color: yellow;
+  }
+  a:hover{
+    color: #fff;
+  }
+  .user-log-out{
+    font-size: 80%;
+    font-style: italic;
+    a{
+      color: #fff !important;
+    }
+  }
+}
+
+@media (min-width: 960px){
+  .user-info-section{
+    margin-top: 32px;
+    margin-left: 0;
+    .user-info-wrapper{
+      display: block;
+      width: 100%;
+      text-align: left;
+      height: 32px;
+      height: auto;
+      border-radius: 0;
+      .user-info-content{
+        display: table-cell;
+        vertical-align: middle;
+        height: 32px;
+        line-height: 1;
+      }
+    }
+  }
 }
