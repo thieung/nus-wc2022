@@ -17,7 +17,7 @@
                 .matches
                   - games.sort_by(&:pos).each do |game|
                     .match-row.match-row--horizontal.match-finalTrn.match-groupStage.match-notFake
-                      %a.match-row_link{href: game.valid? ? match_path(game.id) : 'javascrip:;'}
+                      %a.match-row_link{href: game.can_bet? ? match_path(game.id) : 'javascrip:;'}
                         .match-row_info
                           .match-row_info-wrap
                             .match-data-round

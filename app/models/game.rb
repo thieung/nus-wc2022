@@ -14,7 +14,7 @@ class Game < ActiveRecord::Base
   scope :semi_final, -> { where(pos: [49, 50]) }
   scope :final, -> { where(pos: 51) }
 
-  def valid?
+  def can_bet?
     team1_id && team2_id
   end
 end

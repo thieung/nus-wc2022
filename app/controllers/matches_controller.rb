@@ -31,7 +31,7 @@ class MatchesController < ApplicationController
 
   def check_valid_match
     @game = Game.find_by id: params[:id]
-    unless @game.valid?
+    unless @game.can_bet?
       redirect_to root_path and return
     end
   end
