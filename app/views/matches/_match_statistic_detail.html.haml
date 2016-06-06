@@ -1,0 +1,57 @@
+.box-header
+  %h2.section--title.bigTitle
+    Thống kê
+.box-content.clearfix
+  .statistic-detail-wrap
+    .row
+      .col-xs-12.col-md-8
+        %h5 Thông tin cá cược
+        .underline.hidden-sm.hidden-xs
+        - if game.bets.blank?
+          %p.text-desc
+            Chưa có nhà đầu tư nào tham gia dự đoán tỉ số trận đấu này
+        - else
+          - scores = Score.all.index_by(&:id)
+          %p.text-desc
+            = "Có #{game.bets.size} người đã tham gia dự đoán tỉ số trận đấu này."
+          %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
+            %thead
+              %th.text-center
+                %strong Nhà đầu tư
+              %th.text-center
+                %strong Các tỉ số
+            %tbody
+              - game.bets.includes(:user).each do |bet|
+                %tr{class: bet.user == current_user ? 'current-user' : ''}
+                  %td
+                    = bet.user.display_name
+                  %td.text-center
+                    - bet.score_ids.map{|score_id| scores[score_id.to_i].try(:name)}.joins(', ')
+
+      .col-xs-12.col-md-4
+        %h5 Tổng tiền đầu tư
+        .underline.hidden-sm.hidden-xs
+        .total-money-bet= "#{number_with_delimiter(money_statistic.values.map(&:to_i).sum, delimiter: '.')} VNĐ"
+        %table.table.table-responsive.money-detail-table
+          %tbody
+            - if @game.final_match?
+              %tr
+                %td
+                  Tiền được chuyển vào CK:
+                %td.play-font
+                  = "#{number_with_delimiter(money_statistic[:for_final], delimiter: '.')} VNĐ"
+            %tr
+              %td
+                Trận trước:
+              %td.play-font
+                = "#{number_with_delimiter(money_statistic[:previous_match], delimiter: '.')} VNĐ"
+            %tr
+              %td
+                Trận này:
+              %td.play-font
+                = "#{number_with_delimiter(money_statistic[:this_match], delimiter: '.')} VNĐ"
+            %tr
+              %td
+                Công ty NUS:
+              %td.play-font
+                = "#{number_with_delimiter(money_statistic[:company_contribute], delimiter: '.')} VNĐ"

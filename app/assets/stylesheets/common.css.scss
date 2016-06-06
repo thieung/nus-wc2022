@@ -32,6 +32,9 @@ body{
 .m-l-sm{
   margin-left: 10px;
 }
+.m-l-large{
+  margin-left: 20px;
+}
 .uefa-link, .uefa-link:focus{
   color: #fff;
 }
@@ -196,7 +199,10 @@ body{
 .manage-link{
   color: rgb(229, 193, 104) !important;
 }
-.user-predict-score--form, .admin-import-scores--form{
+.admin-update-score--select{
+  width: 140px;
+}
+.user-predict-score--form, .admin-import-scores--form, .match-update-score--form, .user-predict-champion--form{
   .select2-selection--multiple{
     height: 40px !important;
     border: 1px solid #65beec;

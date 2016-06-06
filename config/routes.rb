@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       post :import_number_users
       post :import_user_betting_scores
       get :add_row
+      post :update_score
     end
   end
   resources :statistics, only: :index

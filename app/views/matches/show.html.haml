@@ -51,106 +51,51 @@
             = link_to 'đăng nhập', login_path
             để tham gia dự đoán tỉ số trận đấu này.
         - else
-          - if !current_user.has_betted_on_match?(@game.id)
+          - if current_user.has_betted_on_match?(@game.id)
             = render partial: 'user_bet_detail', locals: {game: @game}
           - else
             = render partial: 'user_bet_predict_scores', locals: {game: @game, is_edit: false}
-  / Statistic
-  .box-header
-    %h2.section--title.bigTitle
-      Thống kê
-  .box-content.clearfix
-    .statistic-detail-wrap
-      .row
-        .col-xs-12.col-md-8
-          %h5 Thông tin cá cược
-          .underline.hidden-sm.hidden-xs
-          - if false
-            %p.text-desc
-              Chưa có nhà đầu tư nào tham gia dự đoán tỉ số trận đấu này
-          - else
-            %p.text-desc
-              Có 14 người đã tham gia dự đoán tỉ số trận đấu này.
-            %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
-              %thead
-                %th.text-center
-                  %strong Nhà đầu tư
-                %th.text-center
-                  %strong Các tỉ số
-              %tbody
-                %tr
-                  %td
-                    Thiệu Nguyễn
-                  %td.text-center
-                    0-0, 1-2, 2-1
-                %tr.current-user
-                  %td
-                    Thiệu Nguyễn
-                  %td.text-center
-                    0-0, 1-2, 2-1
-        .col-xs-12.col-md-4
-          %h5 Tổng tiền đầu tư
-          .underline.hidden-sm.hidden-xs
-          .total-money-bet= "#{number_with_delimiter(1443000, delimiter: '.')} VNĐ"
-          %table.table.table-responsive.money-detail-table
-            %tbody
-              - if @game.final_match?
-                %tr
-                  %td
-                    Tiền được chuyển vào CK:
-                  %td.play-font
-                    = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
-              %tr
-                %td
-                  Trận trước:
-                %td.play-font
-                  = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
-              %tr
-                %td
-                  Trận này:
-                %td.play-font
-                  = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
-              %tr
-                %td
-                  Công ty NUS:
-                %td.play-font
-                  = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
 
-  / Result
-  .box-header
-    %h2.section--title.bigTitle
-      Kết quả
-  .box-content.clearfix
-    .result-detail-wrap
-      - if false
-        %p.text-desc Không có nhà đầu tư nào dự đoán trúng tỉ số trận đấu này.
-        - unless @game.final_match?
-          %p.text-desc Một nửa số tiền sẽ được chuyển vào trận sau và một nửa còn lại sẽ được chuyển vào trận chung kết.
-      - else
-        %p Xin chúc mừng những nhà đầu tư sau đây đã dự đoán chính xác tỉ số trận đấu:
-        .row.m-t
-          .col-xs-12.col-md-8.col-md-offset-2
-            %table.table-responsive.table.table-bordered.bet-result-tbl
-              %thead
-                %th.text-center
-                  %strong Nhà đầu tư
-                %th.text-center
-                  %strong Số tiền nhận được
-              %tbody
-                %tr
-                  %td
-                    Thiệu Nguyễn
-                  %td.middle.text-center.money-win{rowspan: 5}
-                    = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
-                %tr
-                  %td.current-user
-                    Thiệu Nguyễn
-                %tr
-                  %td
-                    Thiệu Nguyễn
-                %tr
-                  %td
-                    Thiệu Nguyễn
-                %tr
-                  %td
-                    Thiệu Nguyễn
+  / Statistic
+  #statistic_detail_match
+    = render partial: 'match_statistic_detail', locals: {game: @game, money_statistic: @money_statistic}
+
+  - if @game.has_score?
+    / Result
+    .box-header
+      %h2.section--title.bigTitle
+        Kết quả
+    .box-content.clearfix
+      .result-detail-wrap
+        - if false
+          %p.text-desc Không có nhà đầu tư nào dự đoán trúng tỉ số trận đấu này.
+          - unless @game.final_match?
+            %p.text-desc Một nửa số tiền sẽ được chuyển vào trận sau và một nửa còn lại sẽ được chuyển vào trận chung kết.
+        - else
+          %p Xin chúc mừng những nhà đầu tư sau đây đã dự đoán chính xác tỉ số trận đấu:
+          .row.m-t
+            .col-xs-12.col-md-8.col-md-offset-2
+              %table.table-responsive.table.table-bordered.bet-result-tbl
+                %thead
+                  %th.text-center
+                    %strong Nhà đầu tư
+                  %th.text-center
+                    %strong Số tiền nhận được
+                %tbody
+                  %tr
+                    %td
+                      Thiệu Nguyễn
+                    %td.middle.text-center.money-win{rowspan: 5}
+                      = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
+                  %tr
+                    %td.current-user
+                      Thiệu Nguyễn
+                  %tr
+                    %td
+                      Thiệu Nguyễn
+                  %tr
+                    %td
+                      Thiệu Nguyễn
+                  %tr
+                    %td
+                      Thiệu Nguyễn

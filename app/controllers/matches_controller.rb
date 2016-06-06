@@ -1,7 +1,7 @@
 class MatchesController < ApplicationController
-  before_action :load_match, only: [:show, :check_valid_match, :predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users]
-  before_action :check_valid_match, only: [:show, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users]
-  before_action :authenticate_user!, only: [:predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users]
+  before_action :load_match, only: [:show, :check_valid_match, :predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score]
+  before_action :check_valid_match, only: [:show, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score]
+  before_action :authenticate_user!, only: [:predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score]
 
   def index
     today   = Date.today
@@ -28,19 +28,28 @@ class MatchesController < ApplicationController
   end
 
   def show
-    @game = Game.find_by id: params[:id]
+    @money_statistic = calculate_money_for_match @game
   end
 
   def predict_score
     return unless @game.available_to_bet
-    # bet_info = current_user.get_bet_info_on_match params[:id]
-    # if bet_info
-    #   bet_info.update_attributes(match_params)
-    # else
-    #   bet_info = current_user.bets.new(match_params)
-    #   bet_info.game_id = params[:id]
-    #   bet_info.save
-    # end
+    score_ids = if params[:match][:score_ids].blank?
+      []
+    else
+      params[:match][:score_ids]
+    end
+    bet_info = current_user.get_bet_info_on_match(params[:id])||current_user.bets.new(game_id: @game.id)
+    if score_ids.size > 3
+      @err_msg = "Bạn không được dự đoán quá 3 tỉ số"
+    else
+      bet_info.score_ids = score_ids
+      bet_info.last_changed_at = DateTime.current
+      bet_info.total_money_bet = score_ids.size * @game.round.money_rate
+      unless bet_info.save
+        @err_msg = bet_info.errors.full_message.first
+      end
+    end
+    @money_statistic = calculate_money_for_match @game
   end
 
   def predict_score_edit_view
@@ -68,6 +77,34 @@ class MatchesController < ApplicationController
     authorize! :manage, current_user
   end
 
+  def update_score
+    authorize! :manage, current_user
+    score = Score.find_by_id params[:score_id]
+    if score
+      score_result = score.name.split('-')
+      score_team1 = score_result[0].to_i
+      score_team2 = score_result[1].to_i
+      winner_team_id = if score_team1 > score_team2
+        @game.team1_id
+      elsif score_team1 < score_team2
+        @game.team2_id
+      else
+        nil
+      end
+      success = @game.update_attributes(
+        score1: score_team1,
+        score2: score_team2,
+        score_id: score.id,
+        locked: true,
+        winner: winner_team_id
+      )
+      unless success
+        flash[:alert] = "Không thể cập nhật kết quả trận đấu, vui lòng kiểm tra lại."
+      end
+    end
+    redirect_to match_path(@game)
+  end
+
   private
 
   def match_params
@@ -87,5 +124,25 @@ class MatchesController < ApplicationController
       flash[:alert] = "Trận đấu này đã diễn ra và đã bị khoá."
       redirect_to match_path(@game) and return
     end
+  end
+
+  def calculate_money_for_match game
+    money_statistic = {
+      previous_match: 0,
+      this_match: 0,
+      company_contribute: 0,
+      for_final: 0
+    }
+    money_statistic[:previous_match] = if game.first_match?
+      0
+    else
+      Investment.find_by(game_id: game.previous_game.id).try(:remaining) || 0
+    end
+    money_statistic[:for_final] = game.final_match? ? Investment.sum(:remaining) : 0
+    money_statistic[:this_match] = game.bets.sum(:total_money_bet)
+    if money_statistic[:this_match].to_i > 0
+      money_statistic[:company_contribute] = 3*game.round.money_rate
+    end
+    money_statistic
   end
 end

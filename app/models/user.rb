@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def display_name
+    full_name || username || email
+  end
+
   def active_for_authentication?
     super && self.is_active
   end
@@ -60,5 +64,23 @@ class User < ActiveRecord::Base
 
   def last_predict_champion_team
     predict_champions.order_by_created_date.first
+  end
+
+  def total_profit_received
+    total_money_bet = bets.sum(:total_money_bet)
+    total_money_predict_champion = predict_champions.sum(:money)
+    total_money_win = bets.sum(:total_money_win)
+    money_predict_champion_win = 0
+    if DateTime.current > DateTime.parse(Settings.final_match_time)
+      money_for_champion = Settings.nus_money_for_champion.to_i + PredictChampion.sum(:money)
+      winner_ids = PredictChampion.joins(:team).where("teams.is_champion" => true).map(&:user_id).uniq
+      unless winner_ids.blank?
+        money_for_each_user = (money_for_champion.to_f/winner_ids.size).round
+        if winner_ids.include?(self.id)
+          money_predict_champion_win = money_for_each_user
+        end
+      end
+    end
+    (total_money_win + money_predict_champion_win) - (total_money_bet + total_money_predict_champion)
   end
 end

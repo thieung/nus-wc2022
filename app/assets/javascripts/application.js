@@ -29,7 +29,7 @@ function formatSelect2(){
     placeholder: 'Click vào đây để chọn tỉ số...',
     language: 'vi'
   });
-  $('select.select-users').select2({
+  $('select.select-users, select.select-score, select.select-team').select2({
     language: 'vi'
   });
 }

@@ -1,5 +1,5 @@
 = form_tag import_user_betting_scores_match_path(game), method: :post, class: 'form-horizontal admin-import-scores--form' do
-  - users_options = User.staffs.order_by_username.collect{|u|[u.full_name, u.id]}
+  - users_options = User.staffs.order_by_username.collect{|u|[u.display_name, u.id]}
   - number.times do |i|
     .form-group
       .col-xs-12.col-md-4

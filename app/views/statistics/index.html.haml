@@ -18,7 +18,7 @@
         - @statistics.each_with_index do |record, index|
           %tr{class: index == 0 ? "success bold-win" : ([1,2].include?(index) ? 'active' : (@statistics.size-1 == index ? 'danger bold-lose' : ([@statistics.size-2, @statistics.size-3].include?(index) ? 'warning' : ''))), "data-url" => user_statistics_url(record[:user])}
             %td= index+1
-            %td= record[:user].full_name
+            %td= record[:user].display_name
             %td.text-center= record[:total_matches]
             %td.text-center= record[:total_scores]
             %td.text-center= number_with_delimiter(record[:total_money_bet], delimiter: '.')

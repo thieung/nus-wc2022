@@ -21,14 +21,14 @@
                     %span.user-info-content
                       %p
                         = "Xin chào, "
-                        = link_to current_user.full_name, profile_path
+                        = link_to current_user.display_name, profile_path
                         %span.user-log-out= link_to "(Thoát)", destroy_user_session_path, method: :delete
                       - if current_user.is_admin?
                         = link_to 'Tới trang quản lý', management_path, class: 'manage-link'
                       - else
                         %p
                           Lợi nhuận của bạn:
-                          = link_to "#{number_with_delimiter(1041000, delimiter: '.')} VNĐ", statistics_user_path(current_user)
+                          = link_to "#{number_with_delimiter(current_user.total_profit_received, delimiter: '.')} VNĐ", statistics_user_path(current_user)
               / Logo
               .competition-logo
                 %a.logolink{href: root_path, title: "UEFA EURO 2016"} UEFA EURO 2016

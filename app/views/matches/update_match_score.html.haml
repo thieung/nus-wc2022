@@ -1,0 +1,34 @@
+#match_detail.grid-box.col-xs-12.col-sm-12.col-md-10.col-lg-10.col-md-offset-1
+  .box-content.clearfix.m-b-xlarge
+    .match-row.match-row--horizontal.match-finalTrn.match-groupStage.match-notFake
+      .match.match-row_match
+        - team1 = @game.team1
+        - team2 = @game.team2
+        .team-home
+          .team-code
+            = team1.try(:code)
+          .team-name
+            %span.team-name_name= team1.try(:title_vi)||team1.try(:title)
+          %span.team-flag{class: "flag-#{team1.try(:code)}"}
+        .text-center.match--score
+          %span.match--score_score
+            \-
+        .team-away
+          %span.team-flag{class: "flag-#{team2.try(:code)}"}
+          .team-code
+            = team2.try(:code)
+          .team-name
+            %span.team-name_name= team2.try(:title_vi)||team2.try(:title)
+
+  / Update score for match
+  .box-header
+    %h2.section--title.bigTitle.text-center
+      Cập nhật tỉ số trận đấu
+  .box-content.clearfix
+    = form_tag update_score_match_path(@game), method: :post, class: 'form-horizontal match-update-score--form' do
+      .form-group.text-center
+        %label.sr-only.col-xs-12.col-md-12 Tỉ số:
+        = select_tag :score_id, options_for_select(Score.all.collect{|s|[s.name, s.id]}), class: 'form-control select-score admin-update-score--select', prompt: '--- Chọn tỉ số ---'
+      .form-group.text-center
+        .col-xs-4.col-md-4.col-xs-offset-4.col-md-offset-4
+          %button.btn.btn-secondary.ladda-button.submit-btn-custom{type: 'submit', "data-style"=>"zoom-in", "data-spinner-color"=>"#ccc"} Cập nhật

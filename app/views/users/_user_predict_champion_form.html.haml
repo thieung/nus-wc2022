@@ -5,7 +5,7 @@
   %span.deadline-predict= I18n.localize(DateTime.parse(Settings.predict_champion_deadline.first), format: :full_with_time)
 = form_tag pick_champion_users_path, method: :post, class: 'form-horizontal user-predict-champion--form' do
   .form-group
-    .col-xs-12.col-md-6
-      = select_tag "team_id", options_for_select(Team.join_euro.not_eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control', prompt: '----- Chọn đội -----'
-    .col-xs-12.col-md-6.actions
-      %button.btn.btn-secondary{type: 'submit'} Gửi
+    .col-xs-12.col-md-4
+      = select_tag "team_id", options_for_select(Team.join_euro.not_eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control select-team', prompt: '----- Chọn đội -----'
+    .col-xs-12.col-md-8.actions
+      %button.btn.btn-secondary.submit-btn-custom{type: 'submit'} Gửi
