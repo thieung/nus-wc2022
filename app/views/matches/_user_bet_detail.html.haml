@@ -1,0 +1,24 @@
+= form_tag predict_score_edit_view_match_path(game), method: :post, remote: true do
+  %h5 Tỉ số của bạn
+  .underline.hidden-sm.hidden-xs
+  %p
+    %span.your-score-betted 1-0
+    %span.italic.text-desc
+      (Có
+      %span.number-people-same-predict 7
+      người dự đoán cùng tỉ số này với bạn)
+  %p
+    %span.your-score-betted 2-0
+    %span.italic.text-desc
+      (Có
+      %span.number-people-same-predict 10
+      người dự đoán cùng tỉ số này với bạn)
+  %p
+    %span.your-score-betted 3-2
+    %span.italic.text-desc
+      (Có
+      %span.number-people-same-predict 15
+      người dự đoán cùng tỉ số này với bạn)
+  - if game.available_to_bet
+    .actions-btn
+      %button.btn.btn-secondary{type: 'submit'} Thay đổi

@@ -1,0 +1,6 @@
+- message = flash[:error] || flash[:alert]
+- if message
+  #error_container
+    .error-content.clearfix
+      %ul
+        %li= message

@@ -1,0 +1,7 @@
+<% if @game.available_to_bet %>
+  $('.your-bet-detail-wrap').html("<%=j render partial: 'user_bet_predict_scores', locals: {game: @game, is_edit: true} %>");
+  formatSelect2();
+  $('input.select2-search__field').focus();
+<% else %>
+  swal("Oops...", "Đã hết thời gian đặt cược tỉ số cho trận đấu này", "error");
+<% end %>

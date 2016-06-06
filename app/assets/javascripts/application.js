@@ -12,8 +12,24 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require spin.min
+//= require ladda.min
+//= require jquery_ujs
 //= require base.min
 //= require components
 //= require smartbanner.min
-//= require chosen.jquery
+//= require select2.full.min
+//= require sweetalert.min
+//= require_self
 //= require_tree .
+
+function formatSelect2(){
+  $('select.select-scores').select2({
+    maximumSelectionLength: 3,
+    placeholder: 'Click vào đây để chọn tỉ số...',
+    language: 'vi'
+  });
+  $('select.select-users').select2({
+    language: 'vi'
+  });
+}

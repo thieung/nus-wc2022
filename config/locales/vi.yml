@@ -207,4 +207,5 @@ vi:
       long: "%d %B, %Y %H:%M"
       short: "%d %b %H:%M"
       full: "%A, ngày %-d/%-m/%Y"
+      full_with_time: "%A, %H:%M PM ngày %-d/%-m/%Y"
     pm: chiều

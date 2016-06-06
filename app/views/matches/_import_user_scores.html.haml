@@ -1,0 +1,13 @@
+= form_tag import_user_betting_scores_match_path(game), method: :post, class: 'form-horizontal admin-import-scores--form' do
+  - users_options = User.staffs.order_by_username.collect{|u|[u.full_name, u.id]}
+  - number.times do |i|
+    .form-group
+      .col-xs-12.col-md-4
+        = select_tag "bet_info[#{i}][user_id]", options_for_select(users_options), class: 'form-control select-users', prompt: '--- Chọn staff ---'
+      .col-xs-12.col-md-4
+        = select_tag "bet_info[#{i}][score_ids]", options_for_select(Score.all.collect{|s|[s.name, s.id]}, nil), multiple: true, class: 'form-control select-scores'
+  #additional_rows
+  .form-group
+    .col-xs-12
+      = link_to "Thêm hàng", add_row_match_path(game), class: 'btn btn-secondary', "data-remote"=>true
+  %button.btn.btn-primary.submit-btn-custom.pull-right{type: 'submit'} Hoàn tất

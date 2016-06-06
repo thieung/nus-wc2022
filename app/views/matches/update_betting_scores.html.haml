@@ -1,0 +1,35 @@
+#match_detail.grid-box.col-xs-12.col-sm-12.col-md-10.col-lg-10.col-md-offset-1
+  .box-content.clearfix.m-b-xlarge
+    .match-row.match-row--horizontal.match-finalTrn.match-groupStage.match-notFake
+      .match.match-row_match
+        - team1 = @game.team1
+        - team2 = @game.team2
+        .team-home
+          .team-code
+            = team1.try(:code)
+          .team-name
+            %span.team-name_name= team1.try(:title_vi)||team1.try(:title)
+          %span.team-flag{class: "flag-#{team1.try(:code)}"}
+        .text-center.match--score
+          %span.match--score_score
+            \-
+        .team-away
+          %span.team-flag{class: "flag-#{team2.try(:code)}"}
+          .team-code
+            = team2.try(:code)
+          .team-name
+            %span.team-name_name= team2.try(:title_vi)||team2.try(:title)
+
+  / User's betting information
+  .box-header
+    %h2.section--title.bigTitle
+      Nhập dữ liệu
+  .box-content.clearfix
+    = form_tag import_number_users_match_path(@game), method: :post, remote: true, class: 'form-horizontal admin-import-number-users--form' do
+      .admin--input-number-users
+        .form-group
+          .col-xs-12.col-md-4.m-b
+            = text_field_tag 'number_user', nil, type: 'number', autofocus: true, class: 'form-control', placeholder: 'Nhập tổng số người dự đoán trận đấu này'
+          .col-xs-12.col-md-8
+            %button.btn.btn-secondary.ladda-button{type: 'submit', "data-style"=>"zoom-in", "data-spinner-color"=>"#ccc"} Tạo form nhập liệu
+    .admin--input-user-scores

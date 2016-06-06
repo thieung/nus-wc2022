@@ -297,6 +297,12 @@ Game.order(:id).map(&:id).each do |game_id|
   Investment.find_or_create_by(game_id: game_id)
 end
 
+# Generate predict champion data for each staff
+User.staffs.order_by_username.each do |user|
+  predict = user.predict_champions.new(money: 100000)
+  predict.save
+end
+
 # Generate admin
 admin = User.find_by(email: "admin@nustechnology.com")
 unless admin

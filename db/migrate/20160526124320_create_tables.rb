@@ -18,7 +18,7 @@ class CreateTables < ActiveRecord::Migration
 
     create_table :predict_champions do |t|
       t.integer :user_id, null: false
-      t.integer :team_id, null: false
+      t.integer :team_id
       t.integer :money, default: 0
       t.timestamps
     end

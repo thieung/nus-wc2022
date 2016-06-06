@@ -29,6 +29,9 @@ body{
 .m-b-xs{
   margin-bottom: 5px;
 }
+.m-l-sm{
+  margin-left: 10px;
+}
 .uefa-link, .uefa-link:focus{
   color: #fff;
 }
@@ -64,6 +67,10 @@ body{
 .clear-both{
   clear: both;
 }
+.form-control{
+  height: 40px !important;
+  border: 1px solid #65beec;
+}
 .error-content{
   padding: 15px 10px;
   margin: 0 0 20px 0;
@@ -77,6 +84,10 @@ body{
   }
 }
 
+.uppercase{
+  text-transform: uppercase;
+}
+
 .deadline-section{
   text-align: center;
   margin: -10px 0 20px 0;
@@ -85,6 +96,9 @@ body{
     font-family: robotoB;
     font-size: 20px;
   }
+}
+.deadline-predict{
+  font-family: robotoB;
 }
 
 #match_detail{
@@ -137,13 +151,18 @@ body{
     color: blue;
     font-size: 120%;
   }
-  table.bet-result-tbl>tbody>tr>td{
-    padding: 8px 10px;
-  }
+}
+
+.list-better-tbl>tbody>tr>td, .bet-result-tbl>tbody>tr>td{
+  padding: 8px 10px;
+}
+.eliminated{
+  text-decoration: line-through;
+  opacity: 0.5;
 }
 
 .middle{
-  vertical-align: middle;
+  vertical-align: middle !important;
 }
 .current-user{
   font-weight: bold;
@@ -152,7 +171,54 @@ body{
 .text-desc{
   color: #767676;
 }
-
+.select-scores{
+  height: 40px;
+  border: 1px solid #65beec;
+}
+.your-score-betted{
+  color: #1D7CF2;
+  font-weight: 500;
+  font-size: 25px;
+}
+.your-champion-predicted{
+  color: #1D7CF2;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-left: 5px;
+}
+.number-people-same-predict{
+  font-size: 18px;
+  color: #00868B;
+}
+.italic{
+  font-style: italic;
+}
+.manage-link{
+  color: rgb(229, 193, 104) !important;
+}
+.user-predict-score--form, .admin-import-scores--form{
+  .select2-selection--multiple{
+    height: 40px !important;
+    border: 1px solid #65beec;
+    .select2-selection__choice{
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    .select2-search__field{
+      margin-top: 10px;
+    }
+  }
+  .select2-selection--single{
+    height: 40px !important;
+    border: 1px solid #65beec;
+    .select2-selection__rendered{
+      line-height: 38px;
+    }
+    .select2-selection__arrow{
+      height: 40px;
+    }
+  }
+}
 .user-info-section{
   display: none;
   margin-top: 16px;

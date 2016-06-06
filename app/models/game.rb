@@ -27,6 +27,10 @@ class Game < ActiveRecord::Base
     DateTime.parse "#{bet_date} 16:00:00 +7"
   end
 
+  def available_to_bet
+    DateTime.now < deadline
+  end
+
   def final_match?
     pos == 51
   end

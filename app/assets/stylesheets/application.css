@@ -11,11 +11,14 @@
  * file per style scope.
  *
  *= require reset
+ *= require ladda.min
  *= require base.min
  *= require basic.min
+ *= require select2.min
+ *= require sweetalert
+
  *= require common
  *= require teams
  *= require matches
- *= require chosen
  *= require_self
  */

@@ -1,9 +1,10 @@
-#match_detail.grid-box.col-xs-12.col-sm-12.col-md-12.col-lg-12
+#match_detail.grid-box.col-xs-12.col-sm-12.col-md-10.col-lg-10.col-md-offset-1
+  = render "shared/errors"
   .box-content.clearfix.m-b-xlarge
     .deadline-section
       %p
         Hạn chót đặt cược:
-        %span.deadline-time= I18n.localize(@game.deadline, format: :full)
+        %span.deadline-time= I18n.localize(@game.deadline, format: :full_with_time)
     .match-row.match-row--horizontal.match-finalTrn.match-groupStage.match-notFake
       .match.match-row_match
         .text-center
@@ -30,13 +31,30 @@
             = team2.try(:code)
           .team-name
             %span.team-name_name= team2.try(:title_vi)||team2.try(:title)
-    - if current_user && current_user.is_admin?
+    - if current_user && current_user.is_admin? && !@game.locked
       .admin-actions
         .block.m-b-xs
-          = link_to "Cập nhật tỉ số", "", class: 'btn btn-secondary'
+          = link_to "Cập nhật tỉ số", update_match_score_match_path(@game), class: 'btn btn-secondary'
         .block
-          = link_to "Cập nhật cá cược", "", class: 'btn btn-secondary'
+          = link_to "Cập nhật cá cược", update_betting_scores_match_path(@game), class: 'btn btn-secondary'
 
+  - if !@game.locked && (!current_user || (current_user && !current_user.is_admin?))
+    / Your bet
+    .box-header
+      %h2.section--title.bigTitle
+        Dự đoán kết quả
+    .box-content.m-b-xlarge.clearfix
+      .your-bet-detail-wrap
+        - if !current_user
+          %p
+            Bạn cần
+            = link_to 'đăng nhập', login_path
+            để tham gia dự đoán tỉ số trận đấu này.
+        - else
+          - if !current_user.has_betted_on_match?(@game.id)
+            = render partial: 'user_bet_detail', locals: {game: @game}
+          - else
+            = render partial: 'user_bet_predict_scores', locals: {game: @game, is_edit: false}
   / Statistic
   .box-header
     %h2.section--title.bigTitle
@@ -44,29 +62,33 @@
   .box-content.clearfix
     .statistic-detail-wrap
       .row
-        .col-xs-12.col-md-9
+        .col-xs-12.col-md-8
           %h5 Thông tin cá cược
           .underline.hidden-sm.hidden-xs
-          %p.text-desc
-            Có 14 người đã tham gia dự đoán tỉ số trận đấu này.
-          %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
-            %thead
-              %th.text-center
-                %strong Nhà đầu tư
-              %th.text-center
-                %strong Các tỉ số
-            %tbody
-              %tr
-                %td
-                  Thiệu Nguyễn
-                %td.text-center
-                  0-0, 1-2, 2-1
-              %tr
-                %td.current_user
-                  Thiệu Nguyễn
-                %td.text-center
-                  0-0, 1-2, 2-1
-        .col-xs-12.col-md-3
+          - if false
+            %p.text-desc
+              Chưa có nhà đầu tư nào tham gia dự đoán tỉ số trận đấu này
+          - else
+            %p.text-desc
+              Có 14 người đã tham gia dự đoán tỉ số trận đấu này.
+            %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
+              %thead
+                %th.text-center
+                  %strong Nhà đầu tư
+                %th.text-center
+                  %strong Các tỉ số
+              %tbody
+                %tr
+                  %td
+                    Thiệu Nguyễn
+                  %td.text-center
+                    0-0, 1-2, 2-1
+                %tr.current-user
+                  %td
+                    Thiệu Nguyễn
+                  %td.text-center
+                    0-0, 1-2, 2-1
+        .col-xs-12.col-md-4
           %h5 Tổng tiền đầu tư
           .underline.hidden-sm.hidden-xs
           .total-money-bet= "#{number_with_delimiter(1443000, delimiter: '.')} VNĐ"
@@ -93,15 +115,6 @@
                   Công ty NUS:
                 %td.play-font
                   = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
-
-  - if current_user && !current_user.is_admin?
-    / Your bet
-    .box-header
-      %h2.section--title.bigTitle
-        Dự đoán kết quả
-    .box-content.m-b-xlarge.clearfix
-      .your-bet-detail-wrap
-        AAAA
 
   / Result
   .box-header

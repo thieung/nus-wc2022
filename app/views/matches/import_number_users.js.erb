@@ -1,0 +1,7 @@
+Ladda.stopAll();
+<% if @number > 0 %>
+  $('.admin--input-user-scores').html("<%=j render partial: 'import_user_scores', locals: {game: @game, number: @number} %>");
+<% else %>
+  swal('Oops...', 'Xin vui lòng nhập thông tin', 'warning');
+<% end %>
+formatSelect2();

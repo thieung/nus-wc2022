@@ -1,0 +1,6 @@
+= form_tag predict_score_match_path(game), method: :post, remote: true, class: 'form-horizontal user-predict-score--form' do
+  .form-group
+    .col-xs-12.col-md-6
+      = select_tag "match[score_ids]", options_for_select(Score.all.collect{|s|[s.name, s.id]}, [1,2,3]), multiple: true, class: 'form-control select-scores'
+    .col-xs-12.col-md-6.actions
+      %button.btn.btn-secondary{type: 'submit'}= is_edit ? "Cập nhật" : "Gửi"

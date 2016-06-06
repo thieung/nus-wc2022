@@ -1,0 +1,7 @@
+.form-group
+  - current_index = Time.now.to_i
+  - users_options = User.staffs.order_by_username.collect{|u|[u.full_name, u.id]}
+  .col-xs-12.col-md-4
+    = select_tag "bet_info[#{current_index}][user_id]", options_for_select(users_options), class: 'form-control select-users', prompt: '--- Chọn staff ---'
+  .col-xs-12.col-md-4
+    = select_tag "bet_info[#{current_index}][score_ids]", options_for_select(Score.all.collect{|s|[s.name, s.id]}, nil), multiple: true, class: 'form-control select-scores'

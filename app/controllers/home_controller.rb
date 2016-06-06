@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!, only: :management
+
   def index
     today   = Date.today
     @groups  = Group.all.index_by(&:id)
@@ -21,5 +23,9 @@ class HomeController < ApplicationController
 
   def predict_champion
 
+  end
+
+  def management
+    authorize! :manage, current_user
   end
 end

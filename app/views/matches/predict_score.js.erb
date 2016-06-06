@@ -1,0 +1,5 @@
+<% if !@game.available_to_bet %>
+  $('.your-bet-detail-wrap').html("<%=j render partial: 'user_bet_detail', locals: {game: @game} %>");
+<% else %>
+  swal("Oops...", "Đã hết thời gian đặt cược tỉ số cho trận đấu này", "error");
+<% end %>

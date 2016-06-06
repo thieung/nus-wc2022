@@ -1,0 +1,120 @@
+#match_detail.grid-box.col-xs-12.col-sm-12.col-md-10.col-lg-10.col-md-offset-1
+  = render "shared/errors"
+
+  / Your bet
+  .box-header
+    %h2.section--title.bigTitle
+      Dự đoán của bạn
+  .box-content.m-b-xlarge.clearfix
+    .your-bet-detail-wrap
+      - if !current_user
+        %p
+          Bạn cần
+          = link_to 'đăng nhập', login_path
+          để tham gia dự đoán đội vô địch.
+      - else
+        - if current_user.has_predict_champion_first_time?
+          = render partial: 'user_predict_champion_detail'
+        - else
+          = render partial: 'user_predict_champion_form'
+  / Statistic
+  .box-header
+    %h2.section--title.bigTitle
+      Thống kê
+  .box-content.clearfix
+    .statistic-detail-wrap
+      .row
+        .col-xs-12.col-md-9
+          %h5 Thông tin cá cược
+          .underline.hidden-sm.hidden-xs
+          - if false
+            %p.text-desc
+              Chưa có ai tham gia dự đoán đội vô địch
+          - else
+            %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
+              %tr
+                %th.text-center.middle{rowspan: 2}
+                  %strong Nhà đầu tư
+                %th.text-center{colspan: 3}
+                  %strong Dự đoán đội vô địch
+              %tr
+                %td.text-center
+                  Lần 1
+                %td.text-center
+                  Lần 2
+                %td.text-center
+                  Lần 3
+              %tr.current-user
+                %td
+                  Thiệu Nguyễn
+                %td.text-center.uppercase.eliminated
+                  %span.flag-FRA.team-flag
+                  %span PHÁP
+                %td.uppercase
+                %td.uppercase
+              %tr
+                %td
+                  Tham Nguyen-Thi
+                %td.text-center.uppercase
+                  %span.flag-ENG.team-flag
+                  %span Anh
+                %td.uppercase
+                %td.uppercase
+        .col-xs-12.col-md-3
+          %h5 Tổng tiền thưởng
+          .underline.hidden-sm.hidden-xs
+          .total-money-bet= "#{number_with_delimiter(3443000, delimiter: '.')} VNĐ"
+          %table.table.table-responsive.money-detail-table
+            %tbody
+              %tr
+                %td
+                  Tổng tiền tham gia:
+                %td.play-font
+                  = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
+              %tr
+                %td
+                  Công ty NUS:
+                %td.play-font
+                  = "#{number_with_delimiter(1000000, delimiter: '.')} VNĐ"
+
+  / Result
+  .box-header
+    %h2.section--title.bigTitle
+      Kết quả
+  .box-content.clearfix
+    .result-detail-wrap
+      - if false
+        %p.text-desc Không có nhà đầu tư nào dự đoán trúng đội vô địch Euro 2016. Toàn bộ số tiền thưởng sẽ được dùng để liên hoan toàn Công ty.
+      - else
+        %p Xin chúc mừng những nhà đầu tư sau đây đã dự đoán chính xác đội vô địch Euro 2016:
+        .row.m-t
+          .col-xs-12.col-md-8.col-md-offset-2
+            %table.table-responsive.table.table-bordered.bet-result-tbl
+              %thead
+                %th.text-center
+                  %strong Nhà đầu tư
+                %th.text-center
+                  %strong Đội vô địch
+                %th.text-center
+                  %strong Số tiền nhận được
+              %tbody
+                %tr
+                  %td
+                    Thiệu Nguyễn
+                  %td.middle.text-center.uppercase{rowspan: 5}
+                    %span.flag-FRA.team-flag
+                    %span Pháp
+                  %td.middle.text-center.money-win{rowspan: 5}
+                    = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
+                %tr
+                  %td.current-user
+                    Thiệu Nguyễn
+                %tr
+                  %td
+                    Thiệu Nguyễn
+                %tr
+                  %td
+                    Thiệu Nguyễn
+                %tr
+                  %td
+                    Thiệu Nguyễn
