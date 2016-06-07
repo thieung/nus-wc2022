@@ -1,18 +1,18 @@
 @font-face {
   font-family: 'robotoB';
-  src: url('RobotoCondensed-Bold.eot');
+  src: font-url('RobotoCondensed-Bold.eot');
   src: local('â˜º'),
-  url('RobotoCondensed-Bold.ttf') format('truetype'),
-  url('RobotoCondensed-Bold.woff') format('woff'),
-  url('RobotoCondensed-Bold.svg#RobotoCondensed-Bold') format('svg');
+  font-url('RobotoCondensed-Bold.ttf') format('truetype'),
+  font-url('RobotoCondensed-Bold.woff') format('woff'),
+  font-url('RobotoCondensed-Bold.svg#RobotoCondensed-Bold') format('svg');
 }
 @font-face {
   font-family: 'robotoR';
-  src: url('RobotoCondensed-Regular.eot');
+  src: font-url('RobotoCondensed-Regular.eot');
   src: local('â˜º'),
-  url('RobotoCondensed-Regular.ttf') format('truetype'),
-  url('RobotoCondensed-Regular.woff') format('woff'),
-  url('RobotoCondensed-Regular.svg#RobotoCondensed-Regular') format('svg');
+  font-url('RobotoCondensed-Regular.ttf') format('truetype'),
+  font-url('RobotoCondensed-Regular.woff') format('woff'),
+  font-url('RobotoCondensed-Regular.svg#RobotoCondensed-Regular') format('svg');
 }
 body{
   font-family: 'robotoR',Helvetica,Arial,sans-serif;
