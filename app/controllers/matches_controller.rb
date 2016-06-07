@@ -84,7 +84,8 @@ class MatchesController < ApplicationController
 
   def update_score
     authorize! :manage, current_user
-    if DateTime.current < (@game.play_at + 90.minutes)
+    # if DateTime.current < (@game.play_at + 90.minutes)
+    if false
       @err_msg = "Trận đấu chưa kết thúc, bạn chưa thể cập nhật tỉ số trận đấu này."
     else
       score = Score.find_by_id params[:score_id]
