@@ -33,7 +33,7 @@ class MatchesController < ApplicationController
 
   def predict_score
     return unless @game.available_to_bet
-    score_ids = if params[:match][:score_ids].blank?
+    score_ids = if params[:match].blank? || params[:match][:score_ids].blank?
       []
     else
       params[:match][:score_ids]
@@ -47,9 +47,10 @@ class MatchesController < ApplicationController
       bet_info.total_money_bet = score_ids.size * @game.round.money_rate
       unless bet_info.save
         @err_msg = bet_info.errors.full_message.first
+      else
+        @money_statistic = calculate_money_for_match @game
       end
     end
-    @money_statistic = calculate_money_for_match @game
   end
 
   def predict_score_edit_view

@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   end
 
   def has_betted_on_match? game_id
-    bets.exists?(game_id: game_id)
+    bets.has_score.exists?(game_id: game_id)
   end
 
   def get_bet_info_on_match game_id
@@ -68,7 +68,11 @@ class User < ActiveRecord::Base
 
   def total_profit_received
     total_money_bet = bets.sum(:total_money_bet)
-    total_money_predict_champion = predict_champions.sum(:money)
+    total_money_predict_champion = if DateTime.current < DateTime.parse(Settings.predict_champion_deadline.first)
+      predict_champions.has_team.sum(:money)
+    else
+      predict_champions.sum(:money)
+    end
     total_money_win = bets.sum(:total_money_win)
     money_predict_champion_win = 0
     if DateTime.current > DateTime.parse(Settings.final_match_time)

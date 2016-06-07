@@ -64,7 +64,7 @@ class Game < ActiveRecord::Base
     end
 
     # Reset total money win
-    bets.update_all(total_money_win: 0)
+    bets.update_all(total_money_win: 0, locked: true)
     if winners_ids.size > 0
       # Update total money win
       money_for_each_people = ((investment.total + money_from_previous_match + total_money_for_final).to_f / winners_ids.size).round

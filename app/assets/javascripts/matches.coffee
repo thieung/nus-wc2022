@@ -1,3 +1,3 @@
 $ ->
-  # Ladda.bind('[type=submit]')
+  Ladda.bind('button[type=submit]')
   formatSelect2()

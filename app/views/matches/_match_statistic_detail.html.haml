@@ -7,13 +7,13 @@
       .col-xs-12.col-md-8
         %h5 Thông tin cá cược
         .underline.hidden-sm.hidden-xs
-        - if game.bets.blank?
+        - if game.bets.has_score.blank?
           %p.text-desc
             Chưa có nhà đầu tư nào tham gia dự đoán tỉ số trận đấu này
         - else
           - scores = Score.all.index_by(&:id)
           %p.text-desc
-            = "Có #{game.bets.size} người đã tham gia dự đoán tỉ số trận đấu này."
+            = "Có #{game.bets.has_score.size} người đã tham gia dự đoán tỉ số trận đấu này."
           %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
             %thead
               %th.text-center
@@ -21,12 +21,12 @@
               %th.text-center
                 %strong Các tỉ số
             %tbody
-              - game.bets.includes(:user).each do |bet|
+              - game.bets.has_score.includes(:user).each do |bet|
                 %tr{class: bet.user == current_user ? 'current-user' : ''}
                   %td
                     = bet.user.display_name
                   %td.text-center
-                    - bet.score_ids.map{|score_id| scores[score_id.to_i].try(:name)}.joins(', ')
+                    = bet.score_ids.map{|score_id| scores[score_id.to_i].try(:name)}.join(', ')
 
       .col-xs-12.col-md-4
         %h5 Tổng tiền đầu tư
