@@ -84,29 +84,34 @@ class MatchesController < ApplicationController
 
   def update_score
     authorize! :manage, current_user
-    score = Score.find_by_id params[:score_id]
-    if score
-      score_result = score.name.split('-')
-      score_team1 = score_result[0].to_i
-      score_team2 = score_result[1].to_i
-      winner_team_id = if score_team1 > score_team2
-        @game.team1_id
-      elsif score_team1 < score_team2
-        @game.team2_id
-      else
-        nil
-      end
-      success = @game.update_attributes(
-        score1: score_team1,
-        score2: score_team2,
-        score_id: score.id,
-        locked: true,
-        winner: winner_team_id
-      )
-      unless success
-        flash[:alert] = "Không thể cập nhật kết quả trận đấu, vui lòng kiểm tra lại."
+    if DateTime.current < (@game.play_at + 90.minutes)
+      @err_msg = "Trận đấu chưa kết thúc, bạn chưa thể cập nhật tỉ số trận đấu này."
+    else
+      score = Score.find_by_id params[:score_id]
+      if score
+        score_result = score.name.split('-')
+        score_team1 = score_result[0].to_i
+        score_team2 = score_result[1].to_i
+        winner_team_id = if score_team1 > score_team2
+          @game.team1_id
+        elsif score_team1 < score_team2
+          @game.team2_id
+        else
+          nil
+        end
+        success = @game.update_attributes(
+          score1: score_team1,
+          score2: score_team2,
+          score_id: score.id,
+          locked: true,
+          winner: winner_team_id
+        )
+        unless success
+          @err_msg = "Không thể cập nhật kết quả trận đấu, vui lòng kiểm tra lại."
+        end
       end
     end
+    flash[:alert] = @err_msg if @err_msg
     redirect_to match_path(@game)
   end
 

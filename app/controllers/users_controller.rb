@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       }
       @user_statistics << tmp
     end
-    @maximum_money_win = @user_statistics.sort{|a,b| b[:money_win] <=> a[:money_win]}.first[:money_win]
+    @maximum_money_win = @user_statistics.sort{|a,b| b[:money_win] <=> a[:money_win]}.first.try(:money_win)||0
   end
 
   def predict_champion
