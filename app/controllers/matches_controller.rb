@@ -29,6 +29,10 @@ class MatchesController < ApplicationController
 
   def show
     @money_statistic = calculate_money_for_match @game
+    if @game.has_score?
+      winners_ids = @game.bets.select{|b| b.score_ids.map(&:to_i).include?(@game.score_id)}.map(&:user_id).uniq
+      @winners = User.includes(:bets).where("users.id"=>winners_ids)
+    end
   end
 
   def predict_score

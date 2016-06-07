@@ -67,7 +67,7 @@
         Kết quả
     .box-content.clearfix
       .result-detail-wrap
-        - if false
+        - if @winners.blank?
           %p.text-desc Không có nhà đầu tư nào dự đoán trúng tỉ số trận đấu này.
           - unless @game.final_match?
             %p.text-desc Một nửa số tiền sẽ được chuyển vào trận sau và một nửa còn lại sẽ được chuyển vào trận chung kết.
@@ -82,20 +82,10 @@
                   %th.text-center
                     %strong Số tiền nhận được
                 %tbody
-                  %tr
-                    %td
-                      Thiệu Nguyễn
-                    %td.middle.text-center.money-win{rowspan: 5}
-                      = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
-                  %tr
-                    %td.current-user
-                      Thiệu Nguyễn
-                  %tr
-                    %td
-                      Thiệu Nguyễn
-                  %tr
-                    %td
-                      Thiệu Nguyễn
-                  %tr
-                    %td
-                      Thiệu Nguyễn
+                  - @winners.each_with_index do |user, index|
+                    %tr
+                      %td{class: current_user == user ? 'current-user' : ''}
+                        = link_to user.display_name, statistics_user_path(user), class: current_user != user ? 'not-current-user' : ''
+                      - if index == 0
+                        %td.middle.text-center.money-win{rowspan: @winners.size}
+                          = format_currency(user.total_money_win_on_match(@game.id))

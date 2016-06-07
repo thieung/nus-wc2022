@@ -20,6 +20,12 @@ body{
 .m-t{
   margin-top: 15px;
 }
+.m-t-sm{
+  margin-top: 10px;
+}
+.m-t-xlarge{
+  margin-top: 50px;
+}
 .m-b{
   margin-bottom: 15px;
 }
@@ -193,14 +199,74 @@ body{
   font-size: 18px;
   color: #00868B;
 }
+.staff-display-name{
+  color: #00688B;
+  font-size: 120%;
+}
 .italic{
   font-style: italic;
+}
+.bold-text{
+  font-weight: bold;
+}
+.title-text{
+  min-width: 200px;
+  display: inline-block;
+}
+.total-money-for-final{
+  font-size: 60px;
+  color: blue;
+  font-weight: bold;
 }
 .manage-link{
   color: rgb(229, 193, 104) !important;
 }
 .admin-update-score--select{
   width: 140px;
+}
+.highlight-div .highlight-column{
+  color: blue;
+  font-weight: bold;
+}
+#statistic_detail_staff{
+  padding: 0 40px;
+  .total-profits{
+    font-size: 130%;
+  }
+  .money-gain{
+    color: #458B00;
+  }
+  .money-lost{
+    color: #FF3030;
+  }
+}
+#statistic_all_staffs, #statistic_detail_staff{
+  padding: 0 20px;
+  .statistics-table .table>tbody>tr>td{
+    padding: 12px 10px;
+  }
+  .statistics-table .table > thead > tr > th{
+    font-weight: bold;
+  }
+  .statistics-table .table > tbody > tr{
+    cursor: pointer;
+  }
+  tr.top1 td{
+    font-weight: bold;
+    color: blue;
+  }
+  tr.bottom1 td{
+    font-weight: bold;
+    color: red;
+  }
+}
+.table {
+  a.not-current-user{
+    color: #111;
+    &:hover{
+      color: #65beec;
+    }
+  }
 }
 .user-predict-score--form, .admin-import-scores--form, .match-update-score--form, .user-predict-champion--form{
   .select2-selection--multiple{

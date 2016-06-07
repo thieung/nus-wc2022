@@ -3,7 +3,7 @@ class Game < ActiveRecord::Base
   belongs_to :team2, class_name: "Team", foreign_key: :team2_id
   belongs_to :round
   belongs_to :group
-  belongs_to :investment
+  has_one :investment
 
   has_many :user_scores
   has_many :bets
@@ -17,7 +17,7 @@ class Game < ActiveRecord::Base
   scope :semi_final, -> { where(pos: [49, 50]) }
   scope :final, -> { where(pos: 51) }
 
-  after_save :update_money_for_winners, if: lambda { |game| game.score_id_changed? && game.score_id.present? && !game.locked }
+  after_save :update_money_for_winners, if: lambda { |game| game.score_id_changed? && game.score_id.present? }
 
   def can_bet?
     team1_id && team2_id
@@ -37,7 +37,7 @@ class Game < ActiveRecord::Base
   end
 
   def available_to_bet
-    DateTime.now < deadline
+    DateTime.now < deadline && !locked
   end
 
   def final_match?
@@ -55,7 +55,7 @@ class Game < ActiveRecord::Base
   private
 
   def update_money_for_winners
-    winners_ids = bets.select{|b| b.score_ids.include?(score_id)}.maps(&:user_id).uniq
+    winners_ids = bets.select{|b| b.score_ids.map(&:to_i).include?(score_id)}.map(&:user_id).uniq
     total_money_for_final = final_match? ? Investment.sum(:remaining) : 0
     money_from_previous_match = if first_match?
       0

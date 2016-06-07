@@ -3,6 +3,7 @@ class Bet < ActiveRecord::Base
   belongs_to :user
 
   scope :has_score, -> { where.not("score_ids = '{}' OR score_ids IS NULL") }
+  scope :ordered, -> {order(:created_at)}
 
   after_save :update_investment
 

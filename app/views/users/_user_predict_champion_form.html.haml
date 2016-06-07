@@ -8,4 +8,4 @@
     .col-xs-12.col-md-4
       = select_tag "team_id", options_for_select(Team.join_euro.not_eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control select-team', prompt: '----- Chọn đội -----'
     .col-xs-12.col-md-8.actions
-      %button.btn.btn-secondary.submit-btn-custom{type: 'submit'} Gửi
+      %button.btn.btn-secondary.submit-btn-custom.ladda-button{type: 'submit', "data-style"=>"zoom-in", "data-spinner-color"=>"#ccc"} Gửi

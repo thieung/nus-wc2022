@@ -1,8 +1,14 @@
 Ladda.stopAll();
 <% if @game.available_to_bet %>
   <% if @err_msg.blank? %>
-  $('.your-bet-detail-wrap').html("<%=j render partial: 'user_bet_detail', locals: {game: @game} %>");
-  $('#statistic_detail_match').html("<%=j render partial: 'match_statistic_detail', locals: {game: @game, money_statistic: @money_statistic} %>");
+    <% if current_user && current_user.has_betted_on_match?(@game.id) %>
+      $('.your-bet-detail-wrap').html("<%=j render partial: 'user_bet_detail', locals: {game: @game} %>");
+    <% else %>
+      $('.your-bet-detail-wrap').html("<%=j render partial: 'user_bet_predict_scores', locals: {game: @game, is_edit: false} %>");
+      formatSelect2();
+    <% end %>
+    swal("", "Cập nhật thành công", "success");
+    $('#statistic_detail_match').html("<%=j render partial: 'match_statistic_detail', locals: {game: @game, money_statistic: @money_statistic} %>");
   <% else %>
     swal("Oops...", "<%= @err_msg %>", "error");
   <% end %>

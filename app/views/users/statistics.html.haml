@@ -1,0 +1,52 @@
+.grid-box.col-xs-12.col-sm-12.col-md-12.col-lg-12
+  .box-header.text-center
+    %h2.section--title.bigTitle
+      THỐNG KÊ CHI TIẾT
+    %p.text-center.m-t-sm (Đơn vị tiền tệ: VNĐ)
+    %p.text-center.m-t-sm
+      Nhà đầu tư:
+      %span.bold-text.staff-display-name= @user.display_name
+    - if @user.is_alliance
+      %p.text-center
+        Các thành viên:
+        %span.bold-text= User.where(id: @user.members.pluck(:user_id).uniq).map(&:display_name).join(', ')
+  .box-content.clearfix
+    #statistic_detail_staff
+      .staff-statistic-money
+        %p
+          %span.title-text Tổng tiền đầu tư:
+          %span.bold-text= format_currency @user.total_money_bet
+        %p
+          %span.title-text Tổng tiền thắng cuộc:
+          %span.bold-text= format_currency @user.total_money_win
+        %p
+          %span.title-text Tiền dự đoán đội vô địch:
+          %span.bold-text= format_currency @user.total_money_predict_champion
+        %p
+          %span.title-text Tiền thắng dự đoán đội vô địch:
+          %span.bold-text= format_currency @user.money_predict_champion_win
+        %p.total-profits
+          %span.title-text Tổng lợi nhuận:
+          %span.bold-text{class: @user.total_profit_received.to_i >= 0 ? 'money-gain' : 'money-lost'}
+            = format_currency @user.total_profit_received
+      .staff-statistic-detail.m-t-xlarge
+        %p.text-desc * Hàng được highlight là hàng mà bạn thắng cược với lợi nhuận cao nhất
+        .table-responsive.statistics-table
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr
+                %th.text-center Trận
+                %th.text-center Thời gian diễn ra
+                %th.text-center Tổng tỉ số đã cược
+                %th.text-center Tiền đầu tư
+                %th.text-center Tiền thắng cược
+                %th.text-center Lợi nhuận
+            %tbody
+              - @user_statistics.each do |record|
+                %tr{class: (@maximum_money_win > 0 && @maximum_money_win == record[:money_win]) ? 'highlight-div success' : '', "data-url" => match_url(record[:game].id)}
+                  %td= "#{record[:game].team1.title_vi} - #{record[:game].team2.title_vi}"
+                  %td= "#{I18n.localize(record[:game].play_at, format: :full)} - #{record[:game].play_at.strftime('%H:%M%P')}"
+                  %td.text-center= record[:scores]
+                  %td.text-center= format_currency(record[:money_bet], false)
+                  %td.text-center.highlight-column= format_currency(record[:money_win], false)
+                  %td.text-center{class: record[:money_get] > 0 ? 'success' : (record[:money_get] < 0 ? 'danger' : '')}= format_currency(record[:money_get], false)

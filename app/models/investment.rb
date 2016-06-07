@@ -1,3 +1,3 @@
 class Investment < ActiveRecord::Base
-  has_many :games
+  belongs_to :game
 end

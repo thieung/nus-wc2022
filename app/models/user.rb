@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   has_many :bets
   has_many :predict_champions
+  has_many :members, foreign_key: :alliance_id, class_name: "UserAlliance"
 
   scope :order_by_username, -> { order(:username) }
   scope :staffs, -> { with_role(:staff) }
@@ -66,14 +67,33 @@ class User < ActiveRecord::Base
     predict_champions.order_by_created_date.first
   end
 
-  def total_profit_received
-    total_money_bet = bets.sum(:total_money_bet)
-    total_money_predict_champion = if DateTime.current < DateTime.parse(Settings.predict_champion_deadline.first)
+  def champion_team_predicted
+    last_predict_champion_team.team
+  end
+
+  ###### Money statistic
+
+  def total_money_win_on_match game_id
+    get_bet_info_on_match(game_id).try(:total_money_win) || 0
+  end
+
+  def total_money_bet
+    bets.sum(:total_money_bet)
+  end
+
+  def total_money_win
+    bets.sum(:total_money_win)
+  end
+
+  def total_money_predict_champion
+    if DateTime.current < DateTime.parse(Settings.predict_champion_deadline.first)
       predict_champions.has_team.sum(:money)
     else
       predict_champions.sum(:money)
     end
-    total_money_win = bets.sum(:total_money_win)
+  end
+
+  def money_predict_champion_win
     money_predict_champion_win = 0
     if DateTime.current > DateTime.parse(Settings.final_match_time)
       money_for_champion = Settings.nus_money_for_champion.to_i + PredictChampion.sum(:money)
@@ -85,6 +105,10 @@ class User < ActiveRecord::Base
         end
       end
     end
+    money_predict_champion_win
+  end
+
+  def total_profit_received
     (total_money_win + money_predict_champion_win) - (total_money_bet + total_money_predict_champion)
   end
 end

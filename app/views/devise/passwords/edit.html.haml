@@ -17,4 +17,4 @@
         %label.sr-only{for: "user_password_confirmation"} Xác nhận mật khẩu mới
         = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: "Xác nhận mật khẩu mới"
       .form-group.clear-both.pull-right
-        %button.btn.btn-primary.submit-btn-custom{type: "submit"} Cập nhật
+        %button.btn.btn-primary.submit-btn-custom.ladda-button{type: "submit", "data-style"=>"zoom-in", "data-spinner-color"=>"#ccc"} Cập nhật

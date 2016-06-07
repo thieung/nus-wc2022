@@ -1,26 +1,33 @@
 .grid-box.col-xs-12.col-sm-12.col-md-12.col-lg-12
-  %h3.text-center{style: "margin: 20px 0 5px 0;"}
-    THỐNG KÊ TOP TRIỆU PHÚ, TRỌC PHÚ MÙA EURO 2016
-  %p.text-center{style: "margin-bottom: 20px;"} (Đơn vị tiền tệ: VNĐ)
-  %p * Click vào từng hàng để xem thống kê chi tiết từng trận đấu
-  .table-responsive.statistics-table
-    %table.table.table-bordered.table-hover
-      %thead
-        %tr
-          %th.text-center #
-          %th.text-center Nhà đầu tư
-          %th.text-center Số trận tham gia
-          %th.text-center Tổng tỉ số đã cược
-          %th.text-center Tổng tiền đầu tư
-          %th.text-center Tổng tiền thắng cược
-          %th.text-center Tổng lợi nhuận
-      %tbody
-        - @statistics.each_with_index do |record, index|
-          %tr{class: index == 0 ? "success bold-win" : ([1,2].include?(index) ? 'active' : (@statistics.size-1 == index ? 'danger bold-lose' : ([@statistics.size-2, @statistics.size-3].include?(index) ? 'warning' : ''))), "data-url" => user_statistics_url(record[:user])}
-            %td= index+1
-            %td= record[:user].display_name
-            %td.text-center= record[:total_matches]
-            %td.text-center= record[:total_scores]
-            %td.text-center= number_with_delimiter(record[:total_money_bet], delimiter: '.')
-            %td.text-center= number_with_delimiter(record[:total_money_win], delimiter: '.')
-            %td.text-center= number_with_delimiter(record[:total_money_profits], delimiter: '.')
+  .box-header.text-center
+    %h2.section--title.bigTitle
+      THỐNG KÊ TOP TRIỆU PHÚ, TRỌC PHÚ MÙA EURO 2016
+    %p.text-center.m-t-sm (Đơn vị tiền tệ: VNĐ)
+  .box-content.clearfix
+    #statistic_all_staffs
+      %p.text-desc * Click vào từng hàng để xem thống kê chi tiết từng trận đấu của mỗi nhà đầu tư
+      .table-responsive.statistics-table
+        %table.table.table-bordered.table-hover
+          %thead
+            %tr
+              %th.text-center #
+              %th.text-center Nhà đầu tư
+              %th.text-center Số trận tham gia
+              %th.text-center Tổng tỉ số đã cược
+              %th.text-center Tổng tiền đầu tư
+              %th.text-center Tổng tiền thắng cược
+              %th.text-center Tiền dự đoán đội vô địch
+              %th.text-center Tiền thắng dự đoán đội vô địch
+              %th.text-center Tổng lợi nhuận
+          %tbody
+            - @statistics.each_with_index do |record, index|
+              %tr{class: index == 0 ? "success top1" : ([1,2].include?(index) ? 'active' : (@statistics.size-1 == index ? 'danger bottom1' : ([@statistics.size-2, @statistics.size-3].include?(index) ? 'warning' : ''))), "data-url" => statistics_user_url(record[:user])}
+                %td.text-center= index+1
+                %td= record[:user].display_name
+                %td.text-center= record[:total_matches]
+                %td.text-center= record[:total_scores]
+                %td.text-center= format_currency(record[:total_money_bet], false)
+                %td.text-center= format_currency(record[:total_money_win], false)
+                %td.text-center= format_currency(record[:total_money_predict_champion], false)
+                %td.text-center= format_currency(record[:money_predict_champion_win], false)
+                %td.text-center= format_currency(record[:total_money_profits], false)

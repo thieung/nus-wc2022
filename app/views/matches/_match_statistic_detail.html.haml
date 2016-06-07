@@ -24,14 +24,14 @@
               - game.bets.has_score.includes(:user).each do |bet|
                 %tr{class: bet.user == current_user ? 'current-user' : ''}
                   %td
-                    = bet.user.display_name
+                    = link_to bet.user.display_name, statistics_user_path(bet.user), class: current_user != bet.user ? 'not-current-user' : ''
                   %td.text-center
                     = bet.score_ids.map{|score_id| scores[score_id.to_i].try(:name)}.join(', ')
 
       .col-xs-12.col-md-4
         %h5 Tổng tiền đầu tư
         .underline.hidden-sm.hidden-xs
-        .total-money-bet= "#{number_with_delimiter(money_statistic.values.map(&:to_i).sum, delimiter: '.')} VNĐ"
+        .total-money-bet= format_currency(money_statistic.values.map(&:to_i).sum)
         %table.table.table-responsive.money-detail-table
           %tbody
             - if @game.final_match?
@@ -39,19 +39,19 @@
                 %td
                   Tiền được chuyển vào CK:
                 %td.play-font
-                  = "#{number_with_delimiter(money_statistic[:for_final], delimiter: '.')} VNĐ"
+                  = format_currency(money_statistic[:for_final])
             %tr
               %td
                 Trận trước:
               %td.play-font
-                = "#{number_with_delimiter(money_statistic[:previous_match], delimiter: '.')} VNĐ"
+                = format_currency(money_statistic[:previous_match])
             %tr
               %td
                 Trận này:
               %td.play-font
-                = "#{number_with_delimiter(money_statistic[:this_match], delimiter: '.')} VNĐ"
+                = format_currency(money_statistic[:this_match])
             %tr
               %td
                 Công ty NUS:
               %td.play-font
-                = "#{number_with_delimiter(money_statistic[:company_contribute], delimiter: '.')} VNĐ"
+                = format_currency(money_statistic[:company_contribute])

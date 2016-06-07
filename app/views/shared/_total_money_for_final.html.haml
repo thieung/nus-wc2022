@@ -2,4 +2,4 @@
   %h3.text-center
     Tổng tiền được chuyển vào trận chung kết:
   %br/
-  %p.text-center{style: "font-size: 60px; color: blue; font-weight: bold;"}= "#{number_with_delimiter(@total_money_for_final, delimiter: '.')} VNĐ"
+  %p.text-center.total-money-for-final= format_currency @total_money_for_final

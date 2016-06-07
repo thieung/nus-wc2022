@@ -8,4 +8,4 @@
         %label.sr-only{for: "user_email"} Email
         = f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Email"
       .form-group.clear-both.pull-right
-        %button.btn.btn-primary.submit-btn-custom{type: "submit"} Reset mật khẩu
+        %button.btn.btn-primary.submit-btn-custom.ladda-button{type: "submit", "data-style"=>"zoom-in", "data-spinner-color"=>"#ccc"} Reset mật khẩu

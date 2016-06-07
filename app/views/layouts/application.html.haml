@@ -28,7 +28,7 @@
                       - else
                         %p
                           Lợi nhuận của bạn:
-                          = link_to "#{number_with_delimiter(current_user.total_profit_received, delimiter: '.')} VNĐ", statistics_user_path(current_user)
+                          = link_to format_currency(current_user.total_profit_received), statistics_user_path(current_user)
               / Logo
               .competition-logo
                 %a.logolink{href: root_path, title: "UEFA EURO 2016"} UEFA EURO 2016

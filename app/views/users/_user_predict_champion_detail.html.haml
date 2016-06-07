@@ -1,9 +1,9 @@
 %h5 Đội vô địch
 .underline.hidden-sm.hidden-xs
 %p
-  %span.flag-ENG.team-flag
-  %span.your-champion-predicted Anh
+  %span.team-flag{class: "flag-#{current_user.champion_team_predicted.try(:code)}"}
+  %span.your-champion-predicted= current_user.champion_team_predicted.try(:title_vi)
   %span.italic.text-desc.m-l-sm
     (Có
-    %span.number-people-same-predict 7
+    %span.number-people-same-predict= PredictChampion.same_chosen(current_user.id, current_user.champion_team_predicted.try(:id)).size
     người dự đoán đội vô địch giống bạn)

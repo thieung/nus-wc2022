@@ -13,22 +13,23 @@
       \- Người tham gia không được quyền thay đổi đội mình đã đăng ký.
       %strong Vì vậy, hãy cân nhắc và lựa chọn thật kỹ trước khi bấm nút Gửi
 
-  / Your bet
-  .box-header
-    %h2.section--title.bigTitle
-      Dự đoán của bạn
-  .box-content.m-b-xlarge.clearfix
-    .your-bet-detail-wrap
-      - if !current_user
-        %p
-          Bạn cần
-          = link_to 'đăng nhập', login_path
-          để tham gia dự đoán đội vô địch.
-      - else
-        - if current_user.has_predict_champion_first_time?
-          = render partial: 'user_predict_champion_detail'
+  - if current_user && !current_user.is_admin?
+    / Your bet
+    .box-header
+      %h2.section--title.bigTitle
+        Dự đoán của bạn
+    .box-content.m-b-xlarge.clearfix
+      .your-bet-detail-wrap
+        - if !current_user
+          %p
+            Bạn cần
+            = link_to 'đăng nhập', login_path
+            để tham gia dự đoán đội vô địch.
         - else
-          = render partial: 'user_predict_champion_form'
+          - if current_user.has_predict_champion_first_time?
+            = render partial: 'user_predict_champion_detail'
+          - else
+            = render partial: 'user_predict_champion_form'
   / Statistic
   .box-header
     %h2.section--title.bigTitle
@@ -39,7 +40,7 @@
         .col-xs-12.col-md-9
           %h5 Thông tin cá cược
           .underline.hidden-sm.hidden-xs
-          - if false
+          - if PredictChampion.all.size == 0
             %p.text-desc
               Chưa có ai tham gia dự đoán đội vô địch
           - else
@@ -56,77 +57,60 @@
                   Lần 2
                 %td.text-center
                   Lần 3
-              %tr.current-user
-                %td
-                  Thiệu Nguyễn
-                %td.text-center.uppercase.eliminated
-                  %span.flag-FRA.team-flag
-                  %span PHÁP
-                %td.uppercase
-                %td.uppercase
-              %tr
-                %td
-                  Tham Nguyen-Thi
-                %td.text-center.uppercase
-                  %span.flag-ENG.team-flag
-                  %span Anh
-                %td.uppercase
-                %td.uppercase
+              - PredictChampion.includes([:user, :team]).each do |item|
+                %tr{class: item.user == current_user ? 'current-user' : ''}
+                  %td
+                    = link_to item.user.display_name, statistics_user_path(item.user), class: current_user != item.user ? 'not-current-user' : ''
+                  %td.text-center.uppercase{class: item.team.eliminated ? 'eliminated' : ''}
+                    %span.team-flag{class: "flag-#{item.team.code}"}
+                    %span= item.team.title_vi
+                  %td.uppercase
+                  %td.uppercase
         .col-xs-12.col-md-3
           %h5 Tổng tiền thưởng
           .underline.hidden-sm.hidden-xs
-          .total-money-bet= "#{number_with_delimiter(3443000, delimiter: '.')} VNĐ"
+          .total-money-bet= format_currency(Settings.nus_money_for_champion.to_i + PredictChampion.sum(:money))
           %table.table.table-responsive.money-detail-table
             %tbody
               %tr
                 %td
                   Tổng tiền tham gia:
                 %td.play-font
-                  = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
+                  = format_currency(PredictChampion.sum(:money))
               %tr
                 %td
                   Công ty NUS:
                 %td.play-font
-                  = "#{number_with_delimiter(1000000, delimiter: '.')} VNĐ"
-
-  / Result
-  .box-header
-    %h2.section--title.bigTitle
-      Kết quả
-  .box-content.clearfix
-    .result-detail-wrap
-      - if false
-        %p.text-desc Không có nhà đầu tư nào dự đoán trúng đội vô địch Euro 2016. Toàn bộ số tiền thưởng sẽ được dùng để liên hoan toàn Công ty.
-      - else
-        %p Xin chúc mừng những nhà đầu tư sau đây đã dự đoán chính xác đội vô địch Euro 2016:
-        .row.m-t
-          .col-xs-12.col-md-8.col-md-offset-2
-            %table.table-responsive.table.table-bordered.bet-result-tbl
-              %thead
-                %th.text-center
-                  %strong Nhà đầu tư
-                %th.text-center
-                  %strong Đội vô địch
-                %th.text-center
-                  %strong Số tiền nhận được
-              %tbody
-                %tr
-                  %td
-                    Thiệu Nguyễn
-                  %td.middle.text-center.uppercase{rowspan: 5}
-                    %span.flag-FRA.team-flag
-                    %span Pháp
-                  %td.middle.text-center.money-win{rowspan: 5}
-                    = "#{number_with_delimiter(600000, delimiter: '.')} VNĐ"
-                %tr
-                  %td.current-user
-                    Thiệu Nguyễn
-                %tr
-                  %td
-                    Thiệu Nguyễn
-                %tr
-                  %td
-                    Thiệu Nguyễn
-                %tr
-                  %td
-                    Thiệu Nguyễn
+                  = format_currency(Settings.nus_money_for_champion.to_i)
+  - if DateTime.current > DateTime.parse(Settings.final_match_time)
+    / Result
+    .box-header
+      %h2.section--title.bigTitle
+        Kết quả
+    .box-content.clearfix
+      .result-detail-wrap
+        - if @winner_list.blank?
+          %p.text-desc Không có nhà đầu tư nào dự đoán trúng đội vô địch Euro 2016. Toàn bộ số tiền thưởng sẽ được dùng để liên hoan toàn Công ty.
+        - else
+          %p Xin chúc mừng những nhà đầu tư sau đây đã dự đoán chính xác đội vô địch Euro 2016:
+          .row.m-t
+            .col-xs-12.col-md-8.col-md-offset-2
+              %table.table-responsive.table.table-bordered.bet-result-tbl
+                %thead
+                  %th.text-center
+                    %strong Nhà đầu tư
+                  %th.text-center
+                    %strong Đội vô địch
+                  %th.text-center
+                    %strong Số tiền nhận được
+                %tbody
+                  - @winner_list.each_with_index do |user, index|
+                    %tr
+                      %td{class: user == current_user ? 'current-user' : ''}
+                        = link_to user.display_name, statistics_user_path(user), class: current_user != user ? 'not-current-user' : ''
+                      - if index == 0
+                        %td.middle.text-center.uppercase{rowspan: 5}
+                          %span.team-flag{class: "flag-#{Team.champion.try(:code)}"}
+                          %span= Team.champion.try(:code).title_vi
+                        %td.middle.text-center.money-win{rowspan: 5}
+                          = format_currency(@money_for_each_user||0)

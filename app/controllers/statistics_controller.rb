@@ -1,15 +1,19 @@
 class StatisticsController < ApplicationController
   def index
     @statistics = []
-    all_budgets = Bet.all.group_by(&:user_id)
-    users = User.where(id: all_budgets.keys).index_by(&:id)
-    all_budgets.each do |user_id, budgets|
-      total_money_bet = budgets.sum(&:total_money_bet)
-      total_money_win = budgets.sum(&:total_money_win)
-      total_money_profits = total_money_win - total_money_bet
-      user_scores = UserScore.where(user_id: user_id)
-      @statistics << {user: users[user_id], total_matches: user_scores.group_by(&:game_id).size, total_scores: user_scores.size, total_money_bet: total_money_bet, total_money_win: total_money_win, total_money_profits: total_money_profits}
+    User.staffs.includes(:bets).find_each do |user|
+      tmp = {
+        user: user,
+        total_matches: user.bets.has_score.pluck(:game_id).uniq.size,
+        total_scores: user.bets.has_score.map{|b| b.score_ids.size}.sum,
+        total_money_bet: user.total_money_bet,
+        total_money_win: user.total_money_win,
+        total_money_predict_champion: user.total_money_predict_champion,
+        money_predict_champion_win: user.money_predict_champion_win,
+        total_money_profits: user.total_profit_received
+      }
+      @statistics << tmp
     end
-    @statistics = @statistics.sort{|a,b| b[:total_money_profits] <=> a[:total_money_profits]}
+    @statistics.sort!{|a,b| b[:total_money_profits] <=> a[:total_money_profits]}
   end
 end
