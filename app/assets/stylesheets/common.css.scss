@@ -240,6 +240,11 @@ body{
     color: #FF3030;
   }
 }
+.users-management-table, .matches-management-table{
+  .table>tbody>tr>td{
+    padding: 12px 10px;
+  }
+}
 #statistic_all_staffs, #statistic_detail_staff{
   padding: 0 20px;
   .statistics-table .table>tbody>tr>td{

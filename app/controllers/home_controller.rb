@@ -22,7 +22,6 @@ class HomeController < ApplicationController
   end
 
   def predict_champion
-
   end
 
   def management

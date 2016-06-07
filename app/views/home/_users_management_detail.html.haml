@@ -1,0 +1,7 @@
+- User.staffs.order_by_username.each do |user|
+  %tr
+    %td= user.full_name
+    %td.text-center= user.username
+    %td.text-center= user.email
+    %td.text-center
+      = link_to "#{user.is_active ? 'Disable' : 'Enable'}", change_status_user_path(user), "data-remote" => true

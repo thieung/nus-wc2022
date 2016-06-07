@@ -40,7 +40,7 @@
         .col-xs-12.col-md-9
           %h5 Thông tin cá cược
           .underline.hidden-sm.hidden-xs
-          - if PredictChampion.all.size == 0
+          - if @predict_stats[:collection].size == 0
             %p.text-desc
               Chưa có ai tham gia dự đoán đội vô địch
           - else
@@ -57,26 +57,26 @@
                   Lần 2
                 %td.text-center
                   Lần 3
-              - PredictChampion.includes([:user, :team]).each do |item|
+              - @predict_stats[:collection].includes([:user, :team]).each do |item|
                 %tr{class: item.user == current_user ? 'current-user' : ''}
                   %td
                     = link_to item.user.display_name, statistics_user_path(item.user), class: current_user != item.user ? 'not-current-user' : ''
-                  %td.text-center.uppercase{class: item.team.eliminated ? 'eliminated' : ''}
-                    %span.team-flag{class: "flag-#{item.team.code}"}
-                    %span= item.team.title_vi
+                  %td.text-center.uppercase{class: item.team.try(:eliminated) ? 'eliminated' : ''}
+                    %span.team-flag{class: "flag-#{item.team.try(:code)}"}
+                    %span= item.team.try(:title_vi)
                   %td.uppercase
                   %td.uppercase
         .col-xs-12.col-md-3
           %h5 Tổng tiền thưởng
           .underline.hidden-sm.hidden-xs
-          .total-money-bet= format_currency(Settings.nus_money_for_champion.to_i + PredictChampion.sum(:money))
+          .total-money-bet= format_currency(Settings.nus_money_for_champion.to_i + @predict_stats[:total_money])
           %table.table.table-responsive.money-detail-table
             %tbody
               %tr
                 %td
                   Tổng tiền tham gia:
                 %td.play-font
-                  = format_currency(PredictChampion.sum(:money))
+                  = format_currency(@predict_stats[:total_money])
               %tr
                 %td
                   Công ty NUS:
