@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %p Cập nhật thông tin dự đoán:
+    %table
+      %tr
+        %td Nhà đầu tư:
+        %td
+          %strong= @user.display_name
+      %tr
+        %td Trận:
+        %td
+          %strong= @match_content
+      %tr
+        %td URL:
+        %td
+          %strong= link_to match_url(@game.id), match_url(@game.id)
+      %tr
+        %td Các tỉ số:
+        %td
+          %strong{style: 'color: blue;'}= @score_content

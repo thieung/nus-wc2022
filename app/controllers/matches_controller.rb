@@ -43,6 +43,7 @@ class MatchesController < ApplicationController
       params[:match][:score_ids]
     end
     bet_info = current_user.get_bet_info_on_match(params[:id])||current_user.bets.new(game_id: @game.id)
+    is_new_record = bet_info.new_record?
     if score_ids.size > 3
       @err_msg = "Bạn không được dự đoán quá 3 tỉ số"
     else
@@ -52,6 +53,11 @@ class MatchesController < ApplicationController
       unless bet_info.save
         @err_msg = bet_info.errors.full_message.first
       else
+        if is_new_record
+          UserMailer.delay.notice_bet_result_to_staffs bet_info
+        else
+          UserMailer.delay.notice_bet_result_updated_to_staffs bet_info
+        end
         @money_statistic = calculate_money_for_match @game
       end
     end

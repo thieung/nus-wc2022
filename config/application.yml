@@ -27,6 +27,7 @@ defaults: &defaults
 
 development:
   <<: *defaults
+  staffs_mail_group: 'staff@example.com'
   neat_setting: 800
 
 test:
@@ -34,3 +35,4 @@ test:
 
 production:
   <<: *defaults
+  staffs_mail_group: 'vanthieuuit@gmail.com'
