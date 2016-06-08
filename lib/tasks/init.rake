@@ -20,7 +20,7 @@ namespace :db do
           # UserMailer.delay.send_password_to_staff(staff, generated_password)
 
           # Generate predict champion data for each staff
-          predict = user.predict_champions.new(money: 100000)
+          predict = staff.predict_champions.new(money: 100000)
           predict.save
         end
       end
