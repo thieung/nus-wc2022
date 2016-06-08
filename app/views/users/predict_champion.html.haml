@@ -39,7 +39,7 @@
     .statistic-detail-wrap
       = render partial: 'predict_champion_statistic_detail'
 
-  - if Game.final.locked
+  - if Game.final.first.locked
     / Result
     .box-header
       %h2.section--title.bigTitle

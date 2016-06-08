@@ -16,7 +16,7 @@ class Game < ActiveRecord::Base
   scope :round_of_16, -> { where(pos: [37..44]) }
   scope :quarter_final, -> { where(pos: [45..48]) }
   scope :semi_final, -> { where(pos: [49, 50]) }
-  scope :final, -> { where(pos: 51).first }
+  scope :final, -> { where(pos: 51) }
 
   after_save :update_money_for_winners, if: lambda { |game| game.score_id_changed? && game.score_id.present? }
 
