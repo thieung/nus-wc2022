@@ -1,11 +1,19 @@
 = form_tag import_user_betting_scores_match_path(game), method: :post, class: 'form-horizontal admin-import-scores--form' do
   - users_options = User.staffs.order_by_username.collect{|u|[u.display_name, u.id]}
-  - number.times do |i|
-    .form-group
-      .col-xs-12.col-md-4
-        = select_tag "bet_info[#{i}][user_id]", options_for_select(users_options), class: 'form-control select-users', prompt: '--- Chọn staff ---'
-      .col-xs-12.col-md-4
-        = select_tag "bet_info[#{i}][score_ids]", options_for_select(Score.all.collect{|s|[s.name, s.id]}, nil), multiple: true, class: 'form-control select-scores'
+  - if number
+    - number.times do |i|
+      .form-group
+        .col-xs-12.col-md-4
+          = select_tag "bet_info[#{i}][user_id]", options_for_select(users_options), class: 'form-control select-users', prompt: '--- Chọn staff ---'
+        .col-xs-12.col-md-4
+          = select_tag "bet_info[#{i}][score_ids]", options_for_select(Score.all.collect{|s|[s.name, s.id]}, nil), multiple: true, class: 'form-control select-scores'
+  - else
+    - game.bets.has_score.each_with_index do |bet, i|
+      .form-group
+        .col-xs-12.col-md-4
+          = select_tag "bet_info[#{i}][user_id]", options_for_select(users_options, bet.user_id), class: 'form-control select-users', prompt: '--- Chọn staff ---'
+        .col-xs-12.col-md-4
+          = select_tag "bet_info[#{i}][score_ids]", options_for_select(Score.all.collect{|s|[s.name, s.id]}, bet.score_ids), multiple: true, class: 'form-control select-scores'
   #additional_rows
   .form-group
     .col-xs-12

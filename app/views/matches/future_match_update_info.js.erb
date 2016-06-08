@@ -1,0 +1,6 @@
+Ladda.stopAll();
+<% if @success %>
+  $(".matches-management-table tr[data-game-id=<%=@game.id%>]").html("<%=j render partial: 'home/matches_management_row_content', locals: {game: @game} %>");
+<% else %>
+  swal('', 'Có lỗi xảy ra, vui lòng kiểm tra lại', 'error');
+<% end %>

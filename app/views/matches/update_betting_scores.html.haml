@@ -25,11 +25,14 @@
     %h2.section--title.bigTitle
       Nhập dữ liệu
   .box-content.clearfix
-    = form_tag import_number_users_match_path(@game), method: :post, remote: true, class: 'form-horizontal admin-import-number-users--form' do
-      .admin--input-number-users
-        .form-group
-          .col-xs-12.col-md-4.m-b
-            = text_field_tag 'number_user', nil, type: 'number', autofocus: true, class: 'form-control', placeholder: 'Nhập tổng số người dự đoán trận đấu này'
-          .col-xs-12.col-md-8
-            %button.btn.btn-secondary.ladda-button{type: 'submit', "data-style"=>"zoom-in", "data-spinner-color"=>"#ccc"} Tạo form nhập liệu
-    .admin--input-user-scores
+    - if @game.bets.has_score.size == 0
+      = form_tag import_number_users_match_path(@game), method: :post, remote: true, class: 'form-horizontal admin-import-number-users--form' do
+        .admin--input-number-users
+          .form-group
+            .col-xs-12.col-md-4.m-b
+              = text_field_tag 'number_user', nil, type: 'number', autofocus: true, class: 'form-control', placeholder: 'Nhập tổng số người dự đoán trận đấu này'
+            .col-xs-12.col-md-8
+              %button.btn.btn-secondary.ladda-button{type: 'submit', "data-style"=>"zoom-in", "data-spinner-color"=>"#ccc"} Tạo form nhập liệu
+      .admin--input-user-scores
+    - else
+      = render partial: 'import_user_scores', locals: {game: @game, number: nil}

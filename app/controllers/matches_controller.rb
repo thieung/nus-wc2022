@@ -1,7 +1,7 @@
 class MatchesController < ApplicationController
-  before_action :load_match, only: [:show, :check_valid_match, :predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score]
+  before_action :load_match, only: [:show, :check_valid_match, :predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :future_match_update_info]
   before_action :check_valid_match, only: [:show, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score]
-  before_action :authenticate_user!, only: [:predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score]
+  before_action :authenticate_user!, only: [:predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :future_match_update_info]
 
   def index
     today   = Date.today
@@ -70,6 +70,32 @@ class MatchesController < ApplicationController
 
   def import_user_betting_scores
     authorize! :manage, current_user
+    return if !current_user.is_admin? && !@game.available_to_bet
+    success = false
+    Game.transaction do
+      users_indexed = User.all.index_by(&:id)
+      params[:bet_info].each do |item|
+        user_id = item[1][:user_id]
+        score_ids = item[1][:score_ids]
+        user = users_indexed[user_id.to_i]
+        if user_id.present? && score_ids.present?
+          bet_info = user.get_bet_info_on_match(@game.id)||user.bets.new(game_id: @game.id)
+          if score_ids.size > 3
+            raise ActiveRecord::Rollback
+          else
+            bet_info.score_ids = score_ids
+            bet_info.last_changed_at = DateTime.current
+            bet_info.total_money_bet = score_ids.size * @game.round.money_rate
+            if bet_info.save
+              success = true
+            else
+              raise ActiveRecord::Rollback
+            end
+          end
+        end
+      end
+    end
+    flash[:alert] = "Có lỗi xảy ra, vui lòng nhập lại!" unless success
     redirect_to match_path(@game) and return
   end
 
@@ -114,6 +140,16 @@ class MatchesController < ApplicationController
     end
     flash[:alert] = @err_msg if @err_msg
     redirect_to match_path(@game)
+  end
+
+  def future_match_update_info
+    authorize! :manage, current_user
+    @success = false
+    if params[:tmp_team1_id].present? && params[:tmp_team2_id].present?
+      @game.team1_id = params[:tmp_team1_id]
+      @game.team2_id = params[:tmp_team2_id]
+      @success = @game.save
+    end
   end
 
   private

@@ -4,10 +4,33 @@
   %header.box-header
     %h2.section--title.bigTitle
       Quản lý thành viên
-  .box-content.clearfix.m-b-large
+  .box-content.clearfix.m-b-xlarge
+    #users_management_section
+      .table-responsive.users-management-table
+        %table.table.table-bordered.table-hover
+          %thead
+            %tr
+              %th.text-center.bold-text Tên
+              %th.text-center.bold-text Username
+              %th.text-center.bold-text Email
+              %th.text-center.bold-text Thao tác
+          %tbody
+            = render partial: 'users_management_detail'
 
   / Matches management
   %header.box-header
     %h2.section--title.bigTitle
       Quản lý trận đấu
-  .box-content.clearfix.m-b-large
+  .box-content.clearfix
+    #matches_management_section
+      .table-responsive.matches-management-table
+        %table.table.table-bordered.table-hover
+          %thead
+            %tr
+              %th.text-center.bold-text{width: 60} Trận #
+              %th.text-center.bold-text Đội 1
+              %th.text-center.bold-text Đội 2
+              %th.text-center.bold-text Loại trận đấu
+              %th.text-center.bold-text Thao tác
+          %tbody
+            = render partial: 'matches_management_detail'

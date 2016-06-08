@@ -1,7 +1,14 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:pick_champion]
+  before_action :authenticate_user!, only: [:pick_champion, :change_status]
+  before_action :load_user, only: [:statistics, :change_status]
+
+  def change_status
+    authorize! :manage, current_user
+    @user.is_active = !@user.is_active
+    @user.save
+  end
+
   def statistics
-    @user = User.find_by id: params[:id]
     @user_statistics = []
 
     @user.bets.has_score.ordered.includes(:game).each do |bet|
@@ -18,6 +25,18 @@ class UsersController < ApplicationController
   end
 
   def predict_champion
+    @predict_stats = if DateTime.current < DateTime.parse(Settings.predict_champion_deadline.first)
+      {
+        collection: PredictChampion.has_team,
+        total_money: PredictChampion.has_team.sum(:money)
+      }
+    else
+      {
+        collection: PredictChampion,
+        total_money: PredictChampion.sum(:money)
+      }
+    end
+
     if DateTime.current > DateTime.parse(Settings.final_match_time)
       # Show result
       money_for_champion = Settings.nus_money_for_champion.to_i + PredictChampion.sum(:money)
@@ -51,5 +70,11 @@ class UsersController < ApplicationController
     end
     flash[:alert] = err_msg if err_msg.present?
     redirect_to predict_champion_path
+  end
+
+  private
+
+  def load_user
+    @user = User.find_by(id: params[:id])
   end
 end

@@ -25,12 +25,14 @@ Rails.application.routes.draw do
       post :import_user_betting_scores
       get :add_row
       post :update_score
+      post :future_match_update_info
     end
   end
   resources :statistics, only: :index
   resources :users do
     member do
       get :statistics
+      get :change_status
     end
     collection do
       post :pick_champion

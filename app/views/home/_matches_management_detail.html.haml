@@ -1,0 +1,3 @@
+- Game.ordered.each do |game|
+  %tr{"data-game-id"=>game.id}
+    = render partial: 'matches_management_row_content', locals: {game: game}
