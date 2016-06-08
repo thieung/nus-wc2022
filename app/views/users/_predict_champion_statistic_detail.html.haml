@@ -2,7 +2,7 @@
   .col-xs-12.col-md-9
     %h5 Thông tin cá cược
     .underline.hidden-sm.hidden-xs
-    - if @predict_stats[:collection].size == 0
+    - if @predict_stats[:collection].count == 0
       %p.text-desc
         Chưa có ai tham gia dự đoán đội vô địch
     - else
@@ -19,7 +19,8 @@
             Lần 2
           %td.text-center
             Lần 3
-        - @predict_stats[:collection].includes([:user, :team]).group_by(&:user_id).each do |user_id, records|
+        - collection = DateTime.current <= DateTime.parse(Settings.predict_champion_deadline.first) ? PredictChampion.has_team : PredictChampion
+        - collection.group_by(&:user_id).each do |user_id, records|
           - user = @users_indexed[user_id.to_i]
           - records_sorted = records.sort{|a,b| a[:created_at] <=> b[:created_at]}
           %tr{class: user == current_user ? 'current-user' : ''}
