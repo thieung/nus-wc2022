@@ -26,10 +26,10 @@
             = link_to 'đăng nhập', login_path
             để tham gia dự đoán đội vô địch.
         - else
-          - if current_user.has_predict_champion_first_time?
-            = render partial: 'user_predict_champion_detail'
-          - else
+          - if current_user.available_to_predict_champion?
             = render partial: 'user_predict_champion_form'
+          - else
+            = render partial: 'user_predict_champion_detail'
 
   / Statistic
   .box-header

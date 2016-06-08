@@ -19,17 +19,43 @@
             Lần 2
           %td.text-center
             Lần 3
-        - @predict_stats[:collection].includes([:user, :team]).each do |item|
-          %tr{class: item.user == current_user ? 'current-user' : ''}
+        - @predict_stats[:collection].includes([:user, :team]).group_by(&:user_id).each do |user_id, records|
+          - user = @users_indexed[user_id.to_i]
+          - records_sorted = records.sort{|a,b| a[:created_at] <=> b[:created_at]}
+          %tr{class: user == current_user ? 'current-user' : ''}
             %td
-              = link_to item.user.display_name, statistics_user_path(item.user), class: current_user != item.user ? 'not-current-user' : ''
-            %td.text-center.uppercase{class: item.team.try(:eliminated) ? 'eliminated' : ''}
-              %p
-                %span.team-flag{class: "flag-#{item.team.try(:code)}"}
-              %p
-                %span= item.team.try(:title_vi)
-            %td.uppercase
-            %td.uppercase
+              = link_to user.display_name, statistics_user_path(user), class: current_user != user ? 'not-current-user' : ''
+            - records.sort{|a,b| a[:created_at] <=> b[:created_at]}
+            - for i in 1..3 do
+              - if records_sorted[i-1]
+                - team = @teams_indexed[records_sorted[i-1].try(:team_id)]
+                - if team
+                  %td.text-center.uppercase{class: team.try(:eliminated) ? 'eliminated' : ''}
+                    %p
+                      %span.team-flag{class: "flag-#{team.try(:code)}"}
+                    %p
+                      %span= team.try(:title_vi)
+                - else
+                  %td.text-center.uppercase{class: team.try(:eliminated) ? 'eliminated' : ''}
+                    %span.text-desc
+                      - case i
+                      - when 1
+                        KHÔNG DỰ ĐOÁN
+                      - when 2
+                        = !finish_group_stage? ? 'NOT AVAILABLE' : 'KHÔNG DỰ ĐOÁN'
+                      - when 3
+                        = !finish_round_of_16? ? 'NOT AVAILABLE' : 'KHÔNG DỰ ĐOÁN'
+              - else
+                %td.text-center.uppercase{class: team.try(:eliminated) ? 'eliminated' : ''}
+                  %span.text-desc
+                    - case i
+                    - when 1
+                      KHÔNG DỰ ĐOÁN
+                    - when 2
+                      = !finish_group_stage? ? 'NOT AVAILABLE' : 'KHÔNG DỰ ĐOÁN'
+                    - when 3
+                      = !finish_round_of_16? ? 'NOT AVAILABLE' : 'KHÔNG DỰ ĐOÁN'
+
   .col-xs-12.col-md-3
     %h5 Tổng tiền thưởng
     .underline.hidden-sm.hidden-xs

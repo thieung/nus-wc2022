@@ -7,8 +7,10 @@
   - else
     - predicted_team = user.champion_team_predicted
     - if predicted_team
-      %span.team-flag{class: "flag-#{predicted_team.try(:code)}"}
-      %span= predicted_team.try(:title_vi)
+      %p
+        %span.team-flag{class: "flag-#{predicted_team.try(:code)}"}
+      %p
+        %span= predicted_team.try(:title_vi)
     - else
       %span.text-desc Không dự đoán
 %td.text-center

@@ -51,6 +51,8 @@ class ApplicationController < ActionController::Base
     Game.round_of_16.not_locked.size == 0
   end
 
+  helper_method :finish_group_stage?, :finish_round_of_16?
+
   def can_predict_before_group_stage?
     return false unless current_user
     DateTime.current <= DateTime.parse(Settings.predict_champion_deadline.first)
