@@ -36,3 +36,6 @@ test:
 production:
   <<: *defaults
   staffs_mail_group: 'vanthieuuit@gmail.com'
+  sendgrid:
+    username: jackulti
+    password: il0v3r0r182
