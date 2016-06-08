@@ -3,12 +3,12 @@
   - if game.team1_id
     = game.team1.try(:title_vi)||game.team1.try(:title)
   - else
-    = select_tag "team1_id_#{game.id}", options_for_select(Team.join_euro.not_eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control select-team', prompt: "----- #{game.unknown_team1_title_vi}-----"
+    = select_tag "team1_id_#{game.id}", options_for_select(Team.join_euro.not_eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control admin-select-team', prompt: "----- #{game.unknown_team1_title_vi}-----"
 %td.text-center
   - if game.team2_id
     = game.team2.try(:title_vi)||game.team2.try(:title)
   - else
-    = select_tag "team2_id_#{game.id}", options_for_select(Team.join_euro.not_eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control select-team', prompt: "----- #{game.unknown_team2_title_vi}-----"
+    = select_tag "team2_id_#{game.id}", options_for_select(Team.join_euro.not_eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control admin-select-team', prompt: "----- #{game.unknown_team2_title_vi}-----"
 %td.text-center
   = game.round.is_group_stage? ? "Vòng bảng, #{game.group.title_vi}" : game.round.title_vi
 %td.text-center

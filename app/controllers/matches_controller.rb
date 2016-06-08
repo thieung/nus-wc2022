@@ -24,7 +24,7 @@ class MatchesController < ApplicationController
         redirect_to matches_path({type: 'final'}) and return
       end
     end
-    @all_matches = @games.select("games.*, date(play_at) as occur_date").group_by(&:occur_date)
+    @all_matches = @games.select("games.*, date(play_at) as occur_date").order("occur_date").group_by(&:occur_date)
   end
 
   def show
