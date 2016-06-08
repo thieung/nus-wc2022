@@ -1,0 +1,7 @@
+Ladda.stopAll();
+<% if @success %>
+  $(".staffs-predict-champion-table tr[data-user-id=<%=@user.id%>]").html("<%=j render partial: 'users/admin_predict_champion_staff_row', locals: {user: @user} %>");
+  $(".statistic-detail-wrap").html("<%=j render partial: 'predict_champion_statistic_detail' %>");
+<% else %>
+  swal('', 'Có lỗi xảy ra, vui lòng kiểm tra lại', 'error');
+<% end %>

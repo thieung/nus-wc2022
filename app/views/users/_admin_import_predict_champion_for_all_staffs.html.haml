@@ -1,0 +1,12 @@
+.table-responsive.staffs-predict-champion-table
+  %table.table.table-bordered.table-hover
+    %thead
+      %tr
+        %th.text-center.bold-text{width: '30%'} Tên thành viên
+        %th.text-center.bold-text{width: '20%'} Username
+        %th.text-center.bold-text{width: '30%'} Đội vô địch
+        %th.text-center.bold-text{width: '20%'} Thao tác
+    %tbody
+      - User.staffs.active.order_by_username.each do |user|
+        %tr{"data-user-id"=>user.id}
+          = render partial: 'admin_predict_champion_staff_row', locals: {user: user}

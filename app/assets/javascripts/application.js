@@ -32,7 +32,7 @@ function formatSelect2(){
   $('select.select-users, select.select-score, select.select-team').select2({
     language: 'vi'
   });
-  $('select.admin-select-team').select2({
+  $('select.admin-select-team, select.admin-predict-team').select2({
     language: 'vi',
     width: '80%'
   });

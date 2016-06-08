@@ -162,7 +162,11 @@ body{
   }
 }
 
-.list-better-tbl>tbody>tr>td, .bet-result-tbl>tbody>tr>td{
+.list-better-tbl>tbody>tr>td{
+  padding: 4px 10px;
+}
+
+.bet-result-tbl>tbody>tr>td{
   padding: 8px 10px;
 }
 .eliminated{
@@ -239,6 +243,9 @@ body{
   .money-lost{
     color: #FF3030;
   }
+}
+.staffs-predict-champion-table .table > tbody > tr > td{
+  padding: 6px 10px;
 }
 .users-management-table, .matches-management-table{
   .table>tbody>tr>td{

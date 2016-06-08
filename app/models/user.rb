@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
 
   scope :order_by_username, -> { order(:username) }
   scope :staffs, -> { with_role(:staff) }
+  scope :active, -> { where(is_active: true) }
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
@@ -40,6 +41,12 @@ class User < ActiveRecord::Base
     self.has_role? :boss
   end
 
+  def can_update_result_on_match? game_id
+    pos = Game.find_by(id: game_id).try(:pos)
+    return true if pos == 1
+    return is_admin? && (Game.where(pos: (1..pos-1).to_a).not_locked.size == 0)
+  end
+
   def has_betted_on_match? game_id
     bets.has_score.exists?(game_id: game_id)
   end
@@ -64,11 +71,24 @@ class User < ActiveRecord::Base
   end
 
   def last_predict_champion_team
-    predict_champions.order_by_created_date.first
+    predict_champions.has_team.order_by_created_date.first
   end
 
   def champion_team_predicted
-    last_predict_champion_team.team
+    last_predict_champion_team.try(:team)
+  end
+
+  def available_to_predict_champion?
+    check = false
+    case total_teams_to_predict_champion
+    when 0
+      check = DateTime.current < DateTime.parse(Settings.predict_champion_deadline.first)
+    when 1
+      check = champion_team_predicted.eliminated && DateTime.current < DateTime.parse(Settings.predict_champion_deadline.second)
+    when 2
+      check = champion_team_predicted.eliminated && DateTime.current < DateTime.parse(Settings.predict_champion_deadline.third)
+    end
+    check
   end
 
   ###### Money statistic

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:pick_champion, :change_status]
-  before_action :load_user, only: [:statistics, :change_status]
+  before_action :authenticate_user!, only: [:pick_champion, :change_status, :import_predict_champion]
+  before_action :load_user, only: [:statistics, :change_status, :import_predict_champion]
 
   def change_status
     authorize! :manage, current_user
@@ -25,17 +25,7 @@ class UsersController < ApplicationController
   end
 
   def predict_champion
-    @predict_stats = if DateTime.current < DateTime.parse(Settings.predict_champion_deadline.first)
-      {
-        collection: PredictChampion.has_team,
-        total_money: PredictChampion.has_team.sum(:money)
-      }
-    else
-      {
-        collection: PredictChampion,
-        total_money: PredictChampion.sum(:money)
-      }
-    end
+    load_predict_stats
 
     if DateTime.current > DateTime.parse(Settings.final_match_time)
       # Show result
@@ -50,15 +40,28 @@ class UsersController < ApplicationController
 
   def pick_champion
     err_msg = ''
-    if DateTime.current <= DateTime.parse(Settings.predict_champion_deadline.first)
+    if current_user.available_to_predict_champion?
       valid_predict = true
       valid_predict = !current_user.predict_champions.exists?(team_id: params[:team_id])
       valid_predict = !Team.find_by(id: params[:team_id]).eliminated
       if valid_predict
-        predict_champion = current_user.predict_champions.new(
-          team_id: params[:team_id],
-          money: 100000
-        )
+        predict_champion = if can_predict_before_group_stage?
+          current_user.predict_champions.first
+        else
+          current_user.predict_champions.new
+        end
+
+        predict_champion.team_id = params[:team_id]
+        money_rate = Settings.predict_champion_money.first
+        if can_predict_before_round_of_16?
+          money_rate = Settings.predict_champion_money.second
+        end
+        if can_predict_before_quarter_final?
+          money_rate = Settings.predict_champion_money.third
+        end
+
+        predict_champion.money = money_rate
+
         unless predict_champion.save
           err_msg = predict_champion.errors.full_messages.first
         end
@@ -72,9 +75,49 @@ class UsersController < ApplicationController
     redirect_to predict_champion_path
   end
 
+  def import_predict_champion
+    authorize! :manage, current_user
+    predict_champion = if @user.has_predict_champion_first_time?
+      @user.predict_champions.first
+    else
+      @user.predict_champions.new
+    end
+
+    @success = false
+    unless params[:predict_team_id].blank?
+      predict_champion.team_id = params[:predict_team_id]
+
+      money_rate = Settings.predict_champion_money.first
+      if can_predict_before_round_of_16?
+        money_rate = Settings.predict_champion_money.second
+      end
+      if can_predict_before_quarter_final?
+        money_rate = Settings.predict_champion_money.third
+      end
+
+      predict_champion.money = money_rate
+      @success = predict_champion.save
+      load_predict_stats
+    end
+  end
+
   private
 
   def load_user
     @user = User.find_by(id: params[:id])
+  end
+
+  def load_predict_stats
+    @predict_stats = if can_predict_before_group_stage?
+      {
+        collection: PredictChampion.has_team,
+        total_money: PredictChampion.has_team.sum(:money)
+      }
+    else
+      {
+        collection: PredictChampion,
+        total_money: PredictChampion.sum(:money)
+      }
+    end
   end
 end

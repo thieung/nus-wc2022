@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     member do
       get :statistics
       get :change_status
+      post :import_predict_champion
     end
     collection do
       post :pick_champion

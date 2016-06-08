@@ -21,6 +21,6 @@
       = link_to 'Nhập tỉ số trận đấu', update_match_score_match_path(game.id)
     - else
       = form_tag future_match_update_info_match_path(game.id), method: :post, remote: true do
-        = hidden_field_tag 'tmp_team1_id', nil
-        = hidden_field_tag 'tmp_team2_id', nil
+        = hidden_field_tag 'tmp_team1_id', nil, class: 'js--team1-id'
+        = hidden_field_tag 'tmp_team2_id', nil, class: 'js--team2-id'
         %button.btn.btn-secondary.ladda-button{type: 'submit', "data-style"=>"zoom-in", "data-spinner-color"=>"#ccc"} Cập nhật

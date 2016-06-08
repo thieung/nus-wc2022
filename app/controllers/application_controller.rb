@@ -43,6 +43,29 @@ class ApplicationController < ActionController::Base
     session[:previous_url] || root_path
   end
 
+  def finish_group_stage?
+    Game.group_stage.not_locked.size == 0
+  end
+
+  def finish_round_of_16?
+    Game.round_of_16.not_locked.size == 0
+  end
+
+  def can_predict_before_group_stage?
+    return false unless current_user
+    DateTime.current <= DateTime.parse(Settings.predict_champion_deadline.first)
+  end
+
+  def can_predict_before_round_of_16?
+    return false unless current_user
+    finish_group_stage? && DateTime.current <= DateTime.parse(Settings.predict_champion_deadline.second)
+  end
+
+  def can_predict_before_quarter_final?
+    return false unless current_user
+    finish_round_of_16? && DateTime.current <= DateTime.parse(Settings.predict_champion_deadline.third)
+  end
+
   protected
 
   def configure_permitted_parameters

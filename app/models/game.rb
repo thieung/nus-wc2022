@@ -9,15 +9,24 @@ class Game < ActiveRecord::Base
   has_many :bets
 
   scope :not_locked, -> { where(locked: false) }
+  scope :locked, -> { where(locked: true) }
   scope :ordered, -> {order(:pos)}
   scope :all_matches, -> { where(pos: [1..51]) }
   scope :group_stage, -> { where(pos: [1..36]) }
   scope :round_of_16, -> { where(pos: [37..44]) }
   scope :quarter_final, -> { where(pos: [45..48]) }
   scope :semi_final, -> { where(pos: [49, 50]) }
-  scope :final, -> { where(pos: 51) }
+  scope :final, -> { where(pos: 51).first }
 
   after_save :update_money_for_winners, if: lambda { |game| game.score_id_changed? && game.score_id.present? }
+
+  def previous
+    Game.find_by(pos: pos-1)
+  end
+
+  def next
+    Game.find_by(pos: pos+1)
+  end
 
   def can_bet?
     team1_id && team2_id

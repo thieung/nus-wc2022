@@ -1,0 +1,18 @@
+- available = user.available_to_predict_champion?
+%td= user.display_name
+%td.text-center= user.username
+%td.text-center
+  - if available
+    = select_tag "tmp_team_id__#{user.id}", options_for_select(Team.join_euro.not_eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control admin-predict-team', prompt: "----- Chọn đội -----"
+  - else
+    - predicted_team = user.champion_team_predicted
+    - if predicted_team
+      %span.team-flag{class: "flag-#{predicted_team.try(:code)}"}
+      %span= predicted_team.try(:title_vi)
+    - else
+      %span.text-desc Không dự đoán
+%td.text-center
+  - if available
+    = form_tag import_predict_champion_user_path(user), method: :post, remote: true do
+      = hidden_field_tag 'predict_team_id', nil, class: 'js--team-id'
+      %button.btn.btn-secondary.ladda-button{type: 'submit', "data-style"=>"zoom-in", "data-spinner-color"=>"#ccc"} Cập nhật

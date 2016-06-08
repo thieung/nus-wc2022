@@ -13,7 +13,7 @@
       \- Người tham gia không được quyền thay đổi đội mình đã đăng ký.
       %strong Vì vậy, hãy cân nhắc và lựa chọn thật kỹ trước khi bấm nút Gửi
 
-  - if current_user && !current_user.is_admin?
+  - if !current_user || !current_user.is_admin?
     / Your bet
     .box-header
       %h2.section--title.bigTitle
@@ -30,59 +30,16 @@
             = render partial: 'user_predict_champion_detail'
           - else
             = render partial: 'user_predict_champion_form'
+
   / Statistic
   .box-header
     %h2.section--title.bigTitle
       Thống kê
   .box-content.clearfix
     .statistic-detail-wrap
-      .row
-        .col-xs-12.col-md-9
-          %h5 Thông tin cá cược
-          .underline.hidden-sm.hidden-xs
-          - if @predict_stats[:collection].size == 0
-            %p.text-desc
-              Chưa có ai tham gia dự đoán đội vô địch
-          - else
-            %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
-              %tr
-                %th.text-center.middle{rowspan: 2}
-                  %strong Nhà đầu tư
-                %th.text-center{colspan: 3}
-                  %strong Dự đoán đội vô địch
-              %tr
-                %td.text-center
-                  Lần 1
-                %td.text-center
-                  Lần 2
-                %td.text-center
-                  Lần 3
-              - @predict_stats[:collection].includes([:user, :team]).each do |item|
-                %tr{class: item.user == current_user ? 'current-user' : ''}
-                  %td
-                    = link_to item.user.display_name, statistics_user_path(item.user), class: current_user != item.user ? 'not-current-user' : ''
-                  %td.text-center.uppercase{class: item.team.try(:eliminated) ? 'eliminated' : ''}
-                    %span.team-flag{class: "flag-#{item.team.try(:code)}"}
-                    %span= item.team.try(:title_vi)
-                  %td.uppercase
-                  %td.uppercase
-        .col-xs-12.col-md-3
-          %h5 Tổng tiền thưởng
-          .underline.hidden-sm.hidden-xs
-          .total-money-bet= format_currency(Settings.nus_money_for_champion.to_i + @predict_stats[:total_money])
-          %table.table.table-responsive.money-detail-table
-            %tbody
-              %tr
-                %td
-                  Tổng tiền tham gia:
-                %td.play-font
-                  = format_currency(@predict_stats[:total_money])
-              %tr
-                %td
-                  Công ty NUS:
-                %td.play-font
-                  = format_currency(Settings.nus_money_for_champion.to_i)
-  - if DateTime.current > DateTime.parse(Settings.final_match_time)
+      = render partial: 'predict_champion_statistic_detail'
+
+  - if Game.final.locked
     / Result
     .box-header
       %h2.section--title.bigTitle
@@ -111,6 +68,16 @@
                       - if index == 0
                         %td.middle.text-center.uppercase{rowspan: 5}
                           %span.team-flag{class: "flag-#{Team.champion.try(:code)}"}
-                          %span= Team.champion.try(:code).title_vi
+                          %span= Team.champion.try(:title_vi)
                         %td.middle.text-center.money-win{rowspan: 5}
                           = format_currency(@money_for_each_user||0)
+
+  - if current_user && current_user.is_admin? && DateTime.current <= DateTime.parse(Settings.predict_champion_deadline.third)
+    / Admin import data for staffs
+    .box-header
+      %h2.section--title.bigTitle
+        Nhập dữ liệu
+    .box-content.m-b-xlarge.clearfix
+      %button.btn.btn-primary.toogle-btn{"data-toggle"=>"collapse", "data-target"=>"#staffs_predict_champion"} Hiển thị
+      #staffs_predict_champion.collapse.m-t
+        = render partial: 'admin_import_predict_champion_for_all_staffs'

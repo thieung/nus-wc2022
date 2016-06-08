@@ -65,7 +65,7 @@
     .box-header
       %h2.section--title.bigTitle
         Kết quả
-    .box-content.clearfix
+    .box-content.clearfix.m-b-xlarge
       .result-detail-wrap
         - if @winners.blank?
           %p.text-desc Không có nhà đầu tư nào dự đoán trúng tỉ số trận đấu này.
@@ -89,3 +89,4 @@
                       - if index == 0
                         %td.middle.text-center.money-win{rowspan: @winners.size}
                           = format_currency(user.total_money_win_on_match(@game.id))
+  = render partial: 'go_to_match', locals: {game: @game}

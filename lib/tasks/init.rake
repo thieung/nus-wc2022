@@ -8,7 +8,7 @@ namespace :db do
       staff = User.find_by_email(row['email'])
       unless staff
         # generated_password = Devise.friendly_token.first(8)
-        generated_password = "12345678"
+        generated_password = "12344321"
         staff = User.new(
           full_name: row['full_name'],
           username: row['email'].split('@').first.downcase,
@@ -17,7 +17,11 @@ namespace :db do
         )
         if staff.save
           staff.add_role :staff
-          UserMailer.delay.send_password_to_staff(staff, generated_password)
+          # UserMailer.delay.send_password_to_staff(staff, generated_password)
+
+          # Generate predict champion data for each staff
+          predict = user.predict_champions.new(money: 100000)
+          predict.save
         end
       end
     end
