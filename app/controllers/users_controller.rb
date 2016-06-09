@@ -64,6 +64,8 @@ class UsersController < ApplicationController
 
         unless predict_champion.save
           err_msg = predict_champion.errors.full_messages.first
+        else
+          Mailer.process_notice_predict_champion_result_to_staffs(predict_champion) unless Settings.is_turn_off_mail
         end
       else
         err_msg = "Có lỗi xảy ra, vui lòng kiểm tra lại đội bóng mà bạn đã chọn!"

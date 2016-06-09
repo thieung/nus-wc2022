@@ -16,4 +16,10 @@ class Mailer
       UserMailer.delay.notice_match_result_to_staffs recipient, game
     end
   end
+
+  def self.process_notice_predict_champion_result_to_staffs predict_champion
+    Settings.group_mails.each do |recipient|
+      UserMailer.delay.notice_predict_champion_result_to_staffs recipient, predict_champion
+    end
+  end
 end

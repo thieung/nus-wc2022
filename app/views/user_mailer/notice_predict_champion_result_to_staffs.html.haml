@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %p Thông tin dự đoán:
+    %table
+      %tr
+        %td Nhà đầu tư:
+        %td
+          %strong= @user.display_name
+      %tr
+        %td Đội vô địch:
+        %td
+          %strong= @team.title_vi
+      %tr
+        %td URL:
+        %td
+          %strong= link_to predict_champion_url, predict_champion_url
