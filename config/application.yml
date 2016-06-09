@@ -28,6 +28,8 @@ defaults: &defaults
 development:
   <<: *defaults
   staffs_group_mail: 'staff@example.com'
+  group_mails: ['staff@example.com', 'internship.dev@example.com']
+  group_mails_with_hr: ['hr@example.com', 'staff@example.com', 'internship.dev@example.com']
   neat_setting: 800
   is_turn_off_mail: false
 
@@ -37,6 +39,8 @@ test:
 production:
   <<: *defaults
   staffs_group_mail: 'staff@nustechnology.com'
+  group_mails: ['staff@nustechnology.com', 'internship.dev@nustechnology.com']
+  group_mails_with_hr: ['hr@nustechnology.com', 'staff@nustechnology.com', 'internship.dev@nustechnology.com']
   is_turn_off_mail: true
   sendgrid:
     username: jackulti

@@ -54,9 +54,9 @@ class MatchesController < ApplicationController
         @err_msg = bet_info.errors.full_message.first
       else
         if is_new_record
-          UserMailer.delay.notice_bet_result_to_staffs(bet_info) unless Settings.is_turn_off_mail
+          Mailer.process_notice_bet_result_to_staffs(bet_info) unless Settings.is_turn_off_mail
         else
-          UserMailer.delay.notice_bet_result_updated_to_staffs(bet_info) unless Settings.is_turn_off_mail
+          Mailer.process_notice_bet_result_updated_to_staffs(bet_info) unless Settings.is_turn_off_mail
         end
         @money_statistic = calculate_money_for_match @game
       end
@@ -144,7 +144,7 @@ class MatchesController < ApplicationController
         unless success
           @err_msg = "Không thể cập nhật kết quả trận đấu, vui lòng kiểm tra lại."
         else
-          UserMailer.delay.notice_match_result_to_staffs(@game) unless Settings.is_turn_off_mail
+          Mailer.process_notice_match_result_to_staffs(@game) unless Settings.is_turn_off_mail
         end
       end
     end
