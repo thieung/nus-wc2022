@@ -58,7 +58,7 @@ class MatchesController < ApplicationController
         unless bet_info.save
           @err_msg = bet_info.errors.full_message.first
         else
-          # Mailer.process_notice_bet_result_to_staffs(bet_info) unless Settings.is_turn_off_mail
+          Mailer.process_notice_bet_result_to_staffs(bet_info) unless Settings.is_turn_off_mail
           @money_statistic = calculate_money_for_match @game
         end
       end
