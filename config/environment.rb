@@ -9,6 +9,6 @@ ActionMailer::Base.smtp_settings = {
   :authentication => :plain,
   :user_name      => Settings.sendgrid.username,
   :password       => Settings.sendgrid.password,
-  :domain         => 'demo-euro2016.herokuapp.com',
+  :domain         => 'nus-euro2016.herokuapp.com',
   :enable_starttls_auto => true
 }
