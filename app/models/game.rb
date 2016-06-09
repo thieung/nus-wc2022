@@ -19,8 +19,8 @@ class Game < ActiveRecord::Base
   scope :final, -> { where(pos: 51) }
 
   after_save :update_money_for_winners, if: lambda { |game| game.score_id_changed? && game.score_id.present? }
-  after_save :update_match_information, if: lambda { |game| game.team1_id.present? && game.team2_id.present? && game.team1_id_changed? && game.team2_id_changed? }
-  after_save :update_champion_team, if: lambda { |game| game.pos == 51 && game.winner.present?}
+  after_save :update_match_information, if: lambda { |game| !game.new_record? && game.team1_id.present? && game.team2_id.present? && game.team1_id_changed? && game.team2_id_changed? }
+  after_save :update_champion_team, if: lambda { |game| !game.new_record? && game.pos == 51 && game.winner.present?}
 
   def previous
     Game.find_by(pos: pos-1)
