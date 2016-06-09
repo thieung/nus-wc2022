@@ -54,7 +54,7 @@
           - if current_user.has_betted_on_match?(@game.id)
             = render partial: 'user_bet_detail', locals: {game: @game}
           - else
-            = render partial: 'user_bet_predict_scores', locals: {game: @game, is_edit: false}
+            = render partial: 'user_bet_predict_scores', locals: {game: @game}
 
   / Statistic
   #statistic_detail_match

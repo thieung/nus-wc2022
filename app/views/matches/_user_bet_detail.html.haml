@@ -1,16 +1,12 @@
-= form_tag predict_score_edit_view_match_path(game), method: :post, remote: true do
-  %h5 Tỉ số của bạn
-  .underline.hidden-sm.hidden-xs
-  - bet_info = current_user.get_bet_info_on_match(game.id)
-  - if bet_info
-    - all_bets = game.bets.has_score.where.not(user_id: current_user.id)
-    - bet_info.score_ids.each do |score_id|
-      %p
-        %span.your-score-betted= Score.find_by(id: score_id.to_i).try(:name)
-        %span.italic.text-desc
-          (Có
-          %span.number-people-same-predict= all_bets.select{|b| b.score_ids.include?(score_id)}.size
-          người dự đoán cùng tỉ số này với bạn)
-    - if game.available_to_bet
-      .actions-btn
-        %button.btn.btn-secondary{type: 'submit'} Thay đổi
+%h5 Tỉ số của bạn
+.underline.hidden-sm.hidden-xs
+- bet_info = current_user.get_bet_info_on_match(game.id)
+- if bet_info
+  - all_bets = game.bets.has_score.where.not(user_id: current_user.id)
+  - bet_info.score_ids.each do |score_id|
+    %p
+      %span.your-score-betted= Score.find_by(id: score_id.to_i).try(:name)
+      %span.italic.text-desc
+        (Có
+        %span.number-people-same-predict= all_bets.select{|b| b.score_ids.include?(score_id)}.size
+        người dự đoán cùng tỉ số này với bạn)
