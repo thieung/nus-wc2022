@@ -2,7 +2,7 @@
   .box-header.text-center
     %h2.section--title.bigTitle
       THỐNG KÊ TOP TRIỆU PHÚ, TRỌC PHÚ MÙA EURO 2016
-    %p.text-center.m-t-sm (Đơn vị tiền tệ: VNĐ)
+    %p.text-center.m-t-sm (Đơn vị: Points)
   .box-content.clearfix
     #statistic_all_staffs
       %p.text-desc * Click vào từng hàng để xem thống kê chi tiết từng trận đấu của mỗi nhà đầu tư
@@ -14,10 +14,10 @@
               %th.text-center Nhà đầu tư
               %th.text-center Số trận tham gia
               %th.text-center Tổng tỉ số đã cược
-              %th.text-center Tổng tiền đầu tư
-              %th.text-center Tổng tiền thắng cược
-              %th.text-center Tiền dự đoán đội vô địch
-              %th.text-center Tiền thắng dự đoán đội vô địch
+              %th.text-center Tổng điểm đầu tư
+              %th.text-center Tổng điểm thắng cược
+              %th.text-center Điểm dự đoán đội vô địch
+              %th.text-center Điểm thắng dự đoán đội vô địch
               %th.text-center Tổng lợi nhuận
           %tbody
             - @statistics.each_with_index do |record, index|

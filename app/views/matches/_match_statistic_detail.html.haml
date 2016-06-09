@@ -29,7 +29,7 @@
                     = bet.score_ids.map{|score_id| scores[score_id.to_i].try(:name)}.join(', ')
 
       .col-xs-12.col-md-4
-        %h5 Tổng tiền đầu tư
+        %h5 Tổng điểm đầu tư
         .underline.hidden-sm.hidden-xs
         .total-money-bet= format_currency(money_statistic.values.map(&:to_i).sum)
         %table.table.table-responsive.money-detail-table
@@ -37,7 +37,7 @@
             - if @game.final_match?
               %tr
                 %td
-                  Tiền được chuyển vào CK:
+                  Điểm được chuyển vào CK:
                 %td.play-font
                   = format_currency(money_statistic[:for_final])
             %tr

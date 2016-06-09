@@ -47,7 +47,7 @@
     .box-content.clearfix
       .result-detail-wrap
         - if @winner_list.blank?
-          %p.text-desc Không có nhà đầu tư nào dự đoán trúng đội vô địch Euro 2016. Toàn bộ số tiền thưởng sẽ được dùng để liên hoan toàn Công ty.
+          %p.text-desc Không có nhà đầu tư nào dự đoán trúng đội vô địch Euro 2016. Toàn bộ số điểm thưởng sẽ được dùng để liên hoan toàn Công ty.
         - else
           %p Xin chúc mừng những nhà đầu tư sau đây đã dự đoán chính xác đội vô địch Euro 2016:
           .row.m-t
@@ -59,7 +59,7 @@
                   %th.text-center
                     %strong Đội vô địch
                   %th.text-center
-                    %strong Số tiền nhận được
+                    %strong Số điểm nhận được
                 %tbody
                   - @winner_list.each_with_index do |user, index|
                     %tr

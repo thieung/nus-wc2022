@@ -25,7 +25,7 @@
             Không có nhà đầu tư nào dự đoán trúng tỉ số trận đấu này.
             - unless @game.final_match?
               %br/
-              Một nửa số tiền sẽ được chuyển vào trận sau và một nửa còn lại sẽ được chuyển vào trận chung kết.
+              Một nửa số điểm sẽ được chuyển vào trận sau và một nửa còn lại sẽ được chuyển vào trận chung kết.
       - else
         %tr
           %td Các nhà đầu tư dự đoán đúng:
@@ -34,6 +34,6 @@
               %strong{style: 'color: #8B0A50;'}= user.display_name
               %br/
         %tr
-          %td Số tiền nhận được:
+          %td Số điểm nhận được:
           %td
             %strong{style: 'color: #1464F4;'}= format_currency(@winners.first.total_money_win_on_match(@game.id))

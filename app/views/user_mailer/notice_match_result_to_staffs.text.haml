@@ -6,9 +6,9 @@ URL: #{link_to match_url(@game.id), match_url(@game.id)}
 - if @winners.blank?
   Không có nhà đầu tư nào dự đoán trúng tỉ số trận đấu này.
   - unless @game.final_match?
-    Một nửa số tiền sẽ được chuyển vào trận sau và một nửa còn lại sẽ được chuyển vào trận chung kết.
+    Một nửa số điểm sẽ được chuyển vào trận sau và một nửa còn lại sẽ được chuyển vào trận chung kết.
 - else
   Các nhà đầu tư dự đoán đúng: #{@winners.map(&:display_name).join(', ')}
-  Số tiền nhận được: #{format_currency(@winners.first.total_money_win_on_match(@game.id))}
+  Số điểm nhận được: #{format_currency(@winners.first.total_money_win_on_match(@game.id))}
 
 \===============================================

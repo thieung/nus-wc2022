@@ -70,7 +70,7 @@
         - if @winners.blank?
           %p.text-desc Không có nhà đầu tư nào dự đoán trúng tỉ số trận đấu này.
           - unless @game.final_match?
-            %p.text-desc Một nửa số tiền sẽ được chuyển vào trận sau và một nửa còn lại sẽ được chuyển vào trận chung kết.
+            %p.text-desc Một nửa số điểm sẽ được chuyển vào trận sau và một nửa còn lại sẽ được chuyển vào trận chung kết.
         - else
           %p Xin chúc mừng những nhà đầu tư sau đây đã dự đoán chính xác tỉ số trận đấu:
           .row.m-t
@@ -80,7 +80,7 @@
                   %th.text-center
                     %strong Nhà đầu tư
                   %th.text-center
-                    %strong Số tiền nhận được
+                    %strong Số điểm nhận được
                 %tbody
                   - @winners.each_with_index do |user, index|
                     %tr

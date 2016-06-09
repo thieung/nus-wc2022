@@ -58,14 +58,14 @@
                       = !finish_round_of_16? ? 'NOT AVAILABLE' : 'KHÔNG DỰ ĐOÁN'
 
   .col-xs-12.col-md-3
-    %h5 Tổng tiền thưởng
+    %h5 Tổng điểm thưởng
     .underline.hidden-sm.hidden-xs
     .total-money-bet= format_currency(Settings.nus_money_for_champion.to_i + @predict_stats[:total_money])
     %table.table.table-responsive.money-detail-table
       %tbody
         %tr
           %td
-            Tổng tiền tham gia:
+            Tổng điểm tham gia:
           %td.play-font
             = format_currency(@predict_stats[:total_money])
         %tr
