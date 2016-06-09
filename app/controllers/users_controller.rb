@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 
   def import_predict_champion
     authorize! :manage, current_user
-    predict_champion = if @user.has_predict_champion_first_time?
+    predict_champion = if DateTime.current <= DateTime.parse(Settings.predict_champion_deadline.first)
       @user.predict_champions.first
     else
       @user.predict_champions.new
@@ -117,7 +117,7 @@ class UsersController < ApplicationController
       }
     else
       {
-        collection: PredictChampion,
+        collection: PredictChampion.all,
         total_money: PredictChampion.sum(:money)
       }
     end

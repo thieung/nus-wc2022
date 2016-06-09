@@ -29,6 +29,9 @@ body{
 .m-b{
   margin-bottom: 15px;
 }
+.m-b-large{
+  margin-bottom: 25px;
+}
 .m-b-xlarge{
   margin-bottom: 50px;
 }
@@ -164,6 +167,10 @@ body{
 
 .list-better-tbl>tbody>tr>td{
   padding: 4px 10px;
+}
+
+.list-better-tbl td.no-team{
+  padding: 10px !important;
 }
 
 .bet-result-tbl>tbody>tr>td{
