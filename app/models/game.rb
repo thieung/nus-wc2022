@@ -19,6 +19,8 @@ class Game < ActiveRecord::Base
   scope :final, -> { where(pos: 51) }
 
   after_save :update_money_for_winners, if: lambda { |game| game.score_id_changed? && game.score_id.present? }
+  after_save :update_match_information, if: lambda { |game| game.team1_id.present? && game.team2_id.present? && game.team1_id_changed? && game.team2_id_changed? }
+  after_save :update_champion_team, if: lambda { |game| game.pos == 51 && game.winner.present?}
 
   def previous
     Game.find_by(pos: pos-1)
@@ -86,5 +88,25 @@ class Game < ActiveRecord::Base
       money_for_next_match = ((investment.total + money_from_previous_match + total_money_for_final).to_f / 2).round
       investment.update_attributes(remaining: money_for_next_match)
     end
+  end
+
+  def update_match_information
+    collection = case pos
+    when 44
+      Game.round_of_16
+    when 48
+      Game.quarter_final
+    when 50
+      Game.semi_final
+    when 51
+      Game.final
+    end
+    winner_team_ids = collection.map{|g| [g.team1_id, g.team2_id]}.flatten.uniq
+    Team.where.not(id: winner_team_ids).update_all(eliminated: true) if winner_team_ids
+  end
+
+  def update_champion_team
+    team = Team.find_by(id: winner)
+    team.update_attributes(is_champion: true) if team
   end
 end
