@@ -57,8 +57,10 @@ class Game < ActiveRecord::Base
     pos == 1
   end
 
-  def previous_game
-    Game.find_by(pos: pos-1)
+  def list_winners
+    winners_ids = bets.select{|b| b.score_ids.map(&:to_i).include?(score_id)}.map(&:user_id).uniq
+    winners = User.includes(:bets).where("users.id"=>winners_ids)
+    winners
   end
 
   private
@@ -69,7 +71,7 @@ class Game < ActiveRecord::Base
     money_from_previous_match = if first_match?
       0
     else
-      Investment.find_by(game_id: previous_game.id).try(:remaining) || 0
+      Investment.find_by(game_id: previous.id).try(:remaining) || 0
     end
 
     # Reset total money win

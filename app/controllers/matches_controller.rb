@@ -29,9 +29,9 @@ class MatchesController < ApplicationController
 
   def show
     @money_statistic = calculate_money_for_match @game
+
     if @game.has_score?
-      winners_ids = @game.bets.select{|b| b.score_ids.map(&:to_i).include?(@game.score_id)}.map(&:user_id).uniq
-      @winners = User.includes(:bets).where("users.id"=>winners_ids)
+      @winners = @game.list_winners
     end
   end
 
@@ -54,9 +54,9 @@ class MatchesController < ApplicationController
         @err_msg = bet_info.errors.full_message.first
       else
         if is_new_record
-          UserMailer.delay.notice_bet_result_to_staffs bet_info
+          UserMailer.delay.notice_bet_result_to_staffs(bet_info) unless Settings.is_turn_off_mail
         else
-          UserMailer.delay.notice_bet_result_updated_to_staffs bet_info
+          UserMailer.delay.notice_bet_result_updated_to_staffs(bet_info) unless Settings.is_turn_off_mail
         end
         @money_statistic = calculate_money_for_match @game
       end
@@ -143,6 +143,8 @@ class MatchesController < ApplicationController
         )
         unless success
           @err_msg = "Không thể cập nhật kết quả trận đấu, vui lòng kiểm tra lại."
+        else
+          UserMailer.delay.notice_match_result_to_staffs(@game) unless Settings.is_turn_off_mail
         end
       end
     end
@@ -191,7 +193,7 @@ class MatchesController < ApplicationController
     money_statistic[:previous_match] = if game.first_match?
       0
     else
-      Investment.find_by(game_id: game.previous_game.id).try(:remaining) || 0
+      Investment.find_by(game_id: game.previous.id).try(:remaining) || 0
     end
     money_statistic[:for_final] = game.final_match? ? Investment.sum(:remaining) : 0
     money_statistic[:this_match] = game.bets.sum(:total_money_bet)

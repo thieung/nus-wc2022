@@ -27,15 +27,17 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  staffs_mail_group: 'staff@example.com'
+  staffs_group_mail: 'staff@example.com'
   neat_setting: 800
+  is_turn_off_mail: false
 
 test:
   <<: *defaults
 
 production:
   <<: *defaults
-  staffs_mail_group: 'vanthieuuit@gmail.com'
+  staffs_group_mail: 'staff@nustechnology.com'
+  is_turn_off_mail: true
   sendgrid:
     username: jackulti
     password: il0v3r0r182

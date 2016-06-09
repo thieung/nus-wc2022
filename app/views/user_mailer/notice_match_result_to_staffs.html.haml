@@ -1,0 +1,39 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    :css
+      table td {
+        border-collapse: collapse;
+        padding: 5px 10px;
+        vertical-align: top;
+      }
+  %body
+    %p Kết quả trận đấu:
+    %table{border: 0, cellspacing: 0, cellpadding: 0, style: 'border: 2px dotted #ccc'}
+      %tr
+        %td Trận:
+        %td
+          %strong= "#{@match_content} (#{@game.score1}-#{@game.score2})"
+      %tr
+        %td URL:
+        %td
+          %strong= link_to match_url(@game.id), match_url(@game.id)
+      - if @winners.blank?
+        %tr
+          %td{colspan: 2}
+            Không có nhà đầu tư nào dự đoán trúng tỉ số trận đấu này.
+            - unless @game.final_match?
+              %br/
+              Một nửa số tiền sẽ được chuyển vào trận sau và một nửa còn lại sẽ được chuyển vào trận chung kết.
+      - else
+        %tr
+          %td Các nhà đầu tư dự đoán đúng:
+          %td
+            - @winners.each do |user|
+              %strong{style: 'color: #8B0A50;'}= user.display_name
+              %br/
+        %tr
+          %td Số tiền nhận được:
+          %td
+            %strong{style: 'color: #1464F4;'}= format_currency(@winners.first.total_money_win_on_match(@game.id))
