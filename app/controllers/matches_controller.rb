@@ -53,11 +53,11 @@ class MatchesController < ApplicationController
       unless bet_info.save
         @err_msg = bet_info.errors.full_message.first
       else
-        if is_new_record
-          Mailer.process_notice_bet_result_to_staffs(bet_info) unless Settings.is_turn_off_mail
-        else
-          Mailer.process_notice_bet_result_updated_to_staffs(bet_info) unless Settings.is_turn_off_mail
-        end
+        # if is_new_record
+        #   Mailer.process_notice_bet_result_to_staffs(bet_info) unless Settings.is_turn_off_mail
+        # else
+        #   Mailer.process_notice_bet_result_updated_to_staffs(bet_info) unless Settings.is_turn_off_mail
+        # end
         @money_statistic = calculate_money_for_match @game
       end
     end
@@ -116,11 +116,10 @@ class MatchesController < ApplicationController
 
   def update_score
     authorize! :manage, current_user
-    # if DateTime.current < (@game.play_at + 90.minutes)
-    if false
+    if DateTime.current < (@game.play_at + 90.minutes)
       @err_msg = "Trận đấu chưa kết thúc, bạn chưa thể cập nhật tỉ số trận đấu này."
-    # elsif !current_user.can_update_result_on_match?(@game.id)
-    #   @err_msg = "Trận đấu trước chưa được xử lý xong, bạn chưa thể cập nhật tỉ số trận đấu này."
+    elsif !current_user.can_update_result_on_match?(@game.id)
+      @err_msg = "Trận đấu trước chưa được xử lý xong, bạn chưa thể cập nhật tỉ số trận đấu này."
     else
       score = Score.find_by_id params[:score_id]
       if score
