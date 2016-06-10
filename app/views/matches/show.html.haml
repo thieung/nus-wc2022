@@ -51,12 +51,16 @@
               Bạn cần
               = link_to 'đăng nhập', login_path
               để tham gia dự đoán tỉ số trận đấu này.
+          - else
+            %p.text-desc Đã hết thời gian cá cược cho trấn đấu này.
         - else
           - if current_user.has_betted_on_match?(@game.id)
             = render partial: 'user_bet_detail', locals: {game: @game}
           - else
             - if @game.available_to_bet
               = render partial: 'user_bet_predict_scores', locals: {game: @game}
+            - else
+              %p.text-desc Đã hết thời gian cá cược cho trấn đấu này.
 
   / Statistic
   #statistic_detail_match
