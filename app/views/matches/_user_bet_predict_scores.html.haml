@@ -1,9 +1,11 @@
 %h5 Chú ý
 .underline.hidden-sm.hidden-xs
-%p.m-b
-  * Một khi đã bấm nút Gửi, bạn sẽ không thể thay đổi được nữa.
+%p
+  \- Một khi đã bấm nút Gửi, bạn sẽ không thể thay đổi được nữa.
   %strong Vì vậy, hãy cân nhắc và lựa chọn thật kỹ trước khi bấm nút Gửi
-
+%p.m-b
+  \- Chiều chọn tỉ số tương ứng với chiều hiển thị tên 2 đội bóng trên màn hình, từ trái qua phải.
+  Ví dụ, trận A - B nếu bạn chọn tỉ số 2-0 thì A sẽ là 2 và B sẽ là 0.
 = form_tag predict_score_match_path(game), method: :post, remote: true, class: 'form-horizontal user-predict-score--form' do
   .form-group
     .col-xs-12.col-md-6
