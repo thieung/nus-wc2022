@@ -5,7 +5,29 @@
   .statistic-detail-wrap
     .row
       .col-xs-12.col-md-8
-        %h5 Thông tin cá cược
+        - unless game.bets.has_score.blank?
+          / Stats by scores
+          %h5 Thống kê theo tỉ số
+          .underline.hidden-sm.hidden-xs
+          - scores = Score.all.index_by(&:id)
+          %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b-large
+            %thead
+              %th.text-center{width: '30%'}
+                %strong Tỉ số
+              %th.text-center{width: '30%'}
+                %strong Số người dự đoán
+              %th.text-center{width: '40%'}
+                %strong Điểm dự tính nhận được
+            %tbody
+              - current_user_score_ids = current_user ? current_user.score_ids_on_match(game.id) : []
+              - game.bets.has_score.pluck(:score_ids).flatten.map(&:to_i).group_by{|n|n}.sort_by{|k,v| -v.size}.each do |score_id, collection|
+                %tr{class: current_user && current_user_score_ids.include?(score_id) ? 'current-user-score' : ''}
+                  %td.text-center.number-larger= scores[score_id].try(:name)
+                  %td.text-center.number-larger= collection.size
+                  %td.text-center.points-can-receive= format_currency((money_statistic.values.map(&:to_i).sum.to_f/collection.size).round)
+
+        / Stats by users
+        %h5 Thông tin chi tiết
         .underline.hidden-sm.hidden-xs
         - if game.bets.has_score.blank?
           %p.text-desc

@@ -60,7 +60,7 @@
             - if @game.available_to_bet
               = render partial: 'user_bet_predict_scores', locals: {game: @game}
             - else
-              %p.text-desc Đã hết thời gian cá cược cho trấn đấu này.
+              %p.text-desc Bạn không thể dự đoán vì đã hết thời gian cá cược cho trấn đấu này.
 
   / Statistic
   #statistic_detail_match

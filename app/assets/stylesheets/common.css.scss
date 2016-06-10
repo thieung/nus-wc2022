@@ -44,6 +44,12 @@ body{
 .m-l-large{
   margin-left: 20px;
 }
+.points-can-receive{
+  font-size: 120%;
+}
+.score-larger{
+  font-size: 120%;
+}
 .number-larger{
   font-size: 140%;
 }
@@ -208,6 +214,10 @@ body{
   font-weight: 600;
   text-transform: uppercase;
   padding-left: 5px;
+}
+.current-user-score{
+  color: #1D7CF2;
+  font-weight: 700;
 }
 .number-people-same-predict{
   font-size: 18px;
