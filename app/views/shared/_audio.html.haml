@@ -1,0 +1,4 @@
+- if current_user
+  .audio-section
+    - song = current_user.total_profit_received < 0 ? LOSER_SONGS.sample : WINNER_SONGS.sample
+    = audio_tag(asset_path("audios/#{song}"), autoplay: true, controls: true)
