@@ -19,7 +19,7 @@
               %th.text-center{width: '40%'}
                 %strong Điểm dự tính nhận được
             %tbody
-              - current_user_score_ids = current_user ? current_user.score_ids_on_match(game.id) : []
+              - current_user_score_ids = current_user ? current_user.score_ids_on_match(game.id)||[] : []
               - game.bets.has_score.pluck(:score_ids).flatten.map(&:to_i).group_by{|n|n}.sort_by{|k,v| -v.size}.each do |score_id, collection|
                 %tr{class: current_user && current_user_score_ids.include?(score_id) ? 'current-user-score' : ''}
                   %td.text-center.number-larger= scores[score_id].try(:name)
