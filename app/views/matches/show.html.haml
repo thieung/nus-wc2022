@@ -46,15 +46,17 @@
     .box-content.m-b-xlarge.clearfix
       .your-bet-detail-wrap
         - if !current_user
-          %p
-            Bạn cần
-            = link_to 'đăng nhập', login_path
-            để tham gia dự đoán tỉ số trận đấu này.
+          - if @game.available_to_bet
+            %p
+              Bạn cần
+              = link_to 'đăng nhập', login_path
+              để tham gia dự đoán tỉ số trận đấu này.
         - else
           - if current_user.has_betted_on_match?(@game.id)
             = render partial: 'user_bet_detail', locals: {game: @game}
           - else
-            = render partial: 'user_bet_predict_scores', locals: {game: @game}
+            - if @game.available_to_bet
+              = render partial: 'user_bet_predict_scores', locals: {game: @game}
 
   / Statistic
   #statistic_detail_match
