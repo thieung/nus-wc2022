@@ -8,6 +8,9 @@
         padding: 5px 10px;
         vertical-align: top;
       }
+      table td strong {
+        line-height: 20px;
+      }
   %body
     %p Kết quả trận đấu:
     %table{border: 0, cellspacing: 0, cellpadding: 0, style: 'border: 2px dotted #ccc'}
@@ -30,8 +33,8 @@
         %tr
           %td Các nhà đầu tư dự đoán đúng:
           %td
-            - @winners.each do |user|
-              %strong{style: 'color: #8B0A50;'}= user.display_name
+            - @winners.sort_by{|u| u.display_name}.each do |user|
+              %strong{style: 'color: #00458b;'}= user.display_name
               %br/
         %tr
           %td Số điểm nhận được:

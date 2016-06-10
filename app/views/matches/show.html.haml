@@ -62,10 +62,6 @@
             - else
               %p.text-desc Bạn không thể dự đoán vì đã hết thời gian cá cược cho trấn đấu này.
 
-  / Statistic
-  #statistic_detail_match
-    = render partial: 'match_statistic_detail', locals: {game: @game, money_statistic: @money_statistic}
-
   - if @game.has_score?
     / Result
     .box-header
@@ -95,4 +91,9 @@
                       - if index == 0
                         %td.middle.text-center.money-win{rowspan: @winners.size}
                           = format_currency(user.total_money_win_on_match(@game.id))
+
+  / Statistic
+  #statistic_detail_match
+    = render partial: 'match_statistic_detail', locals: {game: @game, money_statistic: @money_statistic}
+
   = render partial: 'go_to_match', locals: {game: @game}
