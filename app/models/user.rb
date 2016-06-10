@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
 
   attr_accessor :login
 
-  has_many :bets
-  has_many :predict_champions
+  has_many :bets, dependent: :destroy
+  has_many :predict_champions, dependent: :destroy
   has_many :members, foreign_key: :alliance_id, class_name: "UserAlliance"
 
   scope :order_by_username, -> { order(:username) }

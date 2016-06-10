@@ -5,8 +5,7 @@ class Game < ActiveRecord::Base
   belongs_to :group
   has_one :investment
 
-  has_many :user_scores
-  has_many :bets
+  has_many :bets, dependent: :destroy
 
   scope :not_locked, -> { where(locked: false) }
   scope :locked, -> { where(locked: true) }
