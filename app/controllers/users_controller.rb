@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def statistics
     @user_statistics = []
 
-    @user.bets.has_score.ordered.includes(:game).each do |bet|
+    @user.bets.has_score.joins(:game).order("games.play_at ASC").each do |bet|
       tmp = {
         game: bet.game,
         scores: bet.score_ids.size,
