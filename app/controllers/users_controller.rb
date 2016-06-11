@@ -12,16 +12,15 @@ class UsersController < ApplicationController
     @user_statistics = []
 
     @user.bets.has_score.joins(:game).order("games.play_at ASC").each do |bet|
-      tmp = {
+      @user_statistics <<  {
         game: bet.game,
         scores: bet.score_ids.size,
         money_bet: bet.total_money_bet,
         money_win: bet.total_money_win,
         money_get: bet.total_money_win - bet.total_money_bet
       }
-      @user_statistics << tmp
     end
-    @maximum_money_win = @user_statistics.sort{|a,b| b[:money_win] <=> a[:money_win]}.first.try(:money_win)||0
+    @maximum_money_win = @user_statistics.sort{|a,b| b[:money_win] <=> a[:money_win]}.first[:money_win] rescue 0
   end
 
   def predict_champion
