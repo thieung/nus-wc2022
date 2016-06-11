@@ -84,7 +84,7 @@
                   %th.text-center
                     %strong Số điểm nhận được
                 %tbody
-                  - @winners.each_with_index do |user, index|
+                  - @winners.sort_by{|u| u.display_name}.each_with_index do |user, index|
                     %tr
                       %td{class: current_user == user ? 'current-user' : ''}
                         = link_to user.display_name, statistics_user_path(user), class: current_user != user ? 'not-current-user' : ''
