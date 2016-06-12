@@ -36,6 +36,6 @@
         .form-group
           %label.control-label.col-xs-12.col-md-6 Giới hạn đến
           .col-xs-12.col-md-6
-            = text_field_tag 'random_max_number', 3, type: 'number', class: 'form-control'
+            = text_field_tag 'random_max_number', 3, type: 'number', max: 15, min: 1, class: 'form-control'
     .col-xs-12.col-md-6.actions
       %button.btn.btn-secondary.ladda-button{type: 'submit', "data-style"=>"zoom-in", "data-spinner-color"=>"#ccc"} Random tỉ số

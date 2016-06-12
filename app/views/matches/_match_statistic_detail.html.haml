@@ -10,6 +10,9 @@
           %h5 Thống kê theo tỉ số
           .underline.hidden-sm.hidden-xs
           - scores = Score.all.index_by(&:id)
+          - scores_grouped = game.bets.has_score.pluck(:score_ids).flatten.map(&:to_i).group_by{|n|n}.sort_by{|k,v| -v.size}
+          %p.text-desc
+            = "Có tổng cộng #{scores_grouped.uniq.size} tỉ số được dự đoán trong trận đấu này."
           %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b-large
             %thead
               %th.text-center{width: '30%'}
@@ -20,7 +23,7 @@
                 %strong Điểm dự tính nhận được
             %tbody
               - current_user_score_ids = current_user ? current_user.score_ids_on_match(game.id)||[] : []
-              - game.bets.has_score.pluck(:score_ids).flatten.map(&:to_i).group_by{|n|n}.sort_by{|k,v| -v.size}.each do |score_id, collection|
+              - scores_grouped.each do |score_id, collection|
                 %tr{class: current_user && current_user_score_ids.include?(score_id) ? 'current-user-score' : ''}
                   %td.text-center.number-larger= scores[score_id].try(:name)
                   %td.text-center.number-larger= collection.size
