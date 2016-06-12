@@ -20,6 +20,7 @@
 //= require smartbanner.min
 //= require select2.full.min
 //= require sweetalert.min
+//= require icheck.min
 //= require_self
 //= require_tree .
 

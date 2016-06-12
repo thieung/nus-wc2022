@@ -38,11 +38,20 @@ body{
 .m-b-xs{
   margin-bottom: 5px;
 }
+.m-l-xs{
+  margin-left: 5px;
+}
 .m-l-sm{
   margin-left: 10px;
 }
 .m-l-large{
   margin-left: 20px;
+}
+.cursor-pointer{
+  cursor: pointer;
+}
+.hide{
+  display: none;
 }
 .audio-section{
   display: none;

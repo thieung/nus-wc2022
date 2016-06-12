@@ -1,10 +1,10 @@
 class MatchesController < ApplicationController
-  before_action :load_match, only: [:show, :check_valid_match, :predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :future_match_update_info]
-  before_action :check_valid_match, only: [:show, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score]
-  before_action :authenticate_user!, only: [:predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :future_match_update_info]
+  before_action :load_match, only: [:show, :check_valid_match, :predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :future_match_update_info, :random_score]
+  before_action :check_valid_match, only: [:show, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :random_score]
+  before_action :authenticate_user!, only: [:predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :future_match_update_info, :random_score]
 
   def index
-    today   = Date.today
+    today   = DateTime.current
     @groups = Group.all.index_by(&:id)
     @rounds = Round.all.index_by(&:id)
     @teams  = Team.all.index_by(&:id)
@@ -12,15 +12,15 @@ class MatchesController < ApplicationController
     @games = Game.send(@type)
 
     if params[:type].blank?
-      if Date.parse(Settings.group_stage.start) <= today && today >= Date.parse(Settings.group_stage.end)
+      if Date.parse(Settings.group_stage.start) <= today && today <= Date.parse(Settings.group_stage.end)
         redirect_to matches_path({type: 'group_stage'}) and return
-      elsif Date.parse(Settings.round_of_16.start) <= today && today >= Date.parse(Settings.round_of_16.end)
+      elsif Date.parse(Settings.round_of_16.start) <= today && today <= Date.parse(Settings.round_of_16.end)
         redirect_to matches_path({type: 'round_of_16'}) and return
-      elsif Date.parse(Settings.quarter_final.start) <= today && today >= Date.parse(Settings.quarter_final.end)
+      elsif Date.parse(Settings.quarter_final.start) <= today && today <= Date.parse(Settings.quarter_final.end)
         redirect_to matches_path({type: 'quarter_final'}) and return
-      elsif Date.parse(Settings.semi_final.start) <= today && today >= Date.parse(Settings.semi_final.end)
+      elsif Date.parse(Settings.semi_final.start) <= today && today <= Date.parse(Settings.semi_final.end)
         redirect_to matches_path({type: 'semi_final'}) and return
-      elsif Date.parse(Settings.final.start) <= today && today >= Date.parse(Settings.final.end)
+      elsif Date.parse(Settings.final.start) <= today && today <= Date.parse(Settings.final.end)
         redirect_to matches_path({type: 'final'}) and return
       end
     end
@@ -162,6 +162,36 @@ class MatchesController < ApplicationController
       @game.team1_id = params[:tmp_team1_id]
       @game.team2_id = params[:tmp_team2_id]
       @success = @game.save
+    end
+  end
+
+  def random_score
+    @err_msq = ''
+    total_matches = params[:random_total_scores].to_i
+    if total_matches < 1 || total_matches > 3
+      @err_msg = 'Có lỗi xảy ra, bạn chị có thể dự đoán tối đa 3 tỉ số hoặc tối thiểu 1 tỉ số'
+    else
+      conditions = ['']
+      if params[:random_winner_id].to_i == @game.team1_id
+        if params[:random_can_draw].present?
+          conditions[0] += "score1 >= score2"
+        else
+          conditions[0] += "score1 > score2"
+        end
+        conditions[0] += " AND score1 <= ?"
+        conditions << params[:random_max_number].to_i
+      else
+        if params[:random_can_draw].present?
+          conditions[0] += "score1 <= score2"
+        else
+          conditions[0] += "score1 < score2"
+        end
+        conditions[0] += " AND score2 <= ?"
+        conditions << params[:random_max_number].to_i
+      end
+      random_scores = Score.where(conditions).order("RANDOM()").limit(params[:random_total_scores].to_i)
+      @random_score_ids = random_scores.map(&:id).uniq
+      @random_score_content = random_scores.map(&:name).join(', ')
     end
   end
 

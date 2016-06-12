@@ -1,0 +1,29 @@
+Ladda.stopAll();
+<% if @err_msg.blank? %>
+  <% unless @random_score_content.blank? %>
+    var formInput = $("#match_score_ids");
+    formInput.val(<%=@random_score_ids%>).trigger('change');
+    swal({
+      title: "<%= @random_score_content %>",
+      showCancelButton: true,
+      confirmButtonText: 'Gửi',
+      cancelButtonText: 'Làm lại',
+      closeOnConfirm: false,
+      closeOnCancel: false,
+      showLoaderOnConfirm: true
+    }, function(isConfirm) {
+      if (isConfirm) {
+        setTimeout(function(){
+          $(".js-submit-scores").trigger('click');
+        }, 1000);
+      } else {
+        formInput.val(null).trigger('change');
+        swal.close();
+      }
+    });
+  <% else %>
+    swal("Oops...", "Có lỗi xảy ra, vui lòng kiểm tra lại!", "error");
+  <% end %>
+<% else %>
+  swal("Oops...", "<%= @err_msg %>", "error");
+<% end %>
