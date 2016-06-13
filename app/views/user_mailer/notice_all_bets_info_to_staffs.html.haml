@@ -1,0 +1,44 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    :css
+      table.list-bet-scores td {
+        border-collapse: collapse;
+        padding: 5px 10px;
+        vertical-align: top;
+      }
+      table.list-bet-scores td strong {
+        line-height: 20px;
+      }
+  %body
+    %table
+      %tr
+        %td Trận:
+        %td
+          %strong= @match_content
+      %tr
+        %td Giờ thi đấu:
+        %td
+          %strong= @game.play_at.strftime("%-d/%m - %H:%M %p")
+      %tr
+        %td URL:
+        %td
+          %strong= link_to match_url(@game.id), match_url(@game.id)
+
+    - if !@game.bets.has_score.blank?
+      %p Không có nhà đầu tư nào tham gia dự đoán tỉ số trận đấu này
+    - else
+      - scores = Score.all.index_by(&:id)
+      %p Danh sách các nhà đầu tư và các tỉ số:
+      %table.list-bet-scores{border: 1, cellspacing: 0, cellpadding: 0, style: 'border: 2px dotted #ccc'}
+        %thead
+          %th.text-center Nhà đầu tư
+          %th.text-center Các tỉ số
+        %tbody
+          - @game.bets.has_score.joins(:user).order("users.username").each do |bet|
+            %tr
+              %td
+                = bet.user.display_name
+              %td.text-center
+                = bet.score_ids.map{|score_id| scores[score_id.to_i].try(:name)}.join(', ')

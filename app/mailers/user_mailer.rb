@@ -38,9 +38,13 @@ class UserMailer < ApplicationMailer
     mail(from: @user.email, to: recipient, subject: "[NUS Event - Euro 2016] Dự đoán đội vô địch")
   end
 
-  def process_notice_all_bets_info_to_staffs
+  def notice_all_bets_info_to_staffs recipient, game
     @game = game
     @match_content = "#{@game.team1.title_vi} - #{@game.team2.title_vi}"
     mail(to: recipient, subject: "[NUS Event - Euro 2016] Danh sách nhà đầu tư dự đoán tỉ số trận #{@match_content}")
+  end
+
+  def send_test
+    mail(to: 'vanthieuuit@gmail.com', subject: "Test Schedule")
   end
 end
