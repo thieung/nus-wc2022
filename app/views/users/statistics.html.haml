@@ -43,10 +43,10 @@
                 %th.text-center Lợi nhuận
             %tbody
               - @user_statistics.each do |record|
-                %tr{class: (@maximum_money_win > 0 && @maximum_money_win == record[:money_win]) ? 'highlight-div success' : '', "data-url" => match_url(record[:game].id)}
+                %tr{class: record[:money_get] > 0 ? 'success' : (record[:money_get] < 0 ? 'danger' : ''), "data-url" => match_url(record[:game].id)}
                   %td= "#{record[:game].team1.title_vi} - #{record[:game].team2.title_vi}"
                   %td= "#{I18n.localize(record[:game].play_at, format: :full)} - #{record[:game].play_at.strftime('%H:%M%P')}"
                   %td.text-center= record[:scores]
                   %td.text-center= format_currency(record[:money_bet], false)
-                  %td.text-center.highlight-column= format_currency(record[:money_win], false)
+                  %td.text-center.highlight-column{class: (@maximum_money_win > 0 && @maximum_money_win == record[:money_win]) ? 'biggest-money' : ''}= format_currency(record[:money_win], false)
                   %td.text-center{class: record[:money_get] > 0 ? 'success' : (record[:money_get] < 0 ? 'danger' : '')}= format_currency(record[:money_get], false)
