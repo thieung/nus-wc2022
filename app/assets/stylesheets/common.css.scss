@@ -59,7 +59,7 @@ body{
   width: 0;
 }
 .stat-tbl-current{
-  border: 2px dotted #ccc;
+  border: 2px dotted #005cba;
 }
 .points-can-receive{
   font-size: 120%;
@@ -265,9 +265,12 @@ body{
 .admin-update-score--select{
   width: 140px;
 }
-.biggest-money{
-  color: blue;
-  font-weight: bold;
+.highlight-row{
+  border: 2px dotted #005cba;
+  .highlight-column{
+    color: blue;
+    font-weight: bold;
+  }
 }
 #statistic_detail_staff{
   padding: 0 40px;
