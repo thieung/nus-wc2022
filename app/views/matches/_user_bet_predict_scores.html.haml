@@ -6,10 +6,15 @@
 %p.m-b
   \- Chiều chọn tỉ số tương ứng với chiều hiển thị tên 2 đội bóng trên màn hình, từ trái qua phải.
   Ví dụ, trận A - B nếu bạn chọn tỉ số 2-0 thì A sẽ là 2 và B sẽ là 0.
+- remaining_scores = current_user.remaining_scores_can_bet(game.id)
+%p.number-scores-to-bet-info.m-b.text-desc
+  %span= "Bạn #{remaining_scores == MAX_SCORE_CAN_BET ? 'có' : 'còn'}"
+  %span.scores-num= remaining_scores
+  %span lượt dự đoán tỉ số
 = form_tag predict_score_match_path(game), method: :post, remote: true, class: 'form-horizontal user-predict-score--form' do
   .form-group
     .col-xs-12.col-md-6
-      = select_tag "match[score_ids]", options_for_select(Score.all.collect{|s|[s.name, s.id]}, current_user.get_bet_info_on_match(game.id).try(:score_ids)), multiple: true, class: 'form-control select-scores', autofocus: true
+      = select_tag "match[score_ids]", options_for_select(Score.available(current_user.score_ids_on_match(game.id)||[]).collect{|s|[s.name, s.id]}, nil), multiple: true, class: 'form-control select-scores', autofocus: true
     .col-xs-12.col-md-6.actions
       %button.btn.btn-secondary.submit-btn-custom.ladda-button.js-submit-scores{type: 'submit', "data-style"=>"zoom-in", "data-spinner-color"=>"#ccc"} Gửi
 %p
@@ -32,7 +37,7 @@
         .form-group
           %label.control-label.col-xs-12.col-md-6 Tổng tỉ số
           .col-xs-12.col-md-6
-            = text_field_tag 'random_total_scores', 3, type: 'number', max: 3, min: 1, class: 'form-control'
+            = text_field_tag 'random_total_scores', remaining_scores, type: 'number', max: remaining_scores, min: 1, class: 'form-control'
         .form-group
           %label.control-label.col-xs-12.col-md-6 Giới hạn đến
           .col-xs-12.col-md-6

@@ -62,6 +62,18 @@ class User < ActiveRecord::Base
     end
   end
 
+  def has_betted_enough_scores? game_id
+    score_ids = score_ids_on_match game_id
+    return false if score_ids.blank?
+    score_ids.size == MAX_SCORE_CAN_BET
+  end
+
+  def remaining_scores_can_bet game_id
+    user_bet = get_bet_info_on_match game_id
+    return MAX_SCORE_CAN_BET if user_bet.blank?
+    MAX_SCORE_CAN_BET - user_bet.score_ids.size
+  end
+
   def total_teams_to_predict_champion
     predict_champions.has_team.size
   end

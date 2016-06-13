@@ -54,7 +54,7 @@
           - else
             %p.text-desc Đã hết thời gian cá cược cho trấn đấu này.
         - else
-          - if current_user.has_betted_on_match?(@game.id)
+          - if current_user.has_betted_enough_scores?(@game.id)
             = render partial: 'user_bet_detail', locals: {game: @game}
           - else
             - if @game.available_to_bet
