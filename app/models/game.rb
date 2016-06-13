@@ -38,12 +38,7 @@ class Game < ActiveRecord::Base
   end
 
   def deadline
-    bet_date = if (0..16).to_a.include?(play_at.hour)
-      play_at.to_date - 1.day
-    else
-      play_at.to_date
-    end
-    DateTime.parse "#{bet_date} 16:00:00 +7"
+    play_at - 30.minutes
   end
 
   def available_to_bet
