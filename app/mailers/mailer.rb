@@ -13,7 +13,7 @@ class Mailer
 
   def self.process_notice_match_result_to_staffs game
     Settings.group_mails.each do |recipient|
-      UserMailer.delay.notice_match_result_to_staffs recipient, game
+      UserMailer.notice_match_result_to_staffs(recipient, game).deliver
     end
   end
 
@@ -25,7 +25,7 @@ class Mailer
 
   def self.process_notice_all_bets_info_to_staffs game
     Settings.group_mails.each do |recipient|
-      UserMailer.delay.notice_all_bets_info_to_staffs recipient, game
+      UserMailer.notice_all_bets_info_to_staffs(recipient, game).deliver
     end
   end
 end
