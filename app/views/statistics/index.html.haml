@@ -16,8 +16,9 @@
               %th.text-center Tổng tỉ số đã cược
               %th.text-center Tổng điểm đầu tư
               %th.text-center Tổng điểm thắng cược
-              %th.text-center Điểm dự đoán đội vô địch
-              %th.text-center Điểm thắng dự đoán đội vô địch
+              - if finish_euro?
+                %th.text-center Điểm dự đoán đội vô địch
+                %th.text-center Điểm thắng dự đoán đội vô địch
               %th.text-center Tổng lợi nhuận
           %tbody
             - @statistics.each_with_index do |record, index|
@@ -30,6 +31,7 @@
                 %td.text-center= record[:total_scores]
                 %td.text-center= format_currency(record[:total_money_bet], false)
                 %td.text-center= format_currency(record[:total_money_win], false)
-                %td.text-center= format_currency(record[:total_money_predict_champion], false)
-                %td.text-center= format_currency(record[:money_predict_champion_win], false)
+                - if finish_euro?
+                  %td.text-center= format_currency(record[:total_money_predict_champion], false)
+                  %td.text-center= format_currency(record[:money_predict_champion_win], false)
                 %td.text-center= format_currency(record[:total_money_profits], false)

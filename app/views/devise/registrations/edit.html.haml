@@ -9,7 +9,10 @@
         = f.email_field :email, disabled: true, class: 'form-control'
       .form-group
         = f.label :full_name
-        = f.text_field :full_name, autofocus: true, class: 'form-control', placeholder: "Tên hiển thị"
+        = f.text_field :full_name, disabled: true, class: 'form-control', placeholder: "Tên hiển thị"
+      .form-group
+        = f.label :nickname
+        = f.text_field :nickname, autofocus: true, class: 'form-control', placeholder: "Biệt danh"
       .form-group
         = f.label :password
         %i (để trống nếu như bạn không muốn thay đổi)
@@ -21,5 +24,9 @@
         = f.label :current_password
         %i (nhập mật khẩu hiện tại của bạn để cập nhật những thay đổi)
         = f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: "Mật khẩu hiện tại"
+      .form-group
+        .checkbox.pull-left
+          = f.check_box :is_listen_music
+          %label{for: 'user_is_listen_music'} Nghe nhạc nền
       .form-group.clear-both.pull-right
         %button.btn.btn-primary.submit-btn-custom.ladda-button{type: "submit", "data-style"=>"zoom-in", "data-spinner-color"=>"#ccc"} Cập nhật

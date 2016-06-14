@@ -31,20 +31,12 @@
           - else
             = render partial: 'user_predict_champion_detail'
 
-  / Statistic
-  .box-header
-    %h2.section--title.bigTitle
-      Thống kê
-  .box-content.clearfix
-    .statistic-detail-wrap
-      = render partial: 'predict_champion_statistic_detail'
-
-  - if Game.final.first.locked
+  - if finish_euro?
     / Result
     .box-header
       %h2.section--title.bigTitle
         Kết quả
-    .box-content.clearfix
+    .box-content.m-b-xlarge.clearfix
       .result-detail-wrap
         - if @winner_list.blank?
           %p.text-desc Không có nhà đầu tư nào dự đoán trúng đội vô địch Euro 2016. Toàn bộ số điểm thưởng sẽ được dùng để liên hoan toàn Công ty.
@@ -71,6 +63,14 @@
                           %span= Team.champion.try(:title_vi)
                         %td.middle.text-center.money-win{rowspan: 5}
                           = format_currency(@money_for_each_user||0)
+
+  / Statistic
+  .box-header
+    %h2.section--title.bigTitle
+      Thống kê
+  .box-content.clearfix
+    .statistic-detail-wrap
+      = render partial: 'predict_champion_statistic_detail'
 
   - if current_user && current_user.is_admin? && DateTime.current <= DateTime.parse(Settings.predict_champion_deadline.third)
     / Admin import data for staffs

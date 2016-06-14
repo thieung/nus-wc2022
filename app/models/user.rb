@@ -26,7 +26,11 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    full_name || username || email
+    show_name = full_name || username || email
+    if nickname
+      show_name = "#{show_name} (#{nickname})"
+    end
+    show_name
   end
 
   def active_for_authentication?
@@ -127,7 +131,7 @@ class User < ActiveRecord::Base
 
   def money_predict_champion_win
     money_predict_champion_win = 0
-    if DateTime.current > DateTime.parse(Settings.final_match_time)
+    if Game.not_locked.size == 0
       money_for_champion = Settings.nus_money_for_champion.to_i + PredictChampion.sum(:money)
       winner_ids = PredictChampion.joins(:team).where("teams.is_champion" => true).map(&:user_id).uniq
       unless winner_ids.blank?
@@ -141,6 +145,11 @@ class User < ActiveRecord::Base
   end
 
   def total_profit_received
-    (total_money_win + money_predict_champion_win) - (total_money_bet + total_money_predict_champion)
+    if Game.not_locked.size == 0
+      # Finish euro
+      (total_money_win + money_predict_champion_win) - (total_money_bet + total_money_predict_champion)
+    else
+      total_money_win - total_money_bet
+    end
   end
 end

@@ -19,12 +19,15 @@
         %p
           %span.title-text Tổng điểm thắng cuộc:
           %span.bold-text= format_currency @user.total_money_win
-        %p
-          %span.title-text Điểm dự đoán đội vô địch:
-          %span.bold-text= format_currency @user.total_money_predict_champion
-        %p
-          %span.title-text Điểm thắng dự đoán đội vô địch:
-          %span.bold-text= format_currency @user.money_predict_champion_win
+        - if finish_euro?
+          %p
+            %span.title-text Điểm dự đoán đội vô địch:
+            %span.bold-text
+              = format_currency @user.total_money_predict_champion
+          %p
+            %span.title-text Điểm thắng dự đoán đội vô địch:
+            %span.bold-text
+              = format_currency @user.money_predict_champion_win
         %p.total-profits
           %span.title-text Tổng lợi nhuận:
           %span.bold-text{class: @user.total_profit_received.to_i >= 0 ? 'money-gain' : 'money-lost'}

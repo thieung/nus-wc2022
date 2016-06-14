@@ -5,12 +5,12 @@ Ladda.stopAll();
       $('.your-bet-detail-wrap').html("<%=j render partial: 'user_bet_detail', locals: {game: @game} %>");
     <% else %>
       $('.your-bet-detail-wrap').html("<%=j render partial: 'user_bet_predict_scores', locals: {game: @game} %>");
-      $('.user-info-section').html("<%=j render partial: 'shared/user_info_header' %>");
       formatSelect2("<%=current_user.remaining_scores_can_bet(@game.id)%>");
       formatCheckbox();
     <% end %>
     swal("", "Cập nhật thành công", "success");
     $('#statistic_detail_match').html("<%=j render partial: 'match_statistic_detail', locals: {game: @game, money_statistic: @money_statistic} %>");
+    $('.user-info-section').html("<%=j render partial: 'shared/user_info_header' %>");
   <% else %>
     swal("Oops...", "<%= @err_msg %>", "error");
   <% end %>

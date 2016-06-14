@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   def predict_champion
     load_predict_stats
 
-    if DateTime.current > DateTime.parse(Settings.final_match_time)
+    if finish_euro?
       # Show result
       money_for_champion = Settings.nus_money_for_champion.to_i + PredictChampion.sum(:money)
       winner_ids = PredictChampion.joins(:team).where("teams.is_champion" => true).map(&:user_id).uniq

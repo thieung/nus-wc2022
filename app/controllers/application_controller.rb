@@ -51,7 +51,11 @@ class ApplicationController < ActionController::Base
     Game.round_of_16.not_locked.size == 0
   end
 
-  helper_method :finish_group_stage?, :finish_round_of_16?
+  def finish_euro?
+    Game.not_locked.size == 0
+  end
+
+  helper_method :finish_group_stage?, :finish_round_of_16?, :finish_euro?
 
   def can_predict_before_group_stage?
     return false unless current_user
@@ -71,7 +75,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    added_attrs = [:full_name, :password, :password_confirmation, :remember_me]
+    added_attrs = [:nickname, :is_listen_music, :password, :password_confirmation, :remember_me]
     devise_parameter_sanitizer.permit :account_update, keys: added_attrs
   end
 end
