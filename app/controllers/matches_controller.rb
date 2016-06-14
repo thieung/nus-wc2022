@@ -24,7 +24,10 @@ class MatchesController < ApplicationController
         redirect_to matches_path({type: 'final'}) and return
       end
     end
-    @all_matches = @games.select("games.*, date(play_at) as occur_date").order("occur_date").group_by(&:occur_date)
+    @upcoming_matches = @games.not_locked.select("games.*, date(play_at) as occur_date").order("occur_date").group_by(&:occur_date)
+    tmp_past_matches = @games.locked.select("games.*, date(play_at) as occur_date").order("occur_date")
+    @past_matches = tmp_past_matches.group_by(&:occur_date)
+    @recent_matches = tmp_past_matches.last(MAX_RECENT_MATCHES).group_by(&:occur_date)
   end
 
   def show
