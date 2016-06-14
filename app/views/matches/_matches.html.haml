@@ -15,6 +15,12 @@
                 .match-data-round
                   %span.round-name
                     = @rounds[game.round_id].is_group_stage? ? @groups[game.group_id].title_vi : @rounds[game.round_id].title_vi
+              - if current_user && current_user.has_betted_on_match?(game.id)
+                .match-row_info-wrap.p-l-super-large
+                  .match-data-bet
+                    - current_user.score_ids_on_match(game.id).size.times do
+                      = image_tag('ball.svg', class: 'goals-timing--goal')
+
             .match.match-row_match
               - team1 = @teams[game.team1_id]
               - team2 = @teams[game.team2_id]

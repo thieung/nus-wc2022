@@ -47,6 +47,9 @@ body{
 .m-l-large{
   margin-left: 20px;
 }
+.p-l-super-large{
+  padding-left: 65px;
+}
 .cursor-pointer{
   cursor: pointer;
 }
@@ -127,6 +130,12 @@ body{
   ul{
     color: #111;
   }
+}
+
+.goals-timing--goal {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
 }
 
 .uppercase{
