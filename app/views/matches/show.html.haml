@@ -5,6 +5,11 @@
       %p
         Hạn chót đặt cược:
         %span.deadline-time= I18n.localize(@game.deadline, format: :full_with_time)
+      - if @game.available_to_bet
+        %p.text-desc
+          %span#clock
+      - else
+        %p.text-desc Hết giờ dự đoán tỉ số
     .match-row.match-row--horizontal.match-finalTrn.match-groupStage.match-notFake
       .match.match-row_match
         .text-center
@@ -102,4 +107,10 @@
   :javascript
     $(function() {
       formatSelect2("#{current_user.remaining_scores_can_bet(@game.id)}");
+
+      $('#clock').countdown("#{@game.deadline}", function(event) {
+        $(this).html(event.strftime('%-D ngày %H:%M:%S'));
+      }).on('finish.countdown', function(event) {
+        $(this).html("Hết giờ dự đoán tỉ số");
+      });
     });

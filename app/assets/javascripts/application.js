@@ -21,6 +21,7 @@
 //= require select2.full.min
 //= require sweetalert.min
 //= require icheck.min
+//= require jquery.countdown.min
 //= require_self
 //= require_tree .
 
