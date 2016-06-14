@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
 
   def display_name
     show_name = full_name || username || email
-    if nickname
+    unless nickname.blank?
       show_name = "#{show_name} (#{nickname})"
     end
     show_name
