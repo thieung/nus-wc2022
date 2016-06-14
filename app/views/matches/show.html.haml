@@ -97,3 +97,9 @@
     = render partial: 'match_statistic_detail', locals: {game: @game, money_statistic: @money_statistic}
 
   = render partial: 'go_to_match', locals: {game: @game}
+
+- if current_user && !current_user.is_admin?
+  :javascript
+    $(function() {
+      formatSelect2("#{current_user.remaining_scores_can_bet(@game.id)}");
+    });

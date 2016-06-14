@@ -43,27 +43,15 @@ class MatchesController < ApplicationController
       params[:match][:score_ids]
     end
 
-    bet_info = current_user.get_bet_info_on_match(params[:id])
-
-    unless bet_info
-      bet_info = current_user.bets.new(game_id: @game.id)
-      if score_ids.blank?
-        @err_msg = "Bạn chưa dự đoán tỉ số nào"
-      elsif score_ids.size > 3
-        @err_msg = "Bạn không được dự đoán quá 3 tỉ số"
-      else
-        bet_info.score_ids = score_ids
-        bet_info.last_changed_at = DateTime.current
-        bet_info.total_money_bet = score_ids.size * @game.round.money_rate
-        unless bet_info.save
-          @err_msg = bet_info.errors.full_message.first
-        else
-          # Mailer.process_notice_bet_result_to_staffs(bet_info) unless Settings.is_turn_off_mail
-          @money_statistic = calculate_money_for_match @game
-        end
-      end
+    bet_info = current_user.get_bet_info_on_match(params[:id]) || current_user.bets.new(game_id: @game.id)
+    bet_info.score_ids = bet_info.score_ids | score_ids
+    bet_info.last_changed_at = DateTime.current
+    bet_info.total_money_bet = bet_info.score_ids.size * @game.round.money_rate
+    unless bet_info.save
+      @err_msg = bet_info.errors.full_messages.first
     else
-      @err_msg = "Có lỗi xảy ra, vui lòng kiểm tra lại!"
+      # Mailer.process_notice_bet_result_to_staffs(bet_info) unless Settings.is_turn_off_mail
+      @money_statistic = calculate_money_for_match @game
     end
   end
 

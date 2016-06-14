@@ -1,4 +1,6 @@
-- if current_user && !current_user.is_admin?
+- current_time = DateTime.current
+- can_listen_music = current_time.saturday? || current_time.sunday? || !(6..18).to_a.include?(current_time.hour)
+- if current_user && !current_user.is_admin? && can_listen_music
   .audio-section
     - song = current_user.total_profit_received < 0 ? LOSER_SONGS.sample : WINNER_SONGS.sample
     = audio_tag(asset_path("audios/#{song}"), autoplay: true, controls: true)

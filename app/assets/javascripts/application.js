@@ -24,9 +24,9 @@
 //= require_self
 //= require_tree .
 
-function formatSelect2(){
+function formatSelect2(max){
   $('select.select-scores').select2({
-    maximumSelectionLength: 3,
+    maximumSelectionLength: max,
     placeholder: 'Click vào đây để chọn tỉ số...',
     language: 'vi'
   });
@@ -36,5 +36,13 @@ function formatSelect2(){
   $('select.admin-select-team, select.admin-predict-team').select2({
     language: 'vi',
     width: '80%'
+  });
+}
+
+function formatCheckbox(){
+  $('input.js-icheck').iCheck({
+    checkboxClass: 'icheckbox_square-blue',
+    radioClass: 'iradio_square-blue',
+    increaseArea: '20%'
   });
 }

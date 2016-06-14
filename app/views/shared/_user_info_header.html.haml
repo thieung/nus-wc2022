@@ -1,0 +1,12 @@
+%span.user-info-wrapper
+  %span.user-info-content
+    %p
+      = "Xin chào, "
+      = link_to current_user.display_name, profile_path
+      %span.user-log-out= link_to "(Thoát)", destroy_user_session_path, method: :delete
+    - if current_user.is_admin?
+      = link_to 'Tới trang quản lý', management_path, class: 'manage-link'
+    - else
+      %p
+        Lợi nhuận của bạn:
+        = link_to format_currency(current_user.total_profit_received), statistics_user_path(current_user)
