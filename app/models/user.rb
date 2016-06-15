@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :predict_champions, dependent: :destroy
   has_many :members, foreign_key: :alliance_id, class_name: "UserAlliance"
 
+  validates :nickname, length: { maximum: 40 }
+
   scope :order_by_username, -> { order(:username) }
   scope :staffs, -> { with_role(:staff) }
   scope :active, -> { where(is_active: true) }
