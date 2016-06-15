@@ -56,6 +56,22 @@ body{
 .hide{
   display: none;
 }
+.user-rank-section{
+  padding: 2px 5px;
+  color: #fff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  &.top1{
+    background-color: #0682d1;
+  }
+  &.bottom1{
+    background-color: #d10606;
+  }
+}
 .number-scores-to-bet-info{
   font-size: 18px;
   .scores-num{
