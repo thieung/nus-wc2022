@@ -18,8 +18,9 @@
               - if current_user && current_user.has_betted_on_match?(game.id)
                 .match-row_info-wrap.p-l-super-large
                   .match-data-bet
-                    - current_user.score_ids_on_match(game.id).size.times do
-                      = image_tag('ball.svg', class: 'goals-timing--goal')
+                    - count = current_user.score_ids_on_match(game.id).size
+                    - count.times do
+                      = image_tag('ball.svg', class: 'goals-timing--goal tipso', "data-tipso" => "Bạn đã dự đoán #{count} tỉ số cho trận này")
 
             .match.match-row_match
               - team1 = @teams[game.team1_id]

@@ -17,6 +17,7 @@
  *= require select2.min
  *= require sweetalert
  *= require iCheck_blue
+ *= require tipso.min
 
  *= require common
  *= require teams

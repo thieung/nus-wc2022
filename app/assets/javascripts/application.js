@@ -22,6 +22,7 @@
 //= require sweetalert.min
 //= require icheck.min
 //= require jquery.countdown.min
+//= require tipso.min
 //= require_self
 //= require_tree .
 
