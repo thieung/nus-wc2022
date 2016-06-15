@@ -37,6 +37,8 @@
             Chưa có nhà đầu tư nào tham gia dự đoán tỉ số trận đấu này
         - else
           - scores = Score.all.index_by(&:id)
+          - top1 = User.top1
+          - bottom1 = User.bottom1
           %p.text-desc
             = "Có #{game.bets.has_score.size} người đã tham gia dự đoán tỉ số trận đấu này."
           %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
@@ -50,6 +52,10 @@
                 %tr{class: bet.user == current_user ? 'current-user' : ''}
                   %td
                     = link_to bet.user.display_name, statistics_user_path(bet.user), class: current_user != bet.user ? 'not-current-user' : ''
+                    - if bet.user == top1
+                      %span.user-rank-section.top1 Top 1
+                    - elsif bet.user == bottom1
+                      %span.user-rank-section.bottom1 Bottom 1
                   %td.text-center
                     = bet.score_ids.map{|score_id| scores[score_id.to_i].try(:name)}.join(', ')
 

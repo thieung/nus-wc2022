@@ -152,4 +152,24 @@ class User < ActiveRecord::Base
       total_money_win - total_money_bet
     end
   end
+
+  def self.list_order_by_total_money_profits
+    result = []
+    User.staffs.includes(:bets).find_each do |user|
+      tmp = {
+        user: user,
+        total_money_profits: user.total_profit_received
+      }
+      result << tmp
+    end
+    result.sort!{|a,b| b[:total_money_profits] <=> a[:total_money_profits]}
+  end
+
+  def self.top1
+    User.list_order_by_total_money_profits.first[:user]
+  end
+
+  def self.bottom1
+    User.list_order_by_total_money_profits.last[:user]
+  end
 end
