@@ -43,22 +43,54 @@
   / Top 5 Predict Scores
   .box-header
     %h2.section--title.bigTitle
-      TOP 5 DỰ ĐOÁN SỐ TỈ SỐ
+      TOP 5 DỰ ĐOÁN NHIỀU / ÍT TỈ SỐ NHẤT
   .box-content.clearfix.m-b-xlarge
     .row
       .col-xs-12.col-md-6
-        %h5 Nhiều nhất
+        %h5 NHIỀU NHẤT
         .underline.hidden-sm.hidden-xs
-        AAAA
+        .table-responsive.statistics-table
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr
+                %th.text-center #
+                %th.text-center Nhà đầu tư
+                %th.text-center Số tỉ số
+                %th.text-center Tổng điểm đặt cược
+            %tbody
+              - User.list_order_by_numer_scores_betted.first(5).each_with_index do |record, index|
+                - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
+                - css_class += index == 0 ? ' top1' : ''
+                %tr.active{class: css_class}
+                  %td.text-center= index+1
+                  %td= record[:user].display_name
+                  %td.text-center= record[:total_scores]
+                  %td.text-center= format_currency record[:total_money_bet], false
       .col-xs-12.col-md-6
-        %h5 Ít nhất
+        %h5 ÍT NHẤT
         .underline.hidden-sm.hidden-xs
-        AAAAA
+        .table-responsive.statistics-table
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr
+                %th.text-center #
+                %th.text-center Nhà đầu tư
+                %th.text-center Số tỉ số
+                %th.text-center Tổng điểm đặt cược
+            %tbody
+              - User.list_order_by_numer_scores_betted.last(5).reverse.each_with_index do |record, index|
+                - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
+                - css_class += index == 0 ? ' bottom1' : ''
+                %tr.warning{class: css_class}
+                  %td.text-center= index+1
+                  %td= record[:user].display_name
+                  %td.text-center= record[:total_scores]
+                  %td.text-center= format_currency record[:total_money_bet], false
 
   / Top 5 Win Rate/ Lose Rate
   .box-header
     %h2.section--title.bigTitle
-      TOP 5 WIN RATE / LOSE RATE
+      TOP 5 CÓ TỈ LỆ THẮNG / THUA CAO NHẤT
   .box-content.clearfix.m-b-xlarge
     .row
       .col-xs-12.col-md-6
@@ -73,7 +105,7 @@
   / Top 5 Earn Money
   .box-header
     %h2.section--title.bigTitle
-      TOP 5 THẮNG ĐIỂM NHIỀU NHẤT TRONG 1 TRẬN ĐẤU
+      TOP 10 THẮNG ĐIỂM NHIỀU NHẤT TRONG 1 TRẬN ĐẤU
   .box-content.clearfix.m-b-large
     .row
       .col-xs-12.col-md-12

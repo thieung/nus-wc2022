@@ -156,11 +156,28 @@ class User < ActiveRecord::Base
   end
 
   def total_win_matches
-
+    bets.has_score.win.size
   end
 
   def total_attended_matches
     bets.has_score.size
+  end
+
+  def total_scores_betted
+    bets.has_score.pluck(:score_ids).flatten.size
+  end
+
+  def self.list_order_by_numer_scores_betted
+    result = []
+    User.staffs.includes(:bets).find_each do |user|
+      tmp = {
+        user: user,
+        total_scores: user.total_attended_matches,
+        total_money_bet: user.total_money_bet
+      }
+      result << tmp
+    end
+    result.sort!{|a,b| b[:total_scores] <=> a[:total_scores]}
   end
 
   def self.list_order_by_win_rate
