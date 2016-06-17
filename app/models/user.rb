@@ -159,6 +159,10 @@ class User < ActiveRecord::Base
     bets.has_score.win.size
   end
 
+  def total_lose_matches
+    bets.has_score.lose.size
+  end
+
   def total_attended_matches
     bets.has_score.size
   end
@@ -172,7 +176,7 @@ class User < ActiveRecord::Base
     User.staffs.includes(:bets).find_each do |user|
       tmp = {
         user: user,
-        total_scores: user.total_attended_matches,
+        total_scores: user.total_scores_betted,
         total_money_bet: user.total_money_bet
       }
       result << tmp
@@ -181,15 +185,65 @@ class User < ActiveRecord::Base
   end
 
   def self.list_order_by_win_rate
-    result = []
+    result = {
+      by_score: [],
+      by_match: []
+    }
     User.staffs.includes(:bets).find_each do |user|
-      tmp = {
+      total_win_matches = user.total_win_matches
+      total_attended_matches = user.total_attended_matches
+      total_scores_betted = user.total_scores_betted
+
+      tmp_by_match = {
         user: user,
-        total_money_profits: user.total_profit_received
+        total_attended_matches: total_attended_matches,
+        total_win_matches: total_win_matches,
+        rate: total_win_matches > 0 ? (total_win_matches.to_f/total_attended_matches) : 0
       }
-      result << tmp
+      result[:by_match] << tmp_by_match
+
+      tmp_by_score = {
+        user: user,
+        total_scores_betted: total_scores_betted,
+        total_scores_win: total_win_matches,
+        rate: total_win_matches > 0 ? (total_win_matches.to_f/total_scores_betted) : 0
+      }
+      result[:by_score] << tmp_by_score
     end
-    result.sort!{|a,b| b[:total_money_profits] <=> a[:total_money_profits]}
+    result[:by_score].sort!{|a,b| [b[:rate], b[:total_scores_win], b[:total_scores_betted]] <=> [a[:rate], a[:total_scores_win], a[:total_scores_betted]]}
+    result[:by_match].sort!{|a,b| [b[:rate], b[:total_win_matches], b[:total_attended_matches]] <=> [a[:rate], a[:total_win_matches], a[:total_attended_matches]]}
+    result
+  end
+
+  def self.list_order_by_lose_rate
+    result = {
+      by_score: [],
+      by_match: []
+    }
+    User.staffs.includes(:bets).find_each do |user|
+      total_lose_matches = user.total_lose_matches
+      total_attended_matches = user.total_attended_matches
+      total_scores_betted = user.total_scores_betted
+
+      tmp_by_match = {
+        user: user,
+        total_attended_matches: total_attended_matches,
+        total_lose_matches: total_lose_matches,
+        rate: total_lose_matches > 0 ? (total_lose_matches.to_f/total_attended_matches) : 0
+      }
+      result[:by_match] << tmp_by_match
+
+      tmp_by_score = {
+        user: user,
+        total_scores_betted: total_scores_betted,
+        total_scores_lose: total_lose_matches,
+        rate: total_lose_matches > 0 ? (total_lose_matches.to_f/total_scores_betted) : 0
+      }
+      result[:by_score] << tmp_by_score
+    end
+    result[:by_score].sort!{|a,b| [b[:rate], b[:total_scores_lose], b[:total_scores_betted]] <=> [a[:rate], a[:total_scores_lose], a[:total_scores_betted]]}
+    result[:by_match].sort!{|a,b| [b[:rate], b[:total_lose_matches], b[:total_attended_matches]] <=> [a[:rate], a[:total_lose_matches], a[:total_attended_matches]]}
+    result
   end
 
   def self.list_order_by_total_money_profits

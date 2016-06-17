@@ -40,9 +40,9 @@
                       %a.navbar-lv2-item-link{href: root_path}
                         Home
                         %span.icon-arrow-thin-right
-                    %li.navbar-lv2-item.first-link{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type].blank? ? 'active' : ''}"}
-                      %a.navbar-lv2-item-link{href: root_path} Tất cả trận đấu
-                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'group_stage' ? 'active' : ''}"}
+                    / %li.navbar-lv2-item.first-link{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type].blank? ? 'active' : ''}"}
+                    /   %a.navbar-lv2-item-link{href: root_path} Tất cả trận đấu
+                    %li.navbar-lv2-item.first-link{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'group_stage' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: matches_path({type: 'group_stage'})} Vòng bảng
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'round_of_16' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: matches_path({type: 'round_of_16'})} Vòng 16 đội
@@ -54,7 +54,7 @@
                       %a.navbar-lv2-item-link{href: matches_path({type: 'final'})} Chung kết
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'users' && action_name == 'predict_champion' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: predict_champion_path} Dự đoán đội vô địch
-                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'statistics' && action_name == 'index' ? 'active' : ''}"}
+                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'statistics' && action_name == 'records' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: records_statistics_path} Top thống kê
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'statistics' && action_name == 'index' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: statistics_path} Bảng xếp hạng

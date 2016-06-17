@@ -4,6 +4,7 @@ class Bet < ActiveRecord::Base
 
   scope :has_score, -> { where.not("score_ids = '{}' OR score_ids IS NULL") }
   scope :win, -> {where("total_money_win > 0")}
+  scope :lose, -> {where(total_money_win: 0)}
   scope :ordered, -> {order(:created_at)}
 
   validate :check_scores

@@ -58,7 +58,7 @@
                 %th.text-center Số tỉ số
                 %th.text-center Tổng điểm đặt cược
             %tbody
-              - User.list_order_by_numer_scores_betted.first(5).each_with_index do |record, index|
+              - User.list_order_by_numer_scores_betted.first(TOP5).each_with_index do |record, index|
                 - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
                 - css_class += index == 0 ? ' top1' : ''
                 %tr.active{class: css_class}
@@ -78,7 +78,7 @@
                 %th.text-center Số tỉ số
                 %th.text-center Tổng điểm đặt cược
             %tbody
-              - User.list_order_by_numer_scores_betted.last(5).reverse.each_with_index do |record, index|
+              - User.list_order_by_numer_scores_betted.last(TOP5).reverse.each_with_index do |record, index|
                 - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
                 - css_class += index == 0 ? ' bottom1' : ''
                 %tr.warning{class: css_class}
@@ -90,23 +90,110 @@
   / Top 5 Win Rate/ Lose Rate
   .box-header
     %h2.section--title.bigTitle
-      TOP 5 CÓ TỈ LỆ THẮNG / THUA CAO NHẤT
+      TOP 5 CÓ TỈ LỆ THẮNG CAO NHẤT
   .box-content.clearfix.m-b-xlarge
     .row
       .col-xs-12.col-md-6
-        %h5 WIN RATE
+        %h5 THEO TRẬN ĐẤU
         .underline.hidden-sm.hidden-xs
-        AAAA
+        .table-responsive.statistics-table
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr
+                %th.text-center #
+                %th.text-center Nhà đầu tư
+                %th.text-center Số trận tham gia
+                %th.text-center Số trận thắng
+                %th.text-center Tỉ lệ
+            %tbody
+              - User.list_order_by_win_rate[:by_match].first(TOP5).each_with_index do |record, index|
+                - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
+                - css_class += index == 0 ? ' top1' : ''
+                %tr.success{class: css_class}
+                  %td.text-center= index+1
+                  %td= record[:user].display_name
+                  %td.text-center= record[:total_attended_matches]
+                  %td.text-center= record[:total_win_matches]
+                  %td.text-center= format_percentage record[:rate]
       .col-xs-12.col-md-6
-        %h5 LOSE RATE
+        %h5 THEO TỈ SỐ
         .underline.hidden-sm.hidden-xs
-        AAAAA
+        .table-responsive.statistics-table
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr
+                %th.text-center #
+                %th.text-center Nhà đầu tư
+                %th.text-center Số tỉ số đặt cược
+                %th.text-center Số trận thắng
+                %th.text-center Tỉ lệ
+            %tbody
+              - User.list_order_by_win_rate[:by_score].first(TOP5).each_with_index do |record, index|
+                - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
+                - css_class += index == 0 ? ' top1' : ''
+                %tr.success{class: css_class}
+                  %td.text-center= index+1
+                  %td= record[:user].display_name
+                  %td.text-center= record[:total_scores_betted]
+                  %td.text-center= record[:total_scores_win]
+                  %td.text-center= format_percentage record[:rate]
 
-  / Top 5 Earn Money
+  / Top 5 Win Lose Rate
   .box-header
     %h2.section--title.bigTitle
-      TOP 10 THẮNG ĐIỂM NHIỀU NHẤT TRONG 1 TRẬN ĐẤU
-  .box-content.clearfix.m-b-large
+      TOP 5 CÓ TỈ LỆ THUA CAO NHẤT
+  .box-content.clearfix.m-b-xlarge
     .row
-      .col-xs-12.col-md-12
-        AAA
+      .col-xs-12.col-md-6
+        %h5 THEO TRẬN ĐẤU
+        .underline.hidden-sm.hidden-xs
+        .table-responsive.statistics-table
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr
+                %th.text-center #
+                %th.text-center Nhà đầu tư
+                %th.text-center Số trận tham gia
+                %th.text-center Số trận thua
+                %th.text-center Tỉ lệ
+            %tbody
+              - User.list_order_by_lose_rate[:by_match].first(TOP5).each_with_index do |record, index|
+                - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
+                - css_class += index == 0 ? ' bottom1' : ''
+                %tr.danger{class: css_class}
+                  %td.text-center= index+1
+                  %td= record[:user].display_name
+                  %td.text-center= record[:total_attended_matches]
+                  %td.text-center= record[:total_lose_matches]
+                  %td.text-center= format_percentage record[:rate]
+      .col-xs-12.col-md-6
+        %h5 THEO TỈ SỐ
+        .underline.hidden-sm.hidden-xs
+        .table-responsive.statistics-table
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr
+                %th.text-center #
+                %th.text-center Nhà đầu tư
+                %th.text-center Số tỉ số đặt cược
+                %th.text-center Số trận thua
+                %th.text-center Tỉ lệ
+            %tbody
+              - User.list_order_by_lose_rate[:by_score].first(TOP5).each_with_index do |record, index|
+                - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
+                - css_class += index == 0 ? ' bottom1' : ''
+                %tr.danger{class: css_class}
+                  %td.text-center= index+1
+                  %td= record[:user].display_name
+                  %td.text-center= record[:total_scores_betted]
+                  %td.text-center= record[:total_scores_lose]
+                  %td.text-center= format_percentage record[:rate]
+
+  / / Top 5 Earn Money
+  / .box-header
+  /   %h2.section--title.bigTitle
+  /     TOP 10 THẮNG ĐIỂM NHIỀU NHẤT TRONG 1 TRẬN ĐẤU
+  / .box-content.clearfix.m-b-large
+  /   .row
+  /     .col-xs-12.col-md-12
+  /       AAA
