@@ -3,7 +3,7 @@
   .box-header
     %h2.section--title.bigTitle.text-center
       TOP 10 THẮNG ĐIỂM NHIỀU NHẤT TRONG 1 TRẬN ĐẤU
-  .box-content.clearfix.m-b-large
+  .box-content.clearfix.m-b-xlarge
     .row
       .col-xs-12.col-md-8.col-md-offset-2
         .table-responsive.top-stat-tbl.top-stat-tbl-clickable
@@ -18,10 +18,11 @@
               - User.list_order_by_money_win_in_a_match.first(TOP10).each_with_index do |record, index|
                 - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
                 - css_class += index == 0 ? ' top1' : ''
+                - match_info = "#{record[:round].is_group_stage? ? 'Vòng bảng' : record[:round].title_vi}, #{record[:team1].title_vi} #{record[:game].score1} - #{record[:game].score2} #{record[:team2].title_vi}"
                 %tr{class: css_class, "data-url" => match_url(record[:game].id)}
                   %td.text-center= index+1
                   %td= record[:user].display_name
-                  %td.text-center.tipso{"data-tipso"=>"#{record[:team1].title_vi} - #{record[:team2].title_vi}"}
+                  %td.text-center.tipso{"data-tipso"=>"#{match_info}"}
                     %span.team-flag{class: "flag-#{record[:team1].code}"}
                     \-
                     %span.team-flag{class: "flag-#{record[:team2].code}"}

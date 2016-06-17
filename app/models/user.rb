@@ -252,11 +252,12 @@ class User < ActiveRecord::Base
 
   def self.list_order_by_money_win_in_a_match
     result = []
-    User.staffs.joins(:bets).includes(:bets).uniq.find_each do |user|
+    User.staffs.joins(:bets).includes(bets: [game: [:team1, :team2, :round]]).uniq.find_each do |user|
       bet_info = user.biggest_money_win_info
       tmp = {
         user: user,
         game: bet_info.game,
+        round: bet_info.game.round,
         team1: bet_info.game.team1,
         team2: bet_info.game.team2,
         total_money_win: bet_info.try(:total_money_win) || 0
