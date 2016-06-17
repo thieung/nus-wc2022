@@ -6,6 +6,7 @@ class Bet < ActiveRecord::Base
   scope :win, -> {where("total_money_win > 0")}
   scope :lose, -> {where(total_money_win: 0)}
   scope :ordered, -> {order(:created_at)}
+  scope :order_by_money_win, -> {order("total_money_win DESC")}
 
   validate :check_scores
   after_save :update_investment

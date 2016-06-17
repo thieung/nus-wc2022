@@ -171,6 +171,10 @@ class User < ActiveRecord::Base
     bets.has_score.pluck(:score_ids).flatten.size
   end
 
+  def biggest_money_win_info
+    bets.has_score.order_by_money_win.first
+  end
+
   def self.list_order_by_numer_scores_betted
     result = []
     User.staffs.includes(:bets).find_each do |user|
@@ -244,6 +248,22 @@ class User < ActiveRecord::Base
     result[:by_score].sort!{|a,b| [b[:rate], b[:total_scores_lose], b[:total_scores_betted]] <=> [a[:rate], a[:total_scores_lose], a[:total_scores_betted]]}
     result[:by_match].sort!{|a,b| [b[:rate], b[:total_lose_matches], b[:total_attended_matches]] <=> [a[:rate], a[:total_lose_matches], a[:total_attended_matches]]}
     result
+  end
+
+  def self.list_order_by_money_win_in_a_match
+    result = []
+    User.staffs.joins(:bets).includes(:bets).uniq.find_each do |user|
+      bet_info = user.biggest_money_win_info
+      tmp = {
+        user: user,
+        game: bet_info.game,
+        team1: bet_info.game.team1,
+        team2: bet_info.game.team2,
+        total_money_win: bet_info.try(:total_money_win) || 0
+      }
+      result << tmp
+    end
+    result.sort!{|a,b| b[:total_money_win] <=> a[:total_money_win]}
   end
 
   def self.list_order_by_total_money_profits

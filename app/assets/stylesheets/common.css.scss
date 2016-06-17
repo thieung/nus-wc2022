@@ -56,6 +56,9 @@ body{
 .hide{
   display: none;
 }
+.top-stats-page{
+  padding: 0 30px !important;
+}
 .user-rank-section{
   margin-left: 5px;
   padding: 2px 5px;
@@ -277,6 +280,9 @@ body{
   color: #00688B;
   font-size: 120%;
 }
+.inline-block{
+  display: inline-block;
+}
 .italic{
   font-style: italic;
 }
@@ -334,10 +340,13 @@ tr.bold-text td{
   .statistics-table .table>tbody>tr>td{
     padding: 12px 10px;
   }
-  .statistics-table .table > thead > tr > th{
+  .top-stat-tbl .table>tbody>tr>td{
+    padding: 8px 10px !important;
+  }
+  .statistics-table .table > thead > tr > th, .top-stat-tbl .table > thead > tr > th{
     font-weight: bold;
   }
-  .statistics-table .table > tbody > tr{
+  .statistics-table .table > tbody > tr, .top-stat-tbl .table > tbody > tr{
     cursor: pointer;
   }
   tr.top1 td{
