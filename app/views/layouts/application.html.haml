@@ -55,6 +55,8 @@
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'users' && action_name == 'predict_champion' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: predict_champion_path} Dự đoán đội vô địch
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'statistics' && action_name == 'index' ? 'active' : ''}"}
+                      %a.navbar-lv2-item-link{href: records_statistics_path} Top thống kê
+                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'statistics' && action_name == 'index' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: statistics_path} Bảng xếp hạng
                     - if current_user
                       %li.navbar-lv2-item.last-link{role: "presentation", class: "#{controller_name == 'registrations' && action_name == 'edit' ? 'active' : ''}"}

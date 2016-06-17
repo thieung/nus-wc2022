@@ -1,0 +1,80 @@
+#top_stats.grid-box.col-xs-12.col-sm-12.col-md-10.col-lg-10.col-md-offset-1.col-lg-offset-1
+  / Top 5 Earn Money
+  .box-header
+    %h2.section--title.bigTitle
+      TOP 5 THU NHẬP
+  .box-content.clearfix.m-b-xlarge
+    .row
+      .col-xs-12.col-md-6
+        %h5 GIÀU NHẤT
+        .underline.hidden-sm.hidden-xs
+        .table-responsive.statistics-table
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr
+                %th.text-center #
+                %th.text-center Nhà đầu tư
+                %th.text-center Lợi nhuận (Points)
+            %tbody
+              - User.top5.each_with_index do |record, index|
+                - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
+                - css_class += index == 0 ? ' top1' : ''
+                %tr.success{class: css_class}
+                  %td.text-center= index+1
+                  %td= record[:user].display_name
+                  %td.text-center= format_currency record[:total_money_profits], false
+      .col-xs-12.col-md-6
+        %h5 NGHÈO NHẤT
+        .underline.hidden-sm.hidden-xs
+        .table-responsive.statistics-table
+          %table.table.table-bordered.table-hover
+            %thead
+              %tr
+                %th.text-center #
+                %th.text-center Nhà đầu tư
+                %th.text-center Lợi nhuận (Points)
+            %tbody
+              - User.bottom5.reverse.each_with_index do |record, index|
+                %tr.danger{class: index == 0 ? 'bottom1' : ''}
+                  %td.text-center= index+1
+                  %td= record[:user].display_name
+                  %td.text-center= format_currency record[:total_money_profits], false
+
+  / Top 5 Predict Scores
+  .box-header
+    %h2.section--title.bigTitle
+      TOP 5 DỰ ĐOÁN SỐ TỈ SỐ
+  .box-content.clearfix.m-b-xlarge
+    .row
+      .col-xs-12.col-md-6
+        %h5 Nhiều nhất
+        .underline.hidden-sm.hidden-xs
+        AAAA
+      .col-xs-12.col-md-6
+        %h5 Ít nhất
+        .underline.hidden-sm.hidden-xs
+        AAAAA
+
+  / Top 5 Win Rate/ Lose Rate
+  .box-header
+    %h2.section--title.bigTitle
+      TOP 5 WIN RATE / LOSE RATE
+  .box-content.clearfix.m-b-xlarge
+    .row
+      .col-xs-12.col-md-6
+        %h5 WIN RATE
+        .underline.hidden-sm.hidden-xs
+        AAAA
+      .col-xs-12.col-md-6
+        %h5 LOSE RATE
+        .underline.hidden-sm.hidden-xs
+        AAAAA
+
+  / Top 5 Earn Money
+  .box-header
+    %h2.section--title.bigTitle
+      TOP 5 THẮNG ĐIỂM NHIỀU NHẤT TRONG 1 TRẬN ĐẤU
+  .box-content.clearfix.m-b-large
+    .row
+      .col-xs-12.col-md-12
+        AAA

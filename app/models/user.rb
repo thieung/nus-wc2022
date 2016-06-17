@@ -155,6 +155,26 @@ class User < ActiveRecord::Base
     end
   end
 
+  def total_win_matches
+
+  end
+
+  def total_attended_matches
+    bets.has_score.size
+  end
+
+  def self.list_order_by_win_rate
+    result = []
+    User.staffs.includes(:bets).find_each do |user|
+      tmp = {
+        user: user,
+        total_money_profits: user.total_profit_received
+      }
+      result << tmp
+    end
+    result.sort!{|a,b| b[:total_money_profits] <=> a[:total_money_profits]}
+  end
+
   def self.list_order_by_total_money_profits
     result = []
     User.staffs.includes(:bets).find_each do |user|
@@ -171,7 +191,15 @@ class User < ActiveRecord::Base
     User.list_order_by_total_money_profits.first[:user]
   end
 
+  def self.top5
+    User.list_order_by_total_money_profits.first(5)
+  end
+
   def self.bottom1
     User.list_order_by_total_money_profits.last[:user]
+  end
+
+  def self.bottom5
+    User.list_order_by_total_money_profits.last(5)
   end
 end

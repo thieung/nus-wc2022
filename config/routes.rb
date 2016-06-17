@@ -29,7 +29,11 @@ Rails.application.routes.draw do
       post :random_score
     end
   end
-  resources :statistics, only: :index
+  resources :statistics, only: :index do
+    collection do
+      get :records
+    end
+  end
   resources :users do
     member do
       get :statistics

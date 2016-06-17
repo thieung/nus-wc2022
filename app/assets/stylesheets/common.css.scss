@@ -172,7 +172,7 @@ body{
   font-family: robotoB;
 }
 
-#match_detail{
+#match_detail, #top_stats{
   .match-row{
     border-top: none !important;
     .match-row_match{
@@ -283,6 +283,9 @@ body{
 .bold-text{
   font-weight: bold;
 }
+tr.bold-text td{
+  font-weight: bold;
+}
 .title-text{
   min-width: 200px;
   display: inline-block;
@@ -326,7 +329,7 @@ body{
     padding: 12px 10px;
   }
 }
-#statistic_all_staffs, #statistic_detail_staff{
+#statistic_all_staffs, #statistic_detail_staff, #top_stats{
   padding: 0 20px;
   .statistics-table .table>tbody>tr>td{
     padding: 12px 10px;

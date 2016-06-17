@@ -16,4 +16,8 @@ class StatisticsController < ApplicationController
     end
     @statistics.sort!{|a,b| b[:total_money_profits] <=> a[:total_money_profits]}
   end
+
+  def records
+
+  end
 end
