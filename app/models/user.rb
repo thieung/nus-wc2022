@@ -96,15 +96,27 @@ class User < ActiveRecord::Base
     last_predict_champion_team.try(:team)
   end
 
+  def deadline_to_predict_champion
+    correct_time = case total_teams_to_predict_champion
+    when 0
+      'first'
+    when 1
+      'second'
+    when 2
+      'third'
+    end
+    DateTime.parse(Settings.predict_champion_deadline.send("#{correct_time}"))
+  end
+
   def available_to_predict_champion?
     check = false
     case total_teams_to_predict_champion
     when 0
       check = DateTime.current < DateTime.parse(Settings.predict_champion_deadline.first)
     when 1
-      check = champion_team_predicted.eliminated && DateTime.current < DateTime.parse(Settings.predict_champion_deadline.second)
+      check = champion_team_predicted.eliminated && Game.finish_group_stage? && DateTime.current < DateTime.parse(Settings.predict_champion_deadline.second)
     when 2
-      check = champion_team_predicted.eliminated && DateTime.current < DateTime.parse(Settings.predict_champion_deadline.third)
+      check = champion_team_predicted.eliminated && Game.finish_round_of_16? && DateTime.current < DateTime.parse(Settings.predict_champion_deadline.third)
     end
     check
   end

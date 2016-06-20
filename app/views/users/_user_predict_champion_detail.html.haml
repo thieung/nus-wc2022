@@ -1,9 +1,11 @@
 %h5 Đội vô địch
 .underline.hidden-sm.hidden-xs
-%p
-  %span.team-flag{class: "flag-#{current_user.champion_team_predicted.try(:code)}"}
-  %span.your-champion-predicted= current_user.champion_team_predicted.try(:title_vi)
-  %span.italic.text-desc.m-l-sm
-    (Có
-    %span.number-people-same-predict= PredictChampion.same_chosen(current_user.id, current_user.champion_team_predicted.try(:id)).size
-    người dự đoán đội vô địch giống bạn)
+- current_user.predict_champions.has_team.order_asc.each do |item|
+  - team = item.team
+  %p{class: team.eliminated ? 'eliminated' : ''}
+    %span.team-flag{class: "flag-#{team.code}"}
+    %span.your-champion-predicted= team.title_vi
+    %span.italic.text-desc.m-l-sm
+      (Có
+      %span.number-people-same-predict= PredictChampion.same_chosen(current_user.id, team.id).size
+      người dự đoán đội vô địch giống bạn)

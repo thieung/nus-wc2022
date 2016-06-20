@@ -12,8 +12,10 @@
         %tbody
           - PredictChampion.has_team.group_by(&:team_id).sort_by{|k,v| -v.size}.each do |team_id, records|
             - team = @teams_indexed[team_id]
-            %tr
-              %td.text-center.uppercase{class: team.try(:eliminated) ? 'eliminated' : ''}
+            - css_class = team.try(:eliminated) ? 'eliminated' : ''
+            - css_class += records.map(&:user_id).include?(current_user.try(:id)) ? ' current-user' : ''
+            %tr{class: css_class}
+              %td.text-center.uppercase
                 %p
                   %span.team-flag{class: "flag-#{team.try(:code)}"}
                 %p
@@ -59,7 +61,7 @@
                     %p
                       %span= team.try(:title_vi)
                 - else
-                  %td.text-center.uppercase.no-team{class: team.try(:eliminated) ? 'eliminated' : ''}
+                  %td.text-center.uppercase.no-team
                     %span.text-desc
                       - case i
                       - when 1
@@ -69,7 +71,7 @@
                       - when 3
                         = !finish_round_of_16? ? 'NOT AVAILABLE' : 'KHÔNG DỰ ĐOÁN'
               - else
-                %td.text-center.uppercase.no-team{class: team.try(:eliminated) ? 'eliminated' : ''}
+                %td.text-center.uppercase.no-team
                   %span.text-desc
                     - case i
                     - when 1

@@ -44,15 +44,15 @@ class ApplicationController < ActionController::Base
   end
 
   def finish_group_stage?
-    Game.group_stage.not_locked.size == 0
+    Game.finish_group_stage?
   end
 
   def finish_round_of_16?
-    Game.round_of_16.not_locked.size == 0
+    Game.finish_round_of_16?
   end
 
   def finish_euro?
-    Game.not_locked.size == 0
+    Game.finish_euro?
   end
 
   helper_method :finish_group_stage?, :finish_round_of_16?, :finish_euro?

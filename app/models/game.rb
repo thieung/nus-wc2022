@@ -68,6 +68,18 @@ class Game < ActiveRecord::Base
     end
   end
 
+  def self.finish_group_stage?
+    self.group_stage.not_locked.size == 0
+  end
+
+  def self.finish_round_of_16?
+    self.round_of_16.not_locked.size == 0
+  end
+
+  def self.finish_euro?
+    self.not_locked.size == 0
+  end
+
   private
 
   def update_money_for_winners
