@@ -155,7 +155,7 @@
                 %th.text-center #
                 %th.text-center Nhà đầu tư
                 %th.text-center Số tỉ số đặt cược
-                %th.text-center Số trận thắng
+                %th.text-center Số tỉ số thắng
                 %th.text-center Tỉ lệ
             %tbody
               - User.list_order_by_win_rate[:by_score].first(TOP5).each_with_index do |record, index|
@@ -206,7 +206,7 @@
                 %th.text-center #
                 %th.text-center Nhà đầu tư
                 %th.text-center Số tỉ số đặt cược
-                %th.text-center Số trận thua
+                %th.text-center Số tỉ số thua
                 %th.text-center Tỉ lệ
             %tbody
               - User.list_order_by_lose_rate[:by_score].first(TOP5).each_with_index do |record, index|

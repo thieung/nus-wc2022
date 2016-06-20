@@ -163,6 +163,10 @@ class User < ActiveRecord::Base
     bets.has_score.lose.size
   end
 
+  def total_lose_scores
+    total_scores_betted - total_win_matches
+  end
+
   def total_attended_matches
     bets.has_score.size
   end
@@ -226,6 +230,7 @@ class User < ActiveRecord::Base
     }
     User.staffs.includes(:bets).find_each do |user|
       total_lose_matches = user.total_lose_matches
+      total_lose_scores = user.total_lose_scores
       total_attended_matches = user.total_attended_matches
       total_scores_betted = user.total_scores_betted
 
@@ -240,8 +245,8 @@ class User < ActiveRecord::Base
       tmp_by_score = {
         user: user,
         total_scores_betted: total_scores_betted,
-        total_scores_lose: total_lose_matches,
-        rate: total_lose_matches > 0 ? (total_lose_matches.to_f/total_scores_betted) : 0
+        total_scores_lose: total_lose_scores,
+        rate: total_lose_scores > 0 ? (total_lose_scores.to_f/total_scores_betted) : 0
       }
       result[:by_score] << tmp_by_score
     end
