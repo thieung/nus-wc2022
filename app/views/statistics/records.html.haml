@@ -47,7 +47,7 @@
               - User.top5.each_with_index do |record, index|
                 - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
                 - css_class += index == 0 ? ' top1' : ''
-                %tr.success{class: css_class}
+                %tr.success{class: css_class, "data-url" => statistics_user_url(record[:user])}
                   %td.text-center= index+1
                   %td= record[:user].display_name
                   %td.text-center= format_currency record[:total_money_profits], false
@@ -65,7 +65,7 @@
               - User.bottom5.reverse.each_with_index do |record, index|
                 - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
                 - css_class += index == 0 ? ' bottom1' : ''
-                %tr.danger{class: css_class}
+                %tr.danger{class: css_class, "data-url" => statistics_user_url(record[:user])}
                   %td.text-center= index+1
                   %td= record[:user].display_name
                   %td.text-center= format_currency record[:total_money_profits], false
@@ -91,7 +91,7 @@
               - User.list_order_by_numer_scores_betted.first(TOP5).each_with_index do |record, index|
                 - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
                 - css_class += index == 0 ? ' top1' : ''
-                %tr.active{class: css_class}
+                %tr.active{class: css_class, "data-url" => statistics_user_url(record[:user])}
                   %td.text-center= index+1
                   %td= record[:user].display_name
                   %td.text-center= record[:total_scores]
@@ -111,7 +111,7 @@
               - User.list_order_by_numer_scores_betted.last(TOP5).reverse.each_with_index do |record, index|
                 - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
                 - css_class += index == 0 ? ' bottom1' : ''
-                %tr.warning{class: css_class}
+                %tr.warning{class: css_class, "data-url" => statistics_user_url(record[:user])}
                   %td.text-center= index+1
                   %td= record[:user].display_name
                   %td.text-center= record[:total_scores]
@@ -123,6 +123,8 @@
       TOP 5 CÓ TỈ LỆ THẮNG CAO NHẤT
   .box-content.clearfix.m-b-xlarge
     .row
+      .col-xs-12.col-md-12
+        %p.text-desc.m-b * Chỉ tính các trận đấu đã diễn ra và có kết quả
       .col-xs-12.col-md-6
         %h5 THEO TRẬN ĐẤU
         .underline.hidden-sm.hidden-xs
@@ -131,7 +133,7 @@
             %thead
               %tr
                 %th.text-center #
-                %th.text-center Nhà đầu tư
+                %th.text-center{width: '50%'} Nhà đầu tư
                 %th.text-center Số trận tham gia
                 %th.text-center Số trận thắng
                 %th.text-center Tỉ lệ
@@ -139,7 +141,7 @@
               - User.list_order_by_win_rate[:by_match].first(TOP5).each_with_index do |record, index|
                 - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
                 - css_class += index == 0 ? ' top1' : ''
-                %tr.success{class: css_class}
+                %tr.success{class: css_class, "data-url" => statistics_user_url(record[:user])}
                   %td.text-center= index+1
                   %td= record[:user].display_name
                   %td.text-center= record[:total_attended_matches]
@@ -153,7 +155,7 @@
             %thead
               %tr
                 %th.text-center #
-                %th.text-center Nhà đầu tư
+                %th.text-center{width: '50%'} Nhà đầu tư
                 %th.text-center Số tỉ số đặt cược
                 %th.text-center Số tỉ số thắng
                 %th.text-center Tỉ lệ
@@ -161,7 +163,7 @@
               - User.list_order_by_win_rate[:by_score].first(TOP5).each_with_index do |record, index|
                 - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
                 - css_class += index == 0 ? ' top1' : ''
-                %tr.success{class: css_class}
+                %tr.success{class: css_class, "data-url" => statistics_user_url(record[:user])}
                   %td.text-center= index+1
                   %td= record[:user].display_name
                   %td.text-center= record[:total_scores_betted]
@@ -174,6 +176,8 @@
       TOP 5 CÓ TỈ LỆ THUA CAO NHẤT
   .box-content.clearfix.m-b-xlarge
     .row
+      .col-xs-12.col-md-12
+        %p.text-desc.m-b * Chỉ tính các trận đấu đã diễn ra và có kết quả
       .col-xs-12.col-md-6
         %h5 THEO TRẬN ĐẤU
         .underline.hidden-sm.hidden-xs
@@ -182,7 +186,7 @@
             %thead
               %tr
                 %th.text-center #
-                %th.text-center Nhà đầu tư
+                %th.text-center{width: '50%'} Nhà đầu tư
                 %th.text-center Số trận tham gia
                 %th.text-center Số trận thua
                 %th.text-center Tỉ lệ
@@ -190,7 +194,7 @@
               - User.list_order_by_lose_rate[:by_match].first(TOP5).each_with_index do |record, index|
                 - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
                 - css_class += index == 0 ? ' bottom1' : ''
-                %tr.danger{class: css_class}
+                %tr.danger{class: css_class, "data-url" => statistics_user_url(record[:user])}
                   %td.text-center= index+1
                   %td= record[:user].display_name
                   %td.text-center= record[:total_attended_matches]
@@ -204,7 +208,7 @@
             %thead
               %tr
                 %th.text-center #
-                %th.text-center Nhà đầu tư
+                %th.text-center{width: '50%'} Nhà đầu tư
                 %th.text-center Số tỉ số đặt cược
                 %th.text-center Số tỉ số thua
                 %th.text-center Tỉ lệ
@@ -212,7 +216,7 @@
               - User.list_order_by_lose_rate[:by_score].first(TOP5).each_with_index do |record, index|
                 - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''
                 - css_class += index == 0 ? ' bottom1' : ''
-                %tr.danger{class: css_class}
+                %tr.danger{class: css_class, "data-url" => statistics_user_url(record[:user])}
                   %td.text-center= index+1
                   %td= record[:user].display_name
                   %td.text-center= record[:total_scores_betted]

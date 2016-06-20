@@ -156,23 +156,27 @@ class User < ActiveRecord::Base
   end
 
   def total_win_matches
-    bets.has_score.win.size
+    bets.has_score.locked.win.size
   end
 
   def total_lose_matches
-    bets.has_score.lose.size
+    bets.has_score.locked.lose.size
   end
 
   def total_lose_scores
-    total_scores_betted - total_win_matches
+    total_scores_locked_betted - total_win_matches
   end
 
   def total_attended_matches
-    bets.has_score.size
+    bets.has_score.locked.size
   end
 
   def total_scores_betted
     bets.has_score.pluck(:score_ids).flatten.size
+  end
+
+  def total_scores_locked_betted
+    bets.has_score.locked.pluck(:score_ids).flatten.size
   end
 
   def biggest_money_win_info
@@ -181,7 +185,7 @@ class User < ActiveRecord::Base
 
   def self.list_order_by_numer_scores_betted
     result = []
-    User.staffs.includes(:bets).find_each do |user|
+    User.staffs.includes(bets: :game).find_each do |user|
       tmp = {
         user: user,
         total_scores: user.total_scores_betted,
@@ -197,10 +201,10 @@ class User < ActiveRecord::Base
       by_score: [],
       by_match: []
     }
-    User.staffs.includes(:bets).find_each do |user|
+    User.staffs.includes(bets: :game).find_each do |user|
       total_win_matches = user.total_win_matches
       total_attended_matches = user.total_attended_matches
-      total_scores_betted = user.total_scores_betted
+      total_scores_betted = user.total_scores_locked_betted
 
       tmp_by_match = {
         user: user,
@@ -228,11 +232,11 @@ class User < ActiveRecord::Base
       by_score: [],
       by_match: []
     }
-    User.staffs.includes(:bets).find_each do |user|
+    User.staffs.includes(bets: :game).find_each do |user|
       total_lose_matches = user.total_lose_matches
       total_lose_scores = user.total_lose_scores
       total_attended_matches = user.total_attended_matches
-      total_scores_betted = user.total_scores_betted
+      total_scores_betted = user.total_scores_locked_betted
 
       tmp_by_match = {
         user: user,

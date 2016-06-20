@@ -3,6 +3,7 @@ class Bet < ActiveRecord::Base
   belongs_to :user
 
   scope :has_score, -> { where.not("score_ids = '{}' OR score_ids IS NULL") }
+  scope :locked, -> {joins(:game).where("games.locked" => true)}
   scope :win, -> {where("total_money_win > 0")}
   scope :lose, -> {where(total_money_win: 0)}
   scope :ordered, -> {order(:created_at)}
