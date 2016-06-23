@@ -12,15 +12,15 @@ class MatchesController < ApplicationController
     @games = Game.send(@type)
 
     if params[:type].blank?
-      if Date.parse(Settings.group_stage.start) <= today && today <= Date.parse(Settings.group_stage.end)
+      if today <= Date.parse(Settings.group_stage.end)
         redirect_to matches_path({type: 'group_stage'}) and return
-      elsif Date.parse(Settings.round_of_16.start) <= today && today <= Date.parse(Settings.round_of_16.end)
+      elsif today <= Date.parse(Settings.round_of_16.end)
         redirect_to matches_path({type: 'round_of_16'}) and return
-      elsif Date.parse(Settings.quarter_final.start) <= today && today <= Date.parse(Settings.quarter_final.end)
+      elsif today <= Date.parse(Settings.quarter_final.end)
         redirect_to matches_path({type: 'quarter_final'}) and return
-      elsif Date.parse(Settings.semi_final.start) <= today && today <= Date.parse(Settings.semi_final.end)
+      elsif today <= Date.parse(Settings.semi_final.end)
         redirect_to matches_path({type: 'semi_final'}) and return
-      elsif Date.parse(Settings.final.start) <= today && today <= Date.parse(Settings.final.end)
+      elsif today <= Date.parse(Settings.final.end)
         redirect_to matches_path({type: 'final'}) and return
       end
     end
