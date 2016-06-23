@@ -20,6 +20,7 @@ class Game < ActiveRecord::Base
   after_save :update_money_for_winners, if: lambda { |game| game.score_id_changed? && game.score_id.present? }
   after_save :update_match_information, if: lambda { |game| game.team1_id.present? && game.team2_id.present? && game.team1_id_changed? && game.team2_id_changed? }
   after_save :update_champion_team, if: lambda { |game| game.pos == 51 && game.winner.present?}
+  after_save :update_eliminated_team, if: lambda { |game| Game.finish_group_stage? && game.winner.present? }
 
   def previous
     Game.find_by(pos: pos-1)
@@ -125,5 +126,13 @@ class Game < ActiveRecord::Base
   def update_champion_team
     team = Team.find_by(id: winner)
     team.update_attributes(is_champion: true) if team
+  end
+
+  def update_eliminated_team
+    if team1_id == winner
+      Team.find_by(id: team2_id).update_attributes(eliminated: true)
+    elsif team2_id == winner
+      Team.find_by(id: team1_id).update_attributes(eliminated: true)
+    end
   end
 end

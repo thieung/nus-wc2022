@@ -289,6 +289,12 @@ body{
 .bold-text{
   font-weight: bold;
 }
+.normal{
+  font-weight: normal !important;
+}
+.js--choose-winner-when-draw{
+  display: none;
+}
 tr.bold-text td{
   font-weight: bold;
 }

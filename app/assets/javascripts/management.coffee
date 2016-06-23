@@ -17,3 +17,16 @@ $ ->
     $('.toogle-btn').text 'Hiển thị'
   $('#staffs_predict_champion').on 'show.bs.collapse', ->
     $('.toogle-btn').text 'Thu gọn'
+
+  $('.admin-update-score--select').on 'change', (event) ->
+    selectedValue =  $(this).val()
+    if selectedValue
+      scoreText = $(this).find('option[value='+selectedValue+']').text()
+      score1 = parseInt(scoreText.split("-")[0])
+      score2 = parseInt(scoreText.split("-")[1])
+      if score1 == score2
+        $('.js--choose-winner-when-draw').show()
+      else
+        $('.js--choose-winner-when-draw').hide()
+    else
+      $('.js--choose-winner-when-draw').hide()

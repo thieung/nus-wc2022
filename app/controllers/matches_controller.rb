@@ -126,7 +126,8 @@ class MatchesController < ApplicationController
         elsif score_team1 < score_team2
           @game.team2_id
         else
-          nil
+          # Draw
+          !params[:result_winner_id].blank? ? params[:result_winner_id].to_i : nil
         end
         success = @game.update_attributes(
           score1: score_team1,
