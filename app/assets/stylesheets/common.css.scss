@@ -454,3 +454,16 @@ tr.bold-text td{
     }
   }
 }
+
+.knockout{
+  .match--loser{
+    .team-name_name, .team-flag{
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+  }
+}
+.reason-input{
+  width: 350px;
+  margin: 0 auto;
+}

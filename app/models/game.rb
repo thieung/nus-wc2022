@@ -81,6 +81,14 @@ class Game < ActiveRecord::Base
     self.not_locked.size == 0
   end
 
+  def is_knockout?
+    pos >= 37
+  end
+
+  def is_draw?
+    score1 == score2
+  end
+
   private
 
   def update_money_for_winners

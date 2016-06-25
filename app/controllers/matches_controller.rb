@@ -134,7 +134,8 @@ class MatchesController < ApplicationController
           score2: score_team2,
           score_id: score.id,
           locked: true,
-          winner: winner_team_id
+          winner: winner_team_id,
+          reason: score_team1 == score_team2 ? params[:reason] : nil
         )
         unless success
           @err_msg = "Không thể cập nhật kết quả trận đấu, vui lòng kiểm tra lại."

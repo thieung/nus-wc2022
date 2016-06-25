@@ -11,7 +11,7 @@
       - else
         %p.text-desc Hết giờ dự đoán tỉ số
     .match-row.match-row--horizontal.match-finalTrn.match-groupStage.match-notFake
-      .match.match-row_match
+      .match.match-row_match{class: @game.is_knockout? ? 'knockout' : ''}
         .text-center
           %p.match--score_time= @game.round.is_group_stage? ? @game.group.title_vi : @game.round.title_vi
           %p.match--score_time= @game.play_at.strftime("%-d/%m - %H:%M %p")
@@ -36,6 +36,8 @@
             = team2.try(:code)
           .team-name
             %span.team-name_name= team2.try(:title_vi)||team2.try(:title)
+    - if @game.has_score? && @game.is_knockout? && @game.is_draw?
+      %p.text-center.text-desc= @game.reason
     - if current_user && current_user.is_admin? && !@game.locked
       .admin-actions
         .block.m-b-xs
