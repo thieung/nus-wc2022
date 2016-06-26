@@ -5,60 +5,62 @@
   .statistic-detail-wrap
     .row
       .col-xs-12.col-md-8
-        - unless game.bets.has_score.blank?
-          / Stats by scores
-          %h5 Thống kê theo tỉ số
+        - if game.can_show_match_stats?
+          - unless game.bets.has_score.blank?
+            / Stats by scores
+            %h5 Thống kê theo tỉ số
+            .underline.hidden-sm.hidden-xs
+            - scores = Score.all.index_by(&:id)
+            - scores_grouped = game.bets.has_score.pluck(:score_ids).flatten.map(&:to_i).group_by{|n|n}.sort_by{|k,v| -v.size}
+            %p.text-desc
+              = "Có tổng cộng #{scores_grouped.uniq.size} tỉ số được dự đoán trong trận đấu này."
+            %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b-large
+              %thead
+                %th.text-center{width: '30%'}
+                  %strong Tỉ số
+                %th.text-center{width: '30%'}
+                  %strong Số người dự đoán
+                %th.text-center{width: '40%'}
+                  %strong Điểm dự tính nhận được
+              %tbody
+                - current_user_score_ids = current_user ? current_user.score_ids_on_match(game.id)||[] : []
+                - scores_grouped.each do |score_id, collection|
+                  %tr{class: current_user && current_user_score_ids.include?(score_id) ? 'current-user-score' : ''}
+                    %td.text-center.number-larger= scores[score_id].try(:name)
+                    %td.text-center.number-larger= collection.size
+                    %td.text-center.points-can-receive= format_currency((money_statistic.values.map(&:to_i).sum.to_f/collection.size).round)
+
+          / Stats by users
+          %h5 Thông tin chi tiết
           .underline.hidden-sm.hidden-xs
-          - scores = Score.all.index_by(&:id)
-          - scores_grouped = game.bets.has_score.pluck(:score_ids).flatten.map(&:to_i).group_by{|n|n}.sort_by{|k,v| -v.size}
-          %p.text-desc
-            = "Có tổng cộng #{scores_grouped.uniq.size} tỉ số được dự đoán trong trận đấu này."
-          %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b-large
-            %thead
-              %th.text-center{width: '30%'}
-                %strong Tỉ số
-              %th.text-center{width: '30%'}
-                %strong Số người dự đoán
-              %th.text-center{width: '40%'}
-                %strong Điểm dự tính nhận được
-            %tbody
-              - current_user_score_ids = current_user ? current_user.score_ids_on_match(game.id)||[] : []
-              - scores_grouped.each do |score_id, collection|
-                %tr{class: current_user && current_user_score_ids.include?(score_id) ? 'current-user-score' : ''}
-                  %td.text-center.number-larger= scores[score_id].try(:name)
-                  %td.text-center.number-larger= collection.size
-                  %td.text-center.points-can-receive= format_currency((money_statistic.values.map(&:to_i).sum.to_f/collection.size).round)
-
-        / Stats by users
-        %h5 Thông tin chi tiết
-        .underline.hidden-sm.hidden-xs
-        - if game.bets.has_score.blank?
-          %p.text-desc
-            Chưa có nhà đầu tư nào tham gia dự đoán tỉ số trận đấu này
+          - if game.bets.has_score.blank?
+            %p.text-desc
+              Chưa có nhà đầu tư nào tham gia dự đoán tỉ số trận đấu này
+          - else
+            - scores = Score.all.index_by(&:id)
+            - top1 = User.top1
+            - bottom1 = User.bottom1
+            %p.text-desc
+              = "Có #{game.bets.has_score.size} người đã tham gia dự đoán tỉ số trận đấu này."
+            %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
+              %thead
+                %th.text-center
+                  %strong Nhà đầu tư
+                %th.text-center
+                  %strong Các tỉ số
+              %tbody
+                - game.bets.has_score.includes(:user).each do |bet|
+                  %tr{class: bet.user == current_user ? 'current-user' : ''}
+                    %td
+                      = link_to bet.user.display_name, statistics_user_path(bet.user), class: current_user != bet.user ? 'not-current-user' : ''
+                      - if bet.user == top1
+                        %span.user-rank-section.top1 Top 1
+                      - elsif bet.user == bottom1
+                        %span.user-rank-section.bottom1 Bottom 1
+                    %td.text-center
+                      = bet.score_ids.map{|score_id| scores[score_id.to_i].try(:name)}.join(', ')
         - else
-          - scores = Score.all.index_by(&:id)
-          - top1 = User.top1
-          - bottom1 = User.bottom1
-          %p.text-desc
-            = "Có #{game.bets.has_score.size} người đã tham gia dự đoán tỉ số trận đấu này."
-          %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
-            %thead
-              %th.text-center
-                %strong Nhà đầu tư
-              %th.text-center
-                %strong Các tỉ số
-            %tbody
-              - game.bets.has_score.includes(:user).each do |bet|
-                %tr{class: bet.user == current_user ? 'current-user' : ''}
-                  %td
-                    = link_to bet.user.display_name, statistics_user_path(bet.user), class: current_user != bet.user ? 'not-current-user' : ''
-                    - if bet.user == top1
-                      %span.user-rank-section.top1 Top 1
-                    - elsif bet.user == bottom1
-                      %span.user-rank-section.bottom1 Bottom 1
-                  %td.text-center
-                    = bet.score_ids.map{|score_id| scores[score_id.to_i].try(:name)}.join(', ')
-
+          %p.text-desc Thông tin dự đoán chi tiết đang được ẩn, sẽ hiển thị khi hết thời gian đặt cược.
       .col-xs-12.col-md-4
         %h5 Tổng điểm đầu tư
         .underline.hidden-sm.hidden-xs

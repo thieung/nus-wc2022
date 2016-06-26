@@ -89,6 +89,10 @@ class Game < ActiveRecord::Base
     score1 == score2
   end
 
+  def can_show_match_stats?
+    DateTime.now >= deadline
+  end
+
   private
 
   def update_money_for_winners
