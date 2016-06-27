@@ -1,8 +1,11 @@
 %h5= "Dự đoán lần #{current_user.total_teams_to_predict_champion+1}"
 .underline.hidden-sm.hidden-xs
-%p.m-b
+%p
   Hạn chót dự đoán:
-  %span.deadline-predict= I18n.localize(current_user.deadline_to_predict_champion, format: :full_with_time)
+  %span.deadline-predict= I18n.localize(current_user.deadline_to_predict_champion[:time], format: :full_with_time)
+%p.m-b
+  Số điểm đầu tư:
+  %span.deadline-predict= format_currency(current_user.deadline_to_predict_champion[:money])
 = form_tag pick_champion_users_path, method: :post, class: 'form-horizontal user-predict-champion--form' do
   .form-group
     .col-xs-12.col-md-4

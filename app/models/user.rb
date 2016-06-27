@@ -97,28 +97,31 @@ class User < ActiveRecord::Base
   end
 
   def deadline_to_predict_champion
-    correct_time = case total_teams_to_predict_champion
-    when 0
-      'first'
-    when 1
+    current = DateTime.current
+    correct_time = if Game.finish_group_stage? && current <= DateTime.parse(Settings.predict_champion_deadline.second)
       'second'
-    when 2
+    elsif Game.finish_round_of_16? && current <= DateTime.parse(Settings.predict_champion_deadline.third)
       'third'
+    else
+      'first'
     end
-    DateTime.parse(Settings.predict_champion_deadline.send("#{correct_time}"))
+    {
+      time: DateTime.parse(Settings.predict_champion_deadline.send("#{correct_time}")),
+      money: Settings.predict_champion_money.send("#{correct_time}")
+    }
   end
 
   def available_to_predict_champion?
-    check = false
-    case total_teams_to_predict_champion
-    when 0
-      check = DateTime.current < DateTime.parse(Settings.predict_champion_deadline.first)
-    when 1
-      check = champion_team_predicted.eliminated && Game.finish_group_stage? && DateTime.current < DateTime.parse(Settings.predict_champion_deadline.second)
-    when 2
-      check = champion_team_predicted.eliminated && Game.finish_round_of_16? && DateTime.current < DateTime.parse(Settings.predict_champion_deadline.third)
-    end
-    check
+    current = DateTime.current
+    return true if total_teams_to_predict_champion == 0 && current <= DateTime.parse(Settings.predict_champion_deadline.first)
+    return false if champion_team_predicted.blank? || !champion_team_predicted.eliminated
+
+    # champion_team_predicted is eliminated
+    return (Game.finish_group_stage? && current <= DateTime.parse(Settings.predict_champion_deadline.second)) || (Game.finish_round_of_16? && current <= DateTime.parse(Settings.predict_champion_deadline.third))
+  end
+
+  def not_enough_condition_to_predict_champion?
+    total_teams_to_predict_champion == 0 && DateTime.current > DateTime.parse(Settings.predict_champion_deadline.first)
   end
 
   ###### Money statistic
