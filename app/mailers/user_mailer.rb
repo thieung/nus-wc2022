@@ -35,6 +35,7 @@ class UserMailer < ApplicationMailer
   def notice_predict_champion_result_to_staffs recipient, predict_champion
     @user = predict_champion.user
     @team = predict_champion.team
+    @fee = predict_champion.money
     mail(from: @user.email, to: recipient, subject: "[NUS Event - Euro 2016] Dự đoán đội vô địch lần #{@user.total_teams_to_predict_champion}")
   end
 
