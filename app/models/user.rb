@@ -111,6 +111,11 @@ class User < ActiveRecord::Base
     }
   end
 
+  def can_bet_on_match?(game)
+    return true unless game.final_match?
+    bets.map(&:score_ids).flatten.size >= LIMIT_SCORES_CAN_BET_FOR_FINAL
+  end
+
   def available_to_predict_champion?
     current = DateTime.current
     return true if total_teams_to_predict_champion == 0 && current <= DateTime.parse(Settings.predict_champion_deadline.first)

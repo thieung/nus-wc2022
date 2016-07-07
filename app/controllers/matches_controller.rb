@@ -40,6 +40,7 @@ class MatchesController < ApplicationController
 
   def predict_score
     return unless @game.available_to_bet
+    return unless current_user.can_bet_on_match?(@game)
     score_ids = if params[:match].blank? || params[:match][:score_ids].blank?
       []
     else
