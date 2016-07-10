@@ -58,10 +58,10 @@
                       %td{class: user == current_user ? 'current-user' : ''}
                         = link_to user.display_name, statistics_user_path(user), class: current_user != user ? 'not-current-user' : ''
                       - if index == 0
-                        %td.middle.text-center.uppercase{rowspan: 5}
+                        %td.middle.text-center.uppercase{rowspan: @winner_list.size}
                           %span.team-flag{class: "flag-#{Team.champion.try(:code)}"}
                           %span= Team.champion.try(:title_vi)
-                        %td.middle.text-center.money-win{rowspan: 5}
+                        %td.middle.text-center.money-win{rowspan: @winner_list.size}
                           = format_currency(@money_for_each_user||0)
 
   / Statistic

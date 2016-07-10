@@ -15,18 +15,24 @@
       .staff-statistic-money
         %p
           %span.title-text Tổng điểm đầu tư:
-          %span.bold-text= format_currency @user.total_money_bet
+          %span.bold-text
+            \-
+            = format_currency @user.total_money_bet
         %p
           %span.title-text Tổng điểm thắng cuộc:
-          %span.bold-text= format_currency @user.total_money_win
+          %span.bold-text
+            +
+            = format_currency @user.total_money_win
         - if finish_euro?
           %p
             %span.title-text Điểm dự đoán đội vô địch:
             %span.bold-text
+              \-
               = format_currency @user.total_money_predict_champion
           %p
             %span.title-text Điểm thắng dự đoán đội vô địch:
             %span.bold-text
+              +
               = format_currency @user.money_predict_champion_win
         %p.total-profits
           %span.title-text Tổng lợi nhuận:

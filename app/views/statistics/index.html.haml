@@ -10,16 +10,28 @@
         %table.table.table-bordered.table-hover
           %thead
             %tr
-              %th.text-center #
-              %th.text-center Nhà đầu tư
-              %th.text-center Số trận tham gia
-              %th.text-center Tổng tỉ số đã cược
-              %th.text-center Tổng điểm đầu tư
-              %th.text-center Tổng điểm thắng cược
+              %th.middle.text-center #
+              %th.middle.text-center Nhà đầu tư
+              %th.middle.text-center
+                Số trận
+                %br/
+                tham gia
+              %th.middle.text-center
+                Tổng tỉ số
+                %br/
+                đã cược
+              %th.middle.text-center Tổng điểm đầu tư
+              %th.middle.text-center Tổng điểm thắng
               - if finish_euro?
-                %th.text-center Điểm dự đoán đội vô địch
-                %th.text-center Điểm thắng dự đoán đội vô địch
-              %th.text-center Tổng lợi nhuận
+                %th.middle.text-center
+                  Điểm dự đoán
+                  %br/
+                  đội vô địch
+                %th.middle.text-center
+                  Điểm thắng dự đoán
+                  %br/
+                  đội vô địch
+              %th.middle.text-center Tổng lợi nhuận
           %tbody
             - @statistics.each_with_index do |record, index|
               - css_class = current_user == record[:user] ? 'stat-tbl-current' : ''

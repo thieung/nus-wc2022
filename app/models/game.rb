@@ -114,7 +114,9 @@ class Game < ActiveRecord::Base
     else
       # No winner
       money_for_next_match = ((investment.total + money_from_previous_match + total_money_for_final).to_f / 2).round
-      investment.update_attributes(remaining: money_for_next_match)
+      unless final_match?
+        investment.update_attributes(remaining: money_for_next_match)
+      end
     end
   end
 

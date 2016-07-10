@@ -83,6 +83,8 @@
           %p.text-desc Không có nhà đầu tư nào dự đoán trúng tỉ số trận đấu này.
           - unless @game.final_match?
             %p.text-desc Một nửa số điểm sẽ được chuyển vào trận sau và một nửa còn lại sẽ được chuyển vào trận chung kết.
+          - else
+            %p.text-desc Toàn bộ số điểm cược cho trận Chung Kết này sẽ được dùng để liên hoan toàn Công ty.
         - else
           %p Xin chúc mừng những nhà đầu tư sau đây đã dự đoán chính xác tỉ số trận đấu:
           .row.m-t
