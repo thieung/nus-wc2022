@@ -1,0 +1,48 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    :css
+      table td {
+        border-collapse: collapse;
+        padding: 5px 10px;
+        vertical-align: top;
+      }
+      table td strong {
+        line-height: 20px;
+      }
+      .text-center{
+        text-align: center;
+      }
+      .middle{
+        vertical-align: middle;
+      }
+      .uppercase{
+        text-transform: uppercase;
+      }
+      .money-win{
+        color: blue;
+        font-size: 120%;
+      }
+  %body
+    - if @winner_list.blank?
+      %p Không có nhà đầu tư nào dự đoán trúng đội vô địch Euro 2016. Toàn bộ số điểm sẽ được dùng để liên hoan toàn Công ty.
+    - else
+      %p Xin chúc mừng những nhà đầu tư sau đây đã dự đoán chính xác đội vô địch Euro 2016:
+      %table{border: 1, cellspacing: 0, cellpadding: 0, style: 'border: 2px dotted #ccc'}
+        %thead
+          %th.text-center
+            %strong Nhà đầu tư
+          %th.text-center
+            %strong Đội vô địch
+          %th.text-center
+            %strong Số điểm nhận được
+        %tbody
+          - @winner_list.each_with_index do |user, index|
+            %tr
+              %td= user.display_name
+              - if index == 0
+                %td.middle.text-center.uppercase{rowspan: @winner_list.size}
+                  %strong= Team.champion.try(:title_vi)
+                %td.middle.text-center.money-win{rowspan: @winner_list.size}
+                  = format_currency(@money_for_each_user||0)

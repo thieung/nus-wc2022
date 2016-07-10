@@ -140,6 +140,8 @@ class Game < ActiveRecord::Base
   def update_champion_team
     team = Team.find_by(id: winner)
     team.update_attributes(is_champion: true) if team
+    # Send champion winner result email to all staffs
+    Mailer.process_notice_champion_winner_result_to_staffs unless Settings.is_turn_off_mail
   end
 
   def update_eliminated_team

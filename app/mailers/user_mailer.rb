@@ -45,6 +45,16 @@ class UserMailer < ApplicationMailer
     mail(to: recipient, subject: "[NUS Event - Euro 2016] Danh sách nhà đầu tư dự đoán tỉ số trận #{@match_content}")
   end
 
+  def notice_champion_winner_result_to_staffs recipient
+    money_for_champion = Settings.nus_money_for_champion.to_i + PredictChampion.sum(:money)
+    winner_ids = PredictChampion.joins(:team).where("teams.is_champion" => true).map(&:user_id).uniq
+    unless winner_ids.blank?
+      @winner_list = User.where(id: winner_ids)
+      @money_for_each_user = (money_for_champion.to_f/winner_ids.size).round
+    end
+    mail(to: recipient, subject: "[NUS Event - Euro 2016] Kết quả dự đoán đội vô địch Euro 2016")
+  end
+
   def send_test
     mail(to: 'vanthieuuit@gmail.com', subject: "Test Schedule")
   end

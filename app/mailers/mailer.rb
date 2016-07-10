@@ -28,4 +28,10 @@ class Mailer
       UserMailer.notice_all_bets_info_to_staffs(recipient, game).deliver_now
     end
   end
+
+  def self.process_notice_champion_winner_result_to_staffs
+    Settings.group_mails.each do |recipient|
+      UserMailer.notice_champion_winner_result_to_staffs(recipient).deliver_now
+    end
+  end
 end
