@@ -1,25 +1,28 @@
 defaults: &defaults
   nus_money_for_champion: 1000000
-  final_match_time: "2016/07/11 02:00:00 +7"
+  final_match_time: "2018/07/15 22:00:00 +7"
   group_stage:
-    start: 2016/06/10
-    end: 2016/06/23
+    start: 2018/06/13
+    end: 2018/06/29
   round_of_16:
-    start: 2016/06/25
-    end: 2016/06/28
+    start: 2018/06/29
+    end: 2018/07/04
   quarter_final:
-    start: 2016/06/30
-    end: 2016/07/04
+    start: 2018/07/05
+    end: 2018/07/08
   semi_final:
-    start: 2016/07/06
-    end: 2016/07/08
+    start: 2018/07/10
+    end: 2018/07/12
+  third_fourth:
+    start: 2018/07/13
+    end: 2018/07/14
   final:
-    start: 2016/07/10
-    end: 2016/07/11
+    start: 2018/07/14
+    end: 2018/07/15
   predict_champion_deadline:
-    first: "2016/06/10 17:15:00 +7"
-    second: "2016/06/25 20:00:00 +7"
-    third: "2016/07/01 01:30:00 +7"
+    first: "2018/06/14 22:00:00 +7"
+    second: "2018/06/30 21:00:00 +7"
+    third: "2018/07/06 21:00:00 +7"
   predict_champion_money:
     first: 100000
     second: 150000
@@ -28,8 +31,8 @@ defaults: &defaults
 development:
   <<: *defaults
   staffs_group_mail: 'staff@example.com'
-  group_mails: ['staff@example.com', 'internship.dev@example.com']
-  group_mails_with_hr: ['hr@example.com', 'staff@example.com', 'internship.dev@example.com']
+  group_mails: ['staff@example.com', 'internship.dev@example.com', 'internship.ba_qc@example.com']
+  group_mails_with_hr: ['hr@example.com', 'staff@example.com', 'internship.dev@example.com', 'internship.ba_qc@example.com']
   neat_setting: 800
   is_turn_off_mail: false
 
@@ -39,9 +42,9 @@ test:
 production:
   <<: *defaults
   staffs_group_mail: 'staff@nustechnology.com'
-  group_mails: ['staff@nustechnology.com', 'internship.dev@nustechnology.com']
-  group_mails_with_hr: ['hr@nustechnology.com', 'staff@nustechnology.com', 'internship.dev@nustechnology.com']
+  group_mails: ['staff@nustechnology.com', 'internship.dev@nustechnology.com', 'internship.ba_qc@nustechnology.com']
+  group_mails_with_hr: ['hr@nustechnology.com', 'staff@nustechnology.com', 'internship.dev@nustechnology.com', 'internship.ba_qc@nustechnology.com']
   is_turn_off_mail: false
   sendgrid:
-    username: jackulti
+    username: thieunv182
     password: il0v3r0r182

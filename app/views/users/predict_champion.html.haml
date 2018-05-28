@@ -8,7 +8,7 @@
   .box-content.m-b-xlarge.clearfix
     %p - Kể từ sau vòng Tứ kết trở đi không được dự đoán đội vô địch nữa nếu đội bạn dự đoán bị loại.
     %p
-      \- Khi kết thúc vòng bảng (còn 16 đội) và vòng 1/16 (còn 8 đội), nếu đội bạn dự đoán bị loại thì bạn có quyền (ko bắt buộc) dự đoán đội khác trước khi vòng thi đấu tiếp theo diễn ra.
+      \- Khi kết thúc vòng bảng (còn 16 đội) và vòng 1/8 (còn 8 đội), nếu đội bạn dự đoán bị loại thì bạn có quyền (ko bắt buộc) dự đoán đội khác trước khi vòng thi đấu tiếp theo diễn ra.
     %p
       \- Người tham gia không được quyền thay đổi đội mình đã đăng ký.
       %strong Vì vậy, hãy cân nhắc và lựa chọn thật kỹ trước khi bấm nút Gửi
@@ -31,7 +31,7 @@
           - else
             = render partial: 'user_predict_champion_detail'
 
-  - if finish_euro?
+  - if finish_tournament?
     / Result
     .box-header
       %h2.section--title.bigTitle
@@ -59,7 +59,8 @@
                         = link_to user.display_name, statistics_user_path(user), class: current_user != user ? 'not-current-user' : ''
                       - if index == 0
                         %td.middle.text-center.uppercase{rowspan: @winner_list.size}
-                          %span.team-flag{class: "flag-#{Team.champion.try(:code)}"}
+                          %span.team-flag
+                            %img.wc-flag{alt: Team.champion.try(:code), src: "/flags/#{Team.champion.try(:key) || 'placeholder'}.png", title: Team.champion.try(:code)}/
                           %span= Team.champion.try(:title_vi)
                         %td.middle.text-center.money-win{rowspan: @winner_list.size}
                           = format_currency(@money_for_each_user||0)

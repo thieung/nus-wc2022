@@ -8,7 +8,8 @@
     - predicted_team = user.champion_team_predicted
     - if predicted_team
       %p
-        %span.team-flag{class: "flag-#{predicted_team.try(:code)}"}
+        %span.team-flag
+          %img.wc-flag{alt: predicted_team.try(:code), src: "/flags/#{predicted_team.try(:key) || 'placeholder'}.png", title: predicted_team.try(:code)}/
       %p
         %span= predicted_team.try(:title_vi)
     - else

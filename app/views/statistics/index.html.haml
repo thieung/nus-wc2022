@@ -22,7 +22,7 @@
                 đã cược
               %th.middle.text-center Tổng điểm đầu tư
               %th.middle.text-center Tổng điểm thắng
-              - if finish_euro?
+              - if finish_tournament?
                 %th.middle.text-center
                   Điểm dự đoán
                   %br/
@@ -43,7 +43,7 @@
                 %td.text-center= record[:total_scores]
                 %td.text-center= format_currency(record[:total_money_bet], false)
                 %td.text-center= format_currency(record[:total_money_win], false)
-                - if finish_euro?
+                - if finish_tournament?
                   %td.text-center= format_currency(record[:total_money_predict_champion], false)
                   %td.text-center= format_currency(record[:money_predict_champion_win], false)
                 %td.text-center= format_currency(record[:total_money_profits], false)

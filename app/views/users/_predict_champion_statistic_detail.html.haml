@@ -17,7 +17,8 @@
             %tr{class: css_class}
               %td.text-center.uppercase
                 %p
-                  %span.team-flag{class: "flag-#{team.try(:code)}"}
+                  %span.team-flag
+                    %img.wc-flag{alt: team.try(:code), src: "/flags/#{team.try(:key) || 'placeholder'}.png", title: team.try(:code)}/
                 %p
                   %span= team.try(:title_vi)
               %td.text-center.number-larger
@@ -55,7 +56,8 @@
                 - if team
                   %td.text-center.uppercase{class: team.try(:eliminated) ? 'eliminated' : ''}
                     %p
-                      %span.team-flag{class: "flag-#{team.try(:code)}"}
+                      %span.team-flag
+                        %img.wc-flag{alt: team.try(:code), src: "/flags/#{team.try(:key) || 'placeholder'}.png", title: team.try(:code)}/
                     %p
                       %span= team.try(:title_vi)
                 - else

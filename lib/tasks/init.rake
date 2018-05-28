@@ -1,7 +1,7 @@
 require 'csv'
 namespace :db do
   task :generate_staffs, [:role] => :environment do
-    csv_staffs_raw = File.read("#{Rails.root}/db/data/staffs.csv")
+    csv_staffs_raw = File.read("#{Rails.root}/db/data/wc2018/staffs.csv")
     # Header: full_name,email
     csv_staffs = CSV.parse(csv_staffs_raw, headers: true)
     csv_staffs.each do |row|

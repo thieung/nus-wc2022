@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title NUS Technology - Sôi động cùng Euro 2016
+    %title= t('header_title')
     = favicon_link_tag 'favicon.png'
     = favicon_link_tag 'favicon.png', rel: 'apple-touch-icon', type: 'image/png'
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
@@ -22,12 +22,12 @@
                   = render partial: 'shared/user_info_header'
               / Logo
               .competition-logo
-                %a.logolink{href: root_path, title: "UEFA EURO 2016"} UEFA EURO 2016
+                %a.logolink{href: root_path, title: t('wc_title_2018')}= t('wc_title_2018')
               / Navigation
               .navbar-lv2-wrap.js-nav-wrap.affix
                 .container-fluid
                   .competition-logo-affix
-                    %a.logolink{href: root_path, title: "UEFA EURO 2016"} UEFA EURO 2016
+                    %a.logolink{href: root_path, title: t('wc_title_2018')}= t('wc_title_2018')
                   %a.navbar-lv2-toggle.hidden-md.hidden-lg.js-toggle{href: "#"}
                     %span.toggle-text Menu
                     %span.toggle-hamburger
@@ -50,17 +50,19 @@
                       %a.navbar-lv2-item-link{href: matches_path({type: 'quarter_final'})} Tứ kết
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'semi_final' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: matches_path({type: 'semi_final'})} Bán kết
+                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'third_fourth' ? 'active' : ''}"}
+                      %a.navbar-lv2-item-link{href: matches_path({type: 'third_fourth'})} Tranh 3/4
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'final' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: matches_path({type: 'final'})} Chung kết
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'users' && action_name == 'predict_champion' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: predict_champion_path} Dự đoán đội vô địch
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'statistics' && action_name == 'records' ? 'active' : ''}"}
-                      %a.navbar-lv2-item-link{href: records_statistics_path} Top thống kê
+                      %a.navbar-lv2-item-link{href: records_statistics_path} Thống kê
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'statistics' && action_name == 'index' ? 'active' : ''}"}
-                      %a.navbar-lv2-item-link{href: statistics_path} Bảng xếp hạng
+                      %a.navbar-lv2-item-link{href: statistics_path} BXH
                     - if current_user
                       %li.navbar-lv2-item.last-link{role: "presentation", class: "#{controller_name == 'registrations' && action_name == 'edit' ? 'active' : ''}"}
-                        %a.navbar-lv2-item-link{href: profile_path} Thông tin cá nhân
+                        %a.navbar-lv2-item-link{href: profile_path} Profile
                     - else
                       %li.navbar-lv2-item.last-link{role: "presentation", class: "#{controller_name == 'sessions' && action_name == 'new' ? 'active' : ''}"}
                         %a.navbar-lv2-item-link{href: login_path} Đăng nhập
@@ -89,4 +91,6 @@
                   %p{style: 'font-size: 13px;'}
                     Website sử dụng giao diện của
                     %a.uefa-link{:href => "http://www.uefa.com/uefaeuro/", :target => "_blank"} UEFA.com
+                    và
+                    %a.uefa-link{:href => "https://www.fifa.com/worldcup/", :target => "_blank"} FIFA.com
           .watermark-footer
