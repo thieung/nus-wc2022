@@ -280,8 +280,8 @@ end
 # Generate scores
 (0..15).each do |i|
   for j in 0..i do
-    Score.find_or_create_by(name: "#{i}-#{j}")
-    Score.find_or_create_by(name: "#{j}-#{i}")
+    Score.find_or_create_by(name: "#{i}-#{j}", score1: i, score2: j)
+    Score.find_or_create_by(name: "#{j}-#{i}", score1: j, score2: i)
   end
 end
 
