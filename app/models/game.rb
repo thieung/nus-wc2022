@@ -91,6 +91,7 @@ class Game < ActiveRecord::Base
   end
 
   def can_show_match_stats?
+    return true if Settings.is_demo
     DateTime.now >= deadline
   end
 

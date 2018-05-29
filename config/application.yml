@@ -27,6 +27,7 @@ defaults: &defaults
     first: 100000
     second: 150000
     third: 200000
+  is_demo: true
 
 development:
   <<: *defaults

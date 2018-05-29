@@ -168,7 +168,7 @@ class User < ActiveRecord::Base
 
   def total_profit_received
     if Game.not_locked.size == 0
-      # Finish euro
+      # Finish tournament
       (total_money_win + money_predict_champion_win) - (total_money_bet + total_money_predict_champion)
     else
       total_money_win - total_money_bet
