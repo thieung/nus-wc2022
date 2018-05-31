@@ -6,7 +6,7 @@ class UserMailer < ApplicationMailer
     @user = user
     @password = password
     @url = login_url
-    mail(to: @user.email, subject: "[NUS Event - Euro 2016] Thông tin tài khoản")
+    mail(to: @user.email, subject: "[NUS Event - World Cup 2018] Thông tin tài khoản")
   end
 
   def notice_bet_result_to_staffs recipient, bet_info
@@ -14,7 +14,7 @@ class UserMailer < ApplicationMailer
     @score_content = Score.where(id: bet_info.score_ids.map(&:to_i)).map(&:name).join(', ')
     @game = bet_info.game
     @match_content = "#{@game.team1.title_vi} - #{@game.team2.title_vi}"
-    mail(from: "#{@user.full_name.to_ascii} <no-reply@example.com>", to: recipient, subject: "[NUS Event - Euro 2016] Dự đoán tỉ số trận #{@match_content}")
+    mail(from: "#{@user.full_name.to_ascii} <no-reply@example.com>", to: recipient, subject: "[NUS Event - World Cup 2018] Dự đoán tỉ số trận #{@match_content}")
   end
 
   def notice_bet_result_updated_to_staffs recipient, bet_info
@@ -22,27 +22,27 @@ class UserMailer < ApplicationMailer
     @score_content = Score.where(id: bet_info.score_ids.map(&:to_i)).map(&:name).join(', ')
     @game = bet_info.game
     @match_content = "#{@game.team1.title_vi} - #{@game.team2.title_vi}"
-    mail(from: "#{@user.full_name.to_ascii} <no-reply@example.com>", to: recipient, subject: "[NUS Event - Euro 2016] [Update] Dự đoán tỉ số trận #{@match_content}")
+    mail(from: "#{@user.full_name.to_ascii} <no-reply@example.com>", to: recipient, subject: "[NUS Event - World Cup 2018] [Update] Dự đoán tỉ số trận #{@match_content}")
   end
 
   def notice_match_result_to_staffs recipient, game
     @game = game
     @match_content = "#{@game.team1.title_vi} - #{@game.team2.title_vi}"
     @winners = game.list_winners
-    mail(to: recipient, subject: "[NUS Event - Euro 2016] Kết quả trận #{@match_content}")
+    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Kết quả trận #{@match_content}")
   end
 
   def notice_predict_champion_result_to_staffs recipient, predict_champion
     @user = predict_champion.user
     @team = predict_champion.team
     @fee = predict_champion.money
-    mail(from: "#{@user.full_name.to_ascii} <no-reply@example.com>", to: recipient, subject: "[NUS Event - Euro 2016] Dự đoán đội vô địch lần #{@user.total_teams_to_predict_champion}")
+    mail(from: "#{@user.full_name.to_ascii} <no-reply@example.com>", to: recipient, subject: "[NUS Event - World Cup 2018] Dự đoán đội vô địch lần #{@user.total_teams_to_predict_champion}")
   end
 
   def notice_all_bets_info_to_staffs recipient, game
     @game = game
     @match_content = "#{@game.team1.title_vi} - #{@game.team2.title_vi}"
-    mail(to: recipient, subject: "[NUS Event - Euro 2016] Danh sách nhà đầu tư dự đoán tỉ số trận #{@match_content}")
+    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Danh sách nhà đầu tư dự đoán tỉ số trận #{@match_content}")
   end
 
   def notice_champion_winner_result_to_staffs recipient
@@ -52,7 +52,7 @@ class UserMailer < ApplicationMailer
       @winner_list = User.where(id: winner_ids)
       @money_for_each_user = (money_for_champion.to_f/winner_ids.size).round
     end
-    mail(to: recipient, subject: "[NUS Event - Euro 2016] Kết quả dự đoán đội vô địch Euro 2016")
+    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Kết quả dự đoán đội vô địch Euro 2016")
   end
 
   def send_test

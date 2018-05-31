@@ -42,9 +42,12 @@ test:
 
 production:
   <<: *defaults
-  staffs_group_mail: 'staff@nustechnology.com'
-  group_mails: ['staff@nustechnology.com', 'internship.dev@nustechnology.com', 'internship.ba_qc@nustechnology.com']
-  group_mails_with_hr: ['hr@nustechnology.com', 'staff@nustechnology.com', 'internship.dev@nustechnology.com', 'internship.ba_qc@nustechnology.com']
+  staffs_group_mail: 'thuyenttn@nustechnology.com'
+  group_mails: ['thuyenttn@nustechnology.com']
+  group_mails_with_hr: ['thuyenttn@nustechnology.com']
+  # staffs_group_mail: 'staff@nustechnology.com'
+  # group_mails: ['staff@nustechnology.com', 'internship.dev@nustechnology.com', 'internship.ba_qc@nustechnology.com']
+  # group_mails_with_hr: ['hr@nustechnology.com', 'staff@nustechnology.com', 'internship.dev@nustechnology.com', 'internship.ba_qc@nustechnology.com']
   is_turn_off_mail: false
   sendgrid:
     username: thieunv182
