@@ -7,7 +7,7 @@ namespace :db do
     csv_staffs.each do |row|
       staff = User.find_by_email(row['email'])
       unless staff
-        generated_password = Devise.friendly_token.first(8)
+        generated_password = Settings.is_demo ? '12345678' : Devise.friendly_token.first(8)
         staff = User.new(
           full_name: row['full_name'],
           username: row['email'].split('@').first.downcase,
