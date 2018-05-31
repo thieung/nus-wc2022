@@ -3,7 +3,7 @@
 %td.text-center= user.username
 %td.text-center
   - if available
-    = select_tag "tmp_team_id__#{user.id}", options_for_select(Team.join_euro.not_eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control admin-predict-team', prompt: "----- Chọn đội -----"
+    = select_tag "tmp_team_id__#{user.id}", options_for_select(Team.join_tournament.not_eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control admin-predict-team', prompt: "----- Chọn đội -----"
   - else
     - predicted_team = user.champion_team_predicted
     - if predicted_team

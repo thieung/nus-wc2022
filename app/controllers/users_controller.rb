@@ -110,7 +110,7 @@ class UsersController < ApplicationController
 
   def load_predict_stats
     @users_indexed = User.staffs.index_by(&:id)
-    @teams_indexed = Team.join_euro.index_by(&:id)
+    @teams_indexed = Team.join_tournament.index_by(&:id)
     @predict_stats = if DateTime.current <= DateTime.parse(Settings.predict_champion_deadline.first)
       {
         collection: PredictChampion.has_team,

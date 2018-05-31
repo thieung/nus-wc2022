@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       post :update_score
       post :future_match_update_info
       post :random_score
+      post :send_report_email_to_all_staffs
     end
   end
   resources :statistics, only: :index do

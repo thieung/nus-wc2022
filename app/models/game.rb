@@ -90,6 +90,10 @@ class Game < ActiveRecord::Base
     score1 == score2
   end
 
+  def is_third_fourth?
+    pos == 63
+  end
+
   def can_show_match_stats?
     return true if Settings.is_demo
     DateTime.now >= deadline

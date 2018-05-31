@@ -52,7 +52,7 @@ class UserMailer < ApplicationMailer
       @winner_list = User.where(id: winner_ids)
       @money_for_each_user = (money_for_champion.to_f/winner_ids.size).round
     end
-    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Kết quả dự đoán đội vô địch Euro 2016")
+    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Kết quả dự đoán đội vô địch World Cup 2018")
   end
 
   def send_test

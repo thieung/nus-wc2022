@@ -23,9 +23,11 @@
                   %td.text-center= index+1
                   %td= record[:user].display_name
                   %td.text-center.tipso{"data-tipso"=>"#{match_info}"}
-                    %span.team-flag{class: "flag-#{record[:team1].code}"}
+                    %span.team-flag
+                      %img.wc-flag{alt: record[:team1].try(:code), src: "/flags/#{record[:team1].try(:key) || 'placeholder'}.png", title: record[:team1].try(:code)}/
                     \-
-                    %span.team-flag{class: "flag-#{record[:team2].code}"}
+                    %span.team-flag
+                      %img.wc-flag{alt: record[:team2].try(:code), src: "/flags/#{record[:team2].try(:key) || 'placeholder'}.png", title: record[:team2].try(:code)}/
                   %td.text-center= format_currency record[:total_money_win], false
   / Top 5 Earn Money
   .box-header

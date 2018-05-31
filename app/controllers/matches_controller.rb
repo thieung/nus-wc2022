@@ -1,7 +1,7 @@
 class MatchesController < ApplicationController
-  before_action :load_match, only: [:show, :check_valid_match, :predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :future_match_update_info, :random_score]
-  before_action :check_valid_match, only: [:show, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :random_score]
-  before_action :authenticate_user!, only: [:predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :future_match_update_info, :random_score]
+  before_action :load_match, only: [:show, :check_valid_match, :predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :future_match_update_info, :random_score, :send_report_email_to_all_staffs]
+  before_action :check_valid_match, only: [:show, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :random_score, :send_report_email_to_all_staffs]
+  before_action :authenticate_user!, only: [:predict_score, :predict_score_edit_view, :update_betting_scores, :update_match_score, :import_user_betting_scores, :import_number_users, :update_score, :future_match_update_info, :random_score, :send_report_email_to_all_staffs]
 
   def index
     today   = DateTime.current
@@ -68,6 +68,13 @@ class MatchesController < ApplicationController
 
   def update_match_score
     authorize! :manage, current_user
+  end
+
+  def send_report_email_to_all_staffs
+    authorize! :manage, current_user
+    Mailer.process_notice_all_bets_info_to_staffs(@game) unless Settings.is_turn_off_mail
+    @game.update_attributes(is_reported: true)
+    redirect_to match_path(@game)
   end
 
   def import_user_betting_scores
