@@ -1,5 +1,5 @@
 .m-t
   - if game.pos != 1
     = link_to '< Trận trước', match_path(game.previous.id), class: 'btn btn-secondary pull-left'
-  - if game.pos != 51
+  - unless game.final_match?
     = link_to 'Trận tiếp theo >', match_path(game.next.id), class: 'btn btn-secondary pull-right'
