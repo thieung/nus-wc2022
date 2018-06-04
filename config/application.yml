@@ -20,14 +20,14 @@ defaults: &defaults
     start: 2018/07/14
     end: 2018/07/15
   predict_champion_deadline:
-    first: "2018/06/14 22:00:00 +7"
-    second: "2018/06/30 21:00:00 +7"
-    third: "2018/07/06 21:00:00 +7"
+    first: "2018/06/14 21:30:00 +7"
+    second: "2018/06/30 20:30:00 +7"
+    third: "2018/07/06 20:30:00 +7"
   predict_champion_money:
     first: 100000
     second: 150000
     third: 200000
-  is_demo: true
+  is_demo: false
 
 development:
   <<: *defaults
@@ -42,12 +42,9 @@ test:
 
 production:
   <<: *defaults
-  staffs_group_mail: 'thuyenttn@nustechnology.com'
-  group_mails: ['thuyenttn@nustechnology.com', 'thieunguyen.it@gmail.com']
-  group_mails_with_hr: ['thuyenttn@nustechnology.com', 'thieu@wonolo.com']
-  # staffs_group_mail: 'staff@nustechnology.com'
-  # group_mails: ['staff@nustechnology.com', 'internship.dev@nustechnology.com', 'internship.ba_qc@nustechnology.com']
-  # group_mails_with_hr: ['hr@nustechnology.com', 'staff@nustechnology.com', 'internship.dev@nustechnology.com', 'internship.ba_qc@nustechnology.com']
+  staffs_group_mail: 'staff@nustechnology.com'
+  group_mails: ['staff@nustechnology.com', 'internship.dev@nustechnology.com', 'internship.ba_qc@nustechnology.com']
+  group_mails_with_hr: ['hr@nustechnology.com', 'staff@nustechnology.com', 'internship.dev@nustechnology.com', 'internship.ba_qc@nustechnology.com']
   is_turn_off_mail: false
   sendgrid:
     username: thieunv182

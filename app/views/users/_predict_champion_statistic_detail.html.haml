@@ -27,71 +27,47 @@
 
     %h5 Thông tin chi tiết
     .underline.hidden-sm.hidden-xs
-    - if @predict_stats[:collection].size == 0
-      %p.text-desc
-        Chưa có ai tham gia dự đoán đội vô địch
-    - else
-      - collection = DateTime.current <= DateTime.parse(Settings.predict_champion_deadline.first) ? PredictChampion.has_team : PredictChampion.all
-      - max_predict_champion_count = collection.group_by(&:user_id).collect{|k, v| v.size}.max
-      %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
-        %tr
-          %th.text-center.middle{rowspan: 2, width: '35%'}
-            %strong Nhà đầu tư
-          %th.text-center{colspan: max_predict_champion_count}
-            %strong Dự đoán đội vô địch
-        %tr
-          - for i in 1..max_predict_champion_count do
-            %td.text-center
-              = "Lần #{i}"
-        - collection.sort_by(&:created_at).group_by(&:user_id).each do |user_id, records|
-          - user = @users_indexed[user_id.to_i]
-          - records_sorted = records.sort{|a,b| a[:created_at] <=> b[:created_at]}
-          %tr{class: user == current_user ? 'current-user' : ''}
+    - collection = PredictChampion.all
+    - max_predict_champion_count = collection.group_by(&:user_id).collect{|k, v| v.size}.max
+    %table.table-responsive.table.table-bordered.list-better-tbl.m-t.m-b
+      %tr
+        %th.text-center.middle{rowspan: 2, width: '35%'}
+          %strong Nhà đầu tư
+        %th.text-center{colspan: @number_of_rows}
+          %strong Dự đoán đội vô địch
+      %tr
+        - for i in 1..@number_of_rows do
+          %td.text-center
+            = get_predict_label(i)
+        - @staffs.each do |staff|
+          %tr{class: staff == current_user ? 'current-user' : ''}
             %td
-              = link_to user.display_name, statistics_user_path(user), class: current_user != user ? 'not-current-user' : ''
-            - records.sort{|a,b| a[:created_at] <=> b[:created_at]}
-            - for i in 1..max_predict_champion_count do
-              - if records_sorted[i-1]
-                - team = @teams_indexed[records_sorted[i-1].try(:team_id)]
-                - if team
-                  %td.text-center.uppercase{class: team.try(:eliminated) ? 'eliminated' : ''}
-                    %p
-                      %span.team-flag
-                        %img.wc-flag{alt: team.try(:code), src: "/flags/#{team.try(:key) || 'placeholder'}.png", title: team.try(:code)}/
-                    %p
-                      %span= team.try(:title_vi)
-                - else
-                  %td.text-center.uppercase.no-team
-                    %span.text-desc
-                      - case i
-                      - when 1
-                        KHÔNG DỰ ĐOÁN
-                      - when 2
-                        = !finish_group_stage? ? 'NOT AVAILABLE' : 'KHÔNG DỰ ĐOÁN'
-                      - when 3
-                        = !finish_round_of_16? ? 'NOT AVAILABLE' : 'KHÔNG DỰ ĐOÁN'
+              = link_to staff.display_name, statistics_user_path(staff), class: current_user != staff ? 'not-current-user' : ''
+            - for i in 1..@number_of_rows do
+              - predicted_team = staff.get_predict_team(i)
+              - if predicted_team
+                %td.text-center.uppercase{class: predicted_team.try(:eliminated) ? 'eliminated' : ''}
+                  %p
+                    %span.team-flag
+                      %img.wc-flag{alt: predicted_team.try(:code), src: "/flags/#{predicted_team.try(:key) || 'placeholder'}.png", title: predicted_team.try(:code)}/
+                  %p
+                    %span= predicted_team.try(:title_vi)
               - else
                 %td.text-center.uppercase.no-team
                   %span.text-desc
-                    - case i
-                    - when 1
-                      KHÔNG DỰ ĐOÁN
-                    - when 2
-                      = !finish_group_stage? ? 'NOT AVAILABLE' : 'KHÔNG DỰ ĐOÁN'
-                    - when 3
-                      = !finish_round_of_16? ? 'NOT AVAILABLE' : 'KHÔNG DỰ ĐOÁN'
+                    = get_predict_status_text(i)
 
   .col-xs-12.col-md-3
     %h5 Tổng điểm thưởng
     .underline.hidden-sm.hidden-xs
-    .total-money-bet= format_currency(Settings.nus_money_for_champion.to_i + @predict_stats[:total_money])
+    .total-money-bet= format_currency(Settings.nus_money_for_champion.to_i + PredictChampion.sum(:money))
     %table.table.table-responsive.money-detail-table
       %tbody
         %tr
           %td
             Tổng điểm tham gia:
           %td.play-font
-            = format_currency(@predict_stats[:total_money])
+            = format_currency(PredictChampion.sum(:money))
         %tr
           %td
             Công ty NUS:

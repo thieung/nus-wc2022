@@ -122,5 +122,15 @@ class UsersController < ApplicationController
         total_money: PredictChampion.sum(:money)
       }
     end
+
+    @number_of_rows = if finish_group_stage?
+                        2
+                      elsif finish_round_of_16?
+                        3
+                      else
+                        1
+                      end
+
+    @staffs = User.staffs.includes(predict_champions: :team).order(:username)
   end
 end

@@ -8,6 +8,10 @@ vi:
     quarter_final: Tứ kết
     semi_final: Bán kết
     final: Chung kết
+  predict_champion:
+    before_group_stage: Trước vòng bảng
+    before_round_of_16: Trước vòng 16 đội
+    before_quarter_final: Trước tứ kết
   activerecord:
     errors:
       messages:

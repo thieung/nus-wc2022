@@ -9,4 +9,14 @@ module ApplicationHelper
   def format_percentage number
     number_to_percentage(number*100, precision: 2)
   end
+
+  def get_predict_label_by_time
+    if finish_group_stage?
+      t('predict_champion.before_round_of_16')
+    elsif finish_round_of_16?
+      t('predict_champion.before_quarter_final')
+    else
+      t('predict_champion.before_group_stage')
+    end
+  end
 end

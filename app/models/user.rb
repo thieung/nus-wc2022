@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
   end
 
   def last_predict_champion_team
-    predict_champions.has_team.order_by_created_date.first
+    predict_champions.has_team.order_by_created_date_desc.first
   end
 
   def champion_team_predicted
@@ -201,6 +201,24 @@ class User < ActiveRecord::Base
 
   def biggest_money_win_info
     bets.has_score.order_by_money_win.first
+  end
+
+  def get_predict_team index
+    collection = self.predict_champions
+    predict_info = case index
+                    when 1
+                      # Before group stage
+                      collection.where("created_at <= ?", DateTime.parse(Settings.predict_champion_deadline.first)).first
+                    when 2
+                      # Before round of 16
+                      collection.where("created_at >= ? AND created_at <= ?", DateTime.parse(Settings.predict_champion_deadline.first), DateTime.parse(Settings.predict_champion_deadline.second)).first
+                    else
+                      # Before quarter final
+                      collection.where("created_at >= ? AND created_at <= ?", DateTime.parse(Settings.predict_champion_deadline.second), DateTime.parse(Settings.predict_champion_deadline.third)).first
+                    end
+    return nil if predict_info.blank?
+    return nil if predict_info.team.blank?
+    predict_info.team
   end
 
   def self.list_order_by_numer_scores_betted

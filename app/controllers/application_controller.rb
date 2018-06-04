@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
   helper_method :finish_group_stage?, :finish_round_of_16?, :finish_tournament?
 
   def can_predict_before_group_stage?
-    return false unless current_user
+    return false if !current_user || Game.started?
     DateTime.current <= DateTime.parse(Settings.predict_champion_deadline.first)
   end
 

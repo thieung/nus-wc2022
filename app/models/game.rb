@@ -99,6 +99,10 @@ class Game < ActiveRecord::Base
     DateTime.now >= deadline
   end
 
+  def self.started?
+    self.locked.size > 0
+  end
+
   private
 
   def update_money_for_winners

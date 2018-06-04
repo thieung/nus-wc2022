@@ -250,6 +250,10 @@ body{
   font-weight: bold;
   color: #1D7CF2;
 }
+tr.current-user {
+  border: 2px dashed blue !important;
+}
+
 .text-desc{
   color: #767676;
 }
