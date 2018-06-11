@@ -9,6 +9,8 @@
             %strong Tên đội
           %th.text-center
             %strong Tổng người dự đoán
+          %th.text-center
+            %strong Points dự kiến nhận được
         %tbody
           - PredictChampion.has_team.group_by(&:team_id).sort_by{|k,v| -v.size}.each do |team_id, records|
             - team = @teams_indexed[team_id]
@@ -23,7 +25,8 @@
                   %span= team.try(:title_vi)
               %td.text-center.number-larger
                 = records.size
-
+              %td.text-center.number-larger
+                = format_currency((Settings.nus_money_for_champion.to_i + PredictChampion.sum(:money)) / records.size)
 
     %h5 Thông tin chi tiết
     .underline.hidden-sm.hidden-xs

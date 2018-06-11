@@ -117,6 +117,7 @@ class User < ActiveRecord::Base
   end
 
   def available_to_predict_champion?
+    return false if not_join_to_predict_champion?
     current = DateTime.current
     return true if total_teams_to_predict_champion == 0 && current <= DateTime.parse(Settings.predict_champion_deadline.first)
     return false if champion_team_predicted.blank? || !champion_team_predicted.eliminated
@@ -126,7 +127,12 @@ class User < ActiveRecord::Base
   end
 
   def not_enough_condition_to_predict_champion?
+    return true if not_join_to_predict_champion?
     total_teams_to_predict_champion == 0 && DateTime.current > DateTime.parse(Settings.predict_champion_deadline.first)
+  end
+
+  def not_join_to_predict_champion?
+    predict_champions.blank?
   end
 
   ###### Money statistic
