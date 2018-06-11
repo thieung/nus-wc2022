@@ -19,7 +19,7 @@ namespace :db do
           UserMailer.delay.send_password_to_staff(staff, generated_password) unless Settings.is_turn_off_mail
 
           # Generate predict champion data for each staff
-          predict = staff.predict_champions.new(money: 100000)
+          predict = staff.predict_champions.new(money: Settings.predict_champion_money.first)
           predict.save
         end
       end

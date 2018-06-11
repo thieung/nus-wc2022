@@ -22,6 +22,7 @@
  *= require common
  *= require teams
  *= require matches
+ *= require users
  *= require_self
  */
 

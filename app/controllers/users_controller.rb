@@ -1,6 +1,35 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:pick_champion, :change_status, :import_predict_champion]
+  before_action :authenticate_user!, only: [:pick_champion, :change_status, :import_predict_champion, :new, :create]
   before_action :load_user, only: [:statistics, :change_status, :import_predict_champion]
+
+  def new
+    authorize! :manage, current_user
+    @user = User.new
+  end
+
+  def create
+    authorize! :manage, current_user
+    @user = User.new(user_params)
+    @user.username = user_params[:email].split('@').try(:first).try(:downcase) if user_params[:email]
+
+    generated_password = Devise.friendly_token.first(8)
+    @user.password = generated_password
+
+    if @user.save
+      @user.add_role :staff
+      UserMailer.delay.send_password_to_staff(@user, generated_password) unless Settings.is_turn_off_mail
+
+      if params[:can_join_to_predict_champion]
+        # Generate predict champion data for new staff
+        predict = @user.predict_champions.new(money: Settings.predict_champion_money.first)
+        predict.save
+      end
+
+      redirect_to management_path and return
+    else
+      render :new
+    end
+  end
 
   def change_status
     authorize! :manage, current_user
@@ -103,6 +132,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def user_params
+    params.require(:user).permit(:email, :full_name)
+  end
 
   def load_user
     @user = User.find_by(id: params[:id])

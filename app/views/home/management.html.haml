@@ -22,6 +22,7 @@
   %header.box-header
     %h2.section--title.bigTitle
       Quản lý thành viên
+    = link_to 'Tạo thành viên mới', new_user_path, class: 'btn btn-secondary ladda-button creare-user-btn'
   .box-content.clearfix
     #users_management_section
       .table-responsive.users-management-table
@@ -34,3 +35,4 @@
               %th.text-center.bold-text Thao tác
           %tbody
             = render partial: 'users_management_detail'
+    = link_to 'Tạo thành viên mới', new_user_path, class: 'btn btn-secondary ladda-button creare-user-btn'

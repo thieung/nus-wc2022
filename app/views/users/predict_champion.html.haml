@@ -6,9 +6,12 @@
     %h2.section--title.bigTitle
       Chú ý
   .box-content.m-b-xlarge.clearfix
-    %p - Kể từ sau vòng Tứ kết trở đi không được dự đoán đội vô địch nữa nếu đội bạn dự đoán bị loại.
+    %p.red
+      \- Bạn bắt buộc phải dự đoán đội vô địch trước khi vòng đấu bảng diễn ra với mức phí là
+      = format_currency(Settings.predict_champion_money.first)
+    %p - Kể từ sau vòng Tứ kết trở đi không được dự đoán đội vô địch nữa nếu đội bạn dự đoán bị loại
     %p
-      \- Khi kết thúc vòng bảng (còn 16 đội) và vòng 1/8 (còn 8 đội), nếu đội bạn dự đoán bị loại thì bạn có quyền (ko bắt buộc) dự đoán đội khác trước khi vòng thi đấu tiếp theo diễn ra.
+      \- Khi kết thúc vòng bảng (còn 16 đội) và vòng 1/8 (còn 8 đội), nếu đội bạn dự đoán bị loại thì bạn có quyền (ko bắt buộc) dự đoán đội khác trước khi vòng thi đấu tiếp theo diễn ra
     %p
       \- Người tham gia không được quyền thay đổi đội mình đã đăng ký.
       %strong Vì vậy, hãy cân nhắc và lựa chọn thật kỹ trước khi bấm nút Gửi
