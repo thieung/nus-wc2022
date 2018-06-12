@@ -83,7 +83,7 @@ class Game < ActiveRecord::Base
   end
 
   def is_knockout?
-    pos >= 37
+    pos >= 49
   end
 
   def is_draw?
