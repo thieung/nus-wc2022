@@ -5,7 +5,7 @@ class StatisticsController < ApplicationController
       tmp = {
         user: user,
         total_matches: user.bets.has_score.pluck(:game_id).uniq.size,
-        total_scores: user.bets.has_score.map{|b| b.score_ids.size}.sum,
+        total_scores: user.total_scores_betted,
         total_money_bet: user.total_money_bet,
         total_money_win: user.total_money_win,
         total_money_predict_champion: user.total_money_predict_champion,

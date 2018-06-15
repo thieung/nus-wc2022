@@ -12,4 +12,4 @@
         = link_to format_currency(current_user.total_profit_received), statistics_user_path(current_user)
       %p
         Tổng tỉ số đã cược:
-        = link_to current_user.bets.has_score.map{|b| b.score_ids.size}.sum, statistics_user_path(current_user)
+        = link_to current_user.total_scores_betted

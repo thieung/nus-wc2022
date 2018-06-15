@@ -3,3 +3,13 @@
     Tổng điểm được chuyển vào trận chung kết:
   %br/
   %p.text-center.total-money-for-final= format_currency @total_money_for_final
+  - if current_user
+    %br
+    %p.text-center.text-desc
+      - if (remaining_scores = LIMIT_SCORES_CAN_BET_FOR_FINAL - current_user.total_scores_betted) > 0
+        (Bạn cần đặt cược thêm
+        %span.remaining-scores= remaining_scores
+        tỉ số nữa mới đủ điều kiện tham gia dự đoán tỉ số trận chung kết)
+      - else
+        (Bạn đã đủ điều kiện tham gia dự đoán tỉ số trận chung kết)
+

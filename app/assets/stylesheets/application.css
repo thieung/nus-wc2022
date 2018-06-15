@@ -39,3 +39,9 @@
 .team-name_name {
   padding-left: 20px;
 }
+
+.remaining-scores {
+  font-weight: bold;
+  color: #ff0066;
+  font-size: 160%;
+}
