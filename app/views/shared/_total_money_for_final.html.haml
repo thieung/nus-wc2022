@@ -3,7 +3,7 @@
     Tổng điểm được chuyển vào trận chung kết:
   %br/
   %p.text-center.total-money-for-final= format_currency @total_money_for_final
-  - if current_user
+  - if current_user && !current_user.is_admin?
     %br
     %p.text-center.text-desc
       - if (remaining_scores = LIMIT_SCORES_CAN_BET_FOR_FINAL - current_user.total_scores_betted) > 0
