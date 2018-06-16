@@ -79,7 +79,7 @@
                 %th.text-center
                   %strong Số tỉ số dự đoán
               %tbody
-                - game.bets.has_score.includes(:user).each do |bet|
+                - game.bets.has_score.ordered.includes(:user).each do |bet|
                   %tr{class: bet.user == current_user ? 'current-user' : ''}
                     %td
                       = link_to bet.user.display_name, statistics_user_path(bet.user), class: current_user != bet.user ? 'not-current-user' : ''
