@@ -55,6 +55,20 @@ class UserMailer < ApplicationMailer
     mail(to: recipient, subject: "[NUS Event - World Cup 2018] Kết quả dự đoán đội vô địch World Cup 2018")
   end
 
+  def staffs_top_scores_report_after_first_round_group_stage recipient
+    @statistics = []
+    User.staffs.includes(:bets).find_each do |user|
+      tmp = {
+        user: user,
+        total_scores: user.total_scores_betted,
+        total_money_profits: user.total_profit_received
+      }
+      @statistics << tmp
+    end
+    @statistics.sort!{|a,b| b[:total_money_profits] <=> a[:total_money_profits]}
+    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Tổng hợp kết quả sau lượt trận đầu tiên vòng đấu bảng")
+  end
+
   def send_test
     mail(to: 'vanthieuuit@gmail.com', subject: "Test Schedule")
   end

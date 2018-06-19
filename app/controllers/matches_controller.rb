@@ -149,6 +149,10 @@ class MatchesController < ApplicationController
           @err_msg = "Không thể cập nhật kết quả trận đấu, vui lòng kiểm tra lại."
         else
           Mailer.process_notice_match_result_to_staffs(@game) unless Settings.is_turn_off_mail
+
+          if Game.locked.size == 16
+            Mailer.process_staffs_top_scores_report_after_first_round_group_stage unless Settings.is_turn_off_mail
+          end
         end
       end
     end

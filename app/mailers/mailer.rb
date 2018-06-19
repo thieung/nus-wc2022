@@ -34,4 +34,10 @@ class Mailer
       UserMailer.notice_champion_winner_result_to_staffs(recipient).deliver_now
     end
   end
+
+  def self.process_staffs_top_scores_report_after_first_round_group_stage
+    Settings.group_mails.each do |recipient|
+      UserMailer.staffs_top_scores_report_after_first_round_group_stage(recipient).deliver_now
+    end
+  end
 end
