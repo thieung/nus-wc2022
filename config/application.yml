@@ -27,7 +27,15 @@ defaults: &defaults
     first: 100000
     second: 150000
     third: 200000
-  is_demo: false
+  top_scores_report_match_id:
+    first_round_group_stage: 16
+    second_round_group_stage: 32
+    third_round_group_stage: 48
+    round_of_16: 56
+    quarter_final: 60
+    semi_final: 62
+    final: 64
+  is_demo: true
 
 development:
   <<: *defaults

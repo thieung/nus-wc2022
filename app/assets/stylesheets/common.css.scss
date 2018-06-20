@@ -238,6 +238,9 @@ body{
 .bet-result-tbl>tbody>tr>td{
   padding: 8px 10px;
 }
+.bet-result-tbl>tbody>tr>td.current-user{
+  border: 2px dashed blue;
+}
 .eliminated{
   text-decoration: line-through;
   opacity: 0.5;

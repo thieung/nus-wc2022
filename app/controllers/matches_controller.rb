@@ -27,7 +27,7 @@ class MatchesController < ApplicationController
     @upcoming_matches = @games.not_locked.select("games.*, date(play_at) as occur_date").order("occur_date").group_by(&:occur_date)
     tmp_past_matches = @games.locked.select("games.*, date(play_at) as occur_date").order("occur_date")
     @past_matches = tmp_past_matches.group_by(&:occur_date)
-    @recent_matches = tmp_past_matches.last(MAX_RECENT_MATCHES).group_by(&:occur_date)
+    @recent_matches = tmp_past_matches.order("pos").last(MAX_RECENT_MATCHES).group_by(&:occur_date)
   end
 
   def show
@@ -150,7 +150,9 @@ class MatchesController < ApplicationController
         else
           Mailer.process_notice_match_result_to_staffs(@game) unless Settings.is_turn_off_mail
 
-          if Game.locked.size == 16
+          # Send top scores report
+          case Game.locked.size
+          when Settings.top_scores_report_match_id.first_round_group_stage.to_i
             Mailer.process_staffs_top_scores_report_after_first_round_group_stage unless Settings.is_turn_off_mail
           end
         end
