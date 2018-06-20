@@ -35,7 +35,7 @@ defaults: &defaults
     quarter_final: 60
     semi_final: 62
     final: 64
-  is_demo: true
+  is_demo: false
 
 development:
   <<: *defaults
