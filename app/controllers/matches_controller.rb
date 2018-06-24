@@ -154,6 +154,8 @@ class MatchesController < ApplicationController
           case Game.locked.size
           when Settings.top_scores_report_match_id.first_round_group_stage.to_i
             Mailer.process_staffs_top_scores_report_after_first_round_group_stage unless Settings.is_turn_off_mail
+          when Settings.top_scores_report_match_id.second_round_group_stage.to_i
+            Mailer.process_staffs_top_scores_report_after_second_round_group_stage unless Settings.is_turn_off_mail
           end
         end
       end
