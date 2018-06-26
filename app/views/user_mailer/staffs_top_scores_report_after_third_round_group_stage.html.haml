@@ -1,0 +1,47 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    :css
+      table.statistic-report td, table.statistic-report th {
+        border-collapse: collapse;
+        padding: 5px 10px;
+        vertical-align: top;
+      }
+      table.statistic-report td strong {
+        line-height: 20px;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .middle {
+        vertical-align: middle !important;
+      }
+      .top1, .bottom1 {
+        font-weight: bold;
+      }
+      .top10 {
+        color: blue;
+      }
+      .bottom10 {
+        color: red;
+      }
+  %body
+    %p Bảng xếp hạng tổng thu nhập của các nhà đầu tư sau vòng bảng World Cup 2018:
+    %table.statistic-report{border: 1, cellspacing: 0, cellpadding: 0, style: 'border: 2px dotted #ccc'}
+      %thead
+        %th.middle.text-center #
+        %th.middle.text-center Nhà đầu tư
+        %th.middle.text-center Tổng tỉ số đã cược
+        %th.middle.text-center Tổng lợi nhuận (Points)
+      %tbody
+        - @statistics.each_with_index do |record, index|
+          - css_class = ''
+          - css_class += index == 0 ? " top1 top10" : ((1..9).to_a.include?(index) ? ' top10' : (@statistics.size-1 == index ? ' bottom1 bottom10' : ((@statistics.size-10..@statistics.size-2).to_a.include?(index) ? ' bottom10' : '')))
+          %tr{class: css_class}
+            %td.text-center= index+1
+            %td= record[:user].display_name
+            %td.text-center= record[:total_scores]
+            %td.text-center= format_currency(record[:total_money_profits], false)
+    %p Đã có 1 số thay đổi ở TOP 10, có người lên có người xuống, các nhà đầu tư đang bức tốc và cạnh tranh khốc liệt, và sẽ còn khốc liệt hơn nữa khi bước vào vòng đấu knockout.
+    %p Xin chia buồn với các nhà đầu tư đang nằm ở BOTTOM 10, hãy cố gắng lên ở vòng đấu knockout sắp tới. Good luck!

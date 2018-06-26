@@ -1,4 +1,4 @@
-class Mailer
+caile Mailer
   def self.process_notice_bet_result_to_staffs bet_info
     Settings.group_mails.each do |recipient|
       UserMailer.delay.notice_bet_result_to_staffs recipient, bet_info
@@ -44,6 +44,12 @@ class Mailer
   def self.process_staffs_top_scores_report_after_second_round_group_stage
     Settings.group_mails.each do |recipient|
       UserMailer.staffs_top_scores_report_after_second_round_group_stage(recipient).deliver_now
+    end
+  end
+
+  def self.process_staffs_top_scores_report_after_third_round_group_stage
+    Settings.group_mails.each do |recipient|
+      UserMailer.staffs_top_scores_report_after_third_round_group_stage(recipient).deliver_now
     end
   end
 end
