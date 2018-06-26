@@ -1,4 +1,4 @@
-caile Mailer
+class Mailer
   def self.process_notice_bet_result_to_staffs bet_info
     Settings.group_mails.each do |recipient|
       UserMailer.delay.notice_bet_result_to_staffs recipient, bet_info
