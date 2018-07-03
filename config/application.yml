@@ -34,6 +34,7 @@ defaults: &defaults
     round_of_16: 56
     quarter_final: 60
     semi_final: 62
+    third_fourth: 63
     final: 64
   is_demo: false
 

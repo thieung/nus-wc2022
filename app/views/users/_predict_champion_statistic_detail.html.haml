@@ -57,13 +57,13 @@
                     %span= predicted_team.try(:title_vi)
               - else
                 %td.text-center.uppercase.no-team
-                  - if get_predict_status_text(i) == 'VIỆT NAM VÔ ĐỊCH'
+                  - if get_predict_status_text(i, staff) == 'VIỆT NAM VÔ ĐỊCH'
                     %p
                       %span.team-flag
                         %img{alt: 'VIE', src: "/flags/vie.png", title: 'VIE'}/
                   %p
                     %span
-                      = get_predict_status_text(i)
+                      = get_predict_status_text(i, staff)
 
   .col-xs-12.col-md-3
     %h5 Tổng điểm thưởng

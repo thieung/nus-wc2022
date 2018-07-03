@@ -347,4 +347,24 @@ class User < ActiveRecord::Base
   def self.bottom5
     User.list_order_by_total_money_profits.last(5)
   end
+
+  def self.top_scores_report
+    statistics = []
+    self.staffs.includes(:bets).find_each do |u|
+      tmp = {
+        user: u,
+        total_scores: u.total_scores_betted,
+        total_money_profits: u.total_profit_received
+      }
+      statistics << tmp
+    end
+    statistics.sort!{|a,b| b[:total_money_profits] <=> a[:total_money_profits]}
+    statistics
+  end
+
+  def predicted_team_eliminated?(limit)
+    predicted_team = predict_champions.has_team.order_asc.limit(limit).last.try :team
+    return false unless predicted_team
+    predicted_team.eliminated
+  end
 end

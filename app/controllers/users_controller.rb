@@ -156,14 +156,14 @@ class UsersController < ApplicationController
       }
     end
 
-    @number_of_rows = if finish_group_stage?
-                        2
-                      elsif finish_round_of_16?
+    @number_of_rows = if finish_round_of_16?
                         3
+                      elsif finish_group_stage?
+                        2
                       else
                         1
                       end
 
-    @staffs = User.staffs.includes(predict_champions: :team).order(:username)
+    @staffs = User.staffs.joins(:predict_champions).includes(predict_champions: :team).order(:username).uniq
   end
 end

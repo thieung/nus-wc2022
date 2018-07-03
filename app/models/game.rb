@@ -78,6 +78,10 @@ class Game < ActiveRecord::Base
     self.round_of_16.not_locked.size == 0
   end
 
+  def self.finish_quarter_final?
+    self.quarter_final.not_locked.size == 0
+  end
+
   def self.finish_tournament?
     self.not_locked.size == 0
   end

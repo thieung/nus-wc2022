@@ -56,45 +56,43 @@ class UserMailer < ApplicationMailer
   end
 
   def staffs_top_scores_report_after_first_round_group_stage recipient
-    @statistics = []
-    User.staffs.includes(:bets).find_each do |user|
-      tmp = {
-        user: user,
-        total_scores: user.total_scores_betted,
-        total_money_profits: user.total_profit_received
-      }
-      @statistics << tmp
-    end
-    @statistics.sort!{|a,b| b[:total_money_profits] <=> a[:total_money_profits]}
+    @statistics = User.top_scores_report
     mail(to: recipient, subject: "[NUS Event - World Cup 2018] Tổng hợp kết quả sau lượt trận đầu tiên vòng đấu bảng")
   end
 
   def staffs_top_scores_report_after_second_round_group_stage recipient
-    @statistics = []
-    User.staffs.includes(:bets).find_each do |user|
-      tmp = {
-        user: user,
-        total_scores: user.total_scores_betted,
-        total_money_profits: user.total_profit_received
-      }
-      @statistics << tmp
-    end
-    @statistics.sort!{|a,b| b[:total_money_profits] <=> a[:total_money_profits]}
+    @statistics = User.top_scores_report
     mail(to: recipient, subject: "[NUS Event - World Cup 2018] Tổng hợp kết quả sau lượt trận thứ hai vòng đấu bảng")
   end
 
   def staffs_top_scores_report_after_third_round_group_stage recipient
-    @statistics = []
-    User.staffs.includes(:bets).find_each do |user|
-      tmp = {
-        user: user,
-        total_scores: user.total_scores_betted,
-        total_money_profits: user.total_profit_received
-      }
-      @statistics << tmp
-    end
-    @statistics.sort!{|a,b| b[:total_money_profits] <=> a[:total_money_profits]}
-    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Tổng hợp kết quả sau vòng bảng")
+    @statistics = User.top_scores_report
+    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Bảng xếp hạng tổng thu nhập sau vòng bảng")
+  end
+
+  def staffs_top_scores_report_after_round_of_16 recipient
+    @statistics = User.top_scores_report
+    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Bảng xếp hạng tổng thu nhập sau vòng 16 đội")
+  end
+
+  def staffs_top_scores_report_after_quarter_final recipient
+    @statistics = User.top_scores_report
+    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Bảng xếp hạng tổng thu nhập sau vòng tứ kết")
+  end
+
+  def staffs_top_scores_report_after_semi_final recipient
+    @statistics = User.top_scores_report
+    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Bảng xếp hạng tổng thu nhập sau vòng bán kết")
+  end
+
+  def staffs_top_scores_report_after_third_fourth recipient
+    @statistics = User.top_scores_report
+    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Bảng xếp hạng tổng thu nhập sau trận tranh 3-4")
+  end
+
+  def staffs_top_scores_report_after_final recipient
+    @statistics = User.top_scores_report
+    mail(to: recipient, subject: "[NUS Event - World Cup 2018] Bảng xếp hạng tổng thu nhập mùa World Cup 2018")
   end
 
   def send_test

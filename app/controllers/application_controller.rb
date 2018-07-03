@@ -51,11 +51,15 @@ class ApplicationController < ActionController::Base
     Game.finish_round_of_16?
   end
 
+  def finish_quarter_final?
+    Game.finish_quarter_final?
+  end
+
   def finish_tournament?
     Game.finish_tournament?
   end
 
-  helper_method :finish_group_stage?, :finish_round_of_16?, :finish_tournament?
+  helper_method :finish_group_stage?, :finish_round_of_16?, :finish_quarter_final?, :finish_tournament?
 
   def can_predict_before_group_stage?
     return false if !current_user || Game.started?

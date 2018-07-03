@@ -158,6 +158,16 @@ class MatchesController < ApplicationController
             Mailer.process_staffs_top_scores_report_after_second_round_group_stage unless Settings.is_turn_off_mail
           when Settings.top_scores_report_match_id.third_round_group_stage.to_i
             Mailer.process_staffs_top_scores_report_after_third_round_group_stage unless Settings.is_turn_off_mail
+          when Settings.top_scores_report_match_id.round_of_16.to_i
+            Mailer.process_staffs_top_scores_report_after_round_of_16 unless Settings.is_turn_off_mail
+          when Settings.top_scores_report_match_id.quarter_final.to_i
+            Mailer.process_staffs_top_scores_report_after_quarter_final unless Settings.is_turn_off_mail
+          when Settings.top_scores_report_match_id.semi_final.to_i
+            Mailer.process_staffs_top_scores_report_after_semi_final unless Settings.is_turn_off_mail
+          when Settings.top_scores_report_match_id.third_fourth.to_i
+            Mailer.process_staffs_top_scores_report_after_third_fourth unless Settings.is_turn_off_mail
+          when Settings.top_scores_report_match_id.final.to_i
+            Mailer.process_staffs_top_scores_report_after_final unless Settings.is_turn_off_mail
           end
         end
       end
