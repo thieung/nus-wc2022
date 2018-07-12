@@ -20,6 +20,8 @@ class MatchesController < ApplicationController
         redirect_to matches_path({type: 'quarter_final'}) and return
       elsif today <= Date.parse(Settings.semi_final.end)
         redirect_to matches_path({type: 'semi_final'}) and return
+      elsif today <= Date.parse(Settings.third_fourth.end)
+        redirect_to matches_path({type: 'third_fourth'}) and return
       elsif today <= Date.parse(Settings.final.end)
         redirect_to matches_path({type: 'final'}) and return
       end
