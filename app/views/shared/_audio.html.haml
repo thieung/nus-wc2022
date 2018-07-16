@@ -1,7 +1,7 @@
 - current_time = DateTime.current
 - if current_user && !current_user.is_admin?
-  - can_listen_music = current_user.is_listen_music && (current_time.saturday? || current_time.sunday? || !(6..18).to_a.include?(current_time.hour))
-  - if can_listen_music
+  / - can_listen_music = current_user.is_listen_music && (current_time.saturday? || current_time.sunday? || !(6..18).to_a.include?(current_time.hour))
+  - if current_user.is_listen_music && can_play_music?
     .audio-section
       - song = current_user.total_profit_received < 0 ? LOSER_SONGS.sample : (current_user.total_profit_received > 0 ? WINNER_SONGS.sample : nil)
       - if song

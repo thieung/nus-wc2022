@@ -19,4 +19,10 @@ module ApplicationHelper
       t('predict_champion.before_group_stage')
     end
   end
+
+  def can_play_music?
+    days_remaining_after_final = (DateTime.current.to_date - DateTime.parse(Settings.final.end).to_date).to_i
+    # Just only play music on Statistics page in 7 days after final match
+    controller_name == 'statistics' && action_name == 'index' && days_remaining_after_final <= 7
+  end
 end
