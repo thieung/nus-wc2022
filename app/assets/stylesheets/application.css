@@ -28,16 +28,8 @@
 
  /* Custom */
 .team-flag .wc-flag {
-  width: 65px;
-  height: 40px;
-}
-
-.team-away {
-  margin-left: -20px;
-}
-
-.team-name_name {
-  padding-left: 20px;
+  height: 48px;
+  width: 48px;
 }
 
 .remaining-scores {

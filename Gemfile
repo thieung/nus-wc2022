@@ -1,25 +1,25 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '6.1.3.2'
-gem 'pg'
-gem 'sass-rails'
-gem 'uglifier'
-gem 'coffee-rails'
+gem 'rails', '4.2.5'
+gem 'pg', '~> 0.18.4'
+gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.1.0'
 
-gem 'jquery-rails'
-gem 'jbuilder'
+gem 'jquery-rails', '~> 4.1', '>= 4.1.1'
+gem 'jbuilder', '~> 2.0'
 
-gem 'devise'
-gem 'rails_12factor', group: :production
-gem 'delayed_job_active_record'
+gem 'devise', '~> 4.1', '>= 4.1.1'
+gem 'rails_12factor', '~> 0.0.3', group: :production
+gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.1'
 gem 'devise-async'
-gem 'haml-rails'
-gem 'rolify'
-gem 'cancancan'
-gem 'settingslogic'
-gem 'rails-i18n'
-gem 'stringex'
+gem 'haml-rails', '~> 0.9.0'
+gem 'rolify', '~> 5.1'
+gem 'cancancan', '~> 1.14'
+gem 'settingslogic', '~> 2.0', '>= 2.0.9'
+gem 'rails-i18n', '~> 4.0', '>= 4.0.8'
+gem 'stringex', '~> 2.6'
 gem 'mailgun-ruby'
 
 group :development, :test do
@@ -29,9 +29,10 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console'
+  gem 'quiet_assets', '~> 1.1'
+  gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'thin'
+  gem 'thin', '~> 1.6', '>= 1.6.4'
   gem 'letter_opener_web'
 end
 

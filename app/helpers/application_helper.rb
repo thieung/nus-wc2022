@@ -25,4 +25,8 @@ module ApplicationHelper
     # Just only play music on Statistics page in 7 days after final match
     controller_name == 'statistics' && action_name == 'index' && days_remaining_after_final <= 7
   end
+
+  def team_logo(team)
+    team.try(:key) ? "/flags_euro2020/#{team.try(:key)}.png" : "/flags_euro2020/teamlogo_fallback.svg"
+  end
 end
