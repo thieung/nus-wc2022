@@ -10,18 +10,18 @@ class Game < ActiveRecord::Base
   scope :not_locked, -> { where(locked: false) }
   scope :locked, -> { where(locked: true) }
   scope :ordered, -> {order(:pos)}
-  scope :all_matches, -> { where(pos: [1..64]) }
-  scope :group_stage, -> { where(pos: [1..48]) }
-  scope :round_of_16, -> { where(pos: [49..56]) }
-  scope :quarter_final, -> { where(pos: [57..60]) }
-  scope :semi_final, -> { where(pos: [61, 62]) }
-  scope :third_fourth, -> { where(pos: 63) }
-  scope :final, -> { where(pos: 64) }
+  scope :all_matches, -> { where(pos: [1..51]) }
+  scope :group_stage, -> { where(pos: [1..36]) }
+  scope :round_of_16, -> { where(pos: [37..44]) }
+  scope :quarter_final, -> { where(pos: [45..48]) }
+  scope :semi_final, -> { where(pos: [49, 50]) }
+  # scope :third_fourth, -> { where(pos: 63) }
+  scope :final, -> { where(pos: 51) }
 
   after_save :update_money_for_winners, if: lambda { |game| game.score_id_changed? && game.score_id.present? }
   after_save :update_match_information, if: lambda { |game| game.team1_id.present? && game.team2_id.present? && game.team1_id_changed? && game.team2_id_changed? }
-  after_save :update_champion_team, if: lambda { |game| game.pos == 64 && game.winner.present?}
-  after_save :update_eliminated_team, if: lambda { |game| !game.third_fourth_match? && Game.finish_group_stage? && game.winner.present? }
+  after_save :update_champion_team, if: lambda { |game| game.pos == 51 && game.winner.present?}
+  # after_save :update_eliminated_team, if: lambda { |game| !game.third_fourth_match? && Game.finish_group_stage? && game.winner.present? }
 
   def previous
     Game.find_by(pos: pos-1)
@@ -48,11 +48,12 @@ class Game < ActiveRecord::Base
   end
 
   def final_match?
-    pos == 64
+    pos == 51
   end
 
   def third_fourth_match?
-    pos == 63
+    false
+    # pos == 63
   end
 
   def first_match?
@@ -91,7 +92,7 @@ class Game < ActiveRecord::Base
   end
 
   def is_knockout?
-    pos >= 49
+    pos >= 37
   end
 
   def is_draw?
@@ -99,7 +100,8 @@ class Game < ActiveRecord::Base
   end
 
   def is_third_fourth?
-    pos == 63
+    false
+    # pos == 63
   end
 
   def can_show_match_stats?
@@ -140,15 +142,15 @@ class Game < ActiveRecord::Base
 
   def update_match_information
     collection = case pos
-    when 56
+    when 44
       Game.round_of_16
-    when 60
+    when 48
       Game.quarter_final
-    when 62
+    when 50
       Game.semi_final
-    when 63
-      Game.third_fourth
-    when 64
+    # when 63
+    #   Game.third_fourth
+    when 51
       Game.final
     end
     if collection
@@ -164,11 +166,11 @@ class Game < ActiveRecord::Base
     Mailer.process_notice_champion_winner_result_to_staffs unless Settings.is_turn_off_mail
   end
 
-  def update_eliminated_team
-    if team1_id == winner
-      Team.find_by(id: team2_id).update_attributes(eliminated: true)
-    elsif team2_id == winner
-      Team.find_by(id: team1_id).update_attributes(eliminated: true)
-    end
-  end
+  # def update_eliminated_team
+  #   if team1_id == winner
+  #     Team.find_by(id: team2_id).update_attributes(eliminated: true)
+  #   elsif team2_id == winner
+  #     Team.find_by(id: team1_id).update_attributes(eliminated: true)
+  #   end
+  # end
 end

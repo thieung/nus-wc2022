@@ -226,7 +226,7 @@ raw_data_teams = [{"key"=>"alg", "title"=>"Algeria", "code"=>"ALG"},
 raw_data_teams.each do |attribute|
   Team.create(attribute)
 end
-csv_teams_raw = File.read("#{Rails.root}/db/data/wc2018/teams.csv")
+csv_teams_raw = File.read("#{Rails.root}/db/data/euro2020/teams.csv")
 # Header: key,title_vi
 csv_teams = CSV.parse(csv_teams_raw, headers: true)
 csv_teams.each do |row|
@@ -241,9 +241,7 @@ raw_data_groups = [
   {"title"=>"Group C", "title_vi" => "Bảng C", "pos"=>3},
   {"title"=>"Group D", "title_vi" => "Bảng D", "pos"=>4},
   {"title"=>"Group E", "title_vi" => "Bảng E", "pos"=>5},
-  {"title"=>"Group F", "title_vi" => "Bảng F", "pos"=>6},
-  {"title"=>"Group G", "title_vi" => "Bảng G", "pos"=>7},
-  {"title"=>"Group H", "title_vi" => "Bảng H", "pos"=>8}
+  {"title"=>"Group F", "title_vi" => "Bảng F", "pos"=>6}
 ]
 raw_data_groups.each do |attribute|
   Group.create(attribute)
@@ -251,27 +249,23 @@ end
 
 # Generate rounds
 raw_data_rounds = [
-  {"title"=>"Matchday 1", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>1, "start_at"=>"2018-06-14", "end_at"=>"2018-06-14", "money_rate"=>10000},
-  {"title"=>"Matchday 2", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>2, "start_at"=>"2018-06-15", "end_at"=>"2018-06-15", "money_rate"=>10000},
-  {"title"=>"Matchday 3", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>3, "start_at"=>"2018-06-16", "end_at"=>"2018-06-16", "money_rate"=>10000},
-  {"title"=>"Matchday 4", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>4, "start_at"=>"2018-06-17", "end_at"=>"2018-06-17", "money_rate"=>10000},
-  {"title"=>"Matchday 5", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>5, "start_at"=>"2018-06-18", "end_at"=>"2018-06-18", "money_rate"=>10000},
-  {"title"=>"Matchday 6", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>6, "start_at"=>"2018-06-19", "end_at"=>"2018-06-19", "money_rate"=>10000},
-  {"title"=>"Matchday 7", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>7, "start_at"=>"2018-06-20", "end_at"=>"2018-06-20", "money_rate"=>10000},
-  {"title"=>"Matchday 8", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>8, "start_at"=>"2018-06-21", "end_at"=>"2018-06-21", "money_rate"=>10000},
-  {"title"=>"Matchday 9", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>9, "start_at"=>"2018-06-22", "end_at"=>"2018-06-22", "money_rate"=>10000},
-  {"title"=>"Matchday 10", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>10, "start_at"=>"2018-06-23", "end_at"=>"2018-06-23", "money_rate"=>10000},
-  {"title"=>"Matchday 11", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>11, "start_at"=>"2018-06-24", "end_at"=>"2018-06-24", "money_rate"=>10000},
-  {"title"=>"Matchday 12", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>12, "start_at"=>"2018-06-25", "end_at"=>"2018-06-25", "money_rate"=>10000},
-  {"title"=>"Matchday 13", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>13, "start_at"=>"2018-06-26", "end_at"=>"2018-06-26", "money_rate"=>10000},
-  {"title"=>"Matchday 14", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>14, "start_at"=>"2018-06-27", "end_at"=>"2018-06-27", "money_rate"=>10000},
-  {"title"=>"Matchday 15", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>15, "start_at"=>"2018-06-28", "end_at"=>"2018-06-28", "money_rate"=>10000},
-  {"title"=>"Matchday 16", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>16, "start_at"=>"2018-06-29", "end_at"=>"2018-06-29", "money_rate"=>10000},
-  {"title"=>"Round of 16", title_vi: "Vòng 16 đội", is_group_stage: false, "pos"=>17, "start_at"=>"2018-06-30", "end_at"=>"2018-07-04", "money_rate"=>20000},
-  {"title"=>"Quarter-finals", title_vi: "Tứ kết", is_group_stage: false, "pos"=>18, "start_at"=>"2018-07-06", "end_at"=>"2018-07-08", "money_rate"=>30000},
-  {"title"=>"Semi-finals", title_vi: "Bán kết", is_group_stage: false, "pos"=>19, "start_at"=>"2018-07-11", "end_at"=>"2018-07-12", "money_rate"=>40000},
-  {"title"=>"Play-off for third place", title_vi: "Tranh 3/4", is_group_stage: false, "pos"=>20, "start_at"=>"2016-07-14", "end_at"=>"2016-07-14", "money_rate"=>50000},
-  {"title"=>"Final", title_vi: "Chung kết", is_group_stage: false, "pos"=>21, "start_at"=>"2016-07-15", "end_at"=>"2016-07-15", "money_rate"=>50000}
+  {"title"=>"Matchday 1", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>1, "start_at"=>"2021-06-12", "end_at"=>"2021-06-12", "money_rate"=>10000},
+  {"title"=>"Matchday 2", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>2, "start_at"=>"2021-06-13", "end_at"=>"2021-06-13", "money_rate"=>10000},
+  {"title"=>"Matchday 3", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>3, "start_at"=>"2021-06-14", "end_at"=>"2021-06-14", "money_rate"=>10000},
+  {"title"=>"Matchday 4", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>4, "start_at"=>"2021-06-15", "end_at"=>"2021-06-15", "money_rate"=>10000},
+  {"title"=>"Matchday 5", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>5, "start_at"=>"2021-06-16", "end_at"=>"2021-06-16", "money_rate"=>10000},
+  {"title"=>"Matchday 6", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>6, "start_at"=>"2021-06-17", "end_at"=>"2021-06-17", "money_rate"=>10000},
+  {"title"=>"Matchday 7", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>7, "start_at"=>"2021-06-18", "end_at"=>"2021-06-18", "money_rate"=>10000},
+  {"title"=>"Matchday 8", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>8, "start_at"=>"2021-06-19", "end_at"=>"2021-06-19", "money_rate"=>10000},
+  {"title"=>"Matchday 9", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>9, "start_at"=>"2021-06-20", "end_at"=>"2021-06-20", "money_rate"=>10000},
+  {"title"=>"Matchday 10", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>10, "start_at"=>"2021-06-21", "end_at"=>"2021-06-21", "money_rate"=>10000},
+  {"title"=>"Matchday 11", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>11, "start_at"=>"2021-06-22", "end_at"=>"2021-06-22", "money_rate"=>10000},
+  {"title"=>"Matchday 12", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>12, "start_at"=>"2021-06-23", "end_at"=>"2021-06-23", "money_rate"=>10000},
+  {"title"=>"Matchday 13", title_vi: "Vòng bảng", is_group_stage: true, "pos"=>13, "start_at"=>"2021-06-24", "end_at"=>"2021-06-24", "money_rate"=>10000},
+  {"title"=>"Round of 16", title_vi: "Vòng 16 đội", is_group_stage: false, "pos"=>14, "start_at"=>"2021-06-26", "end_at"=>"2021-06-30", "money_rate"=>20000},
+  {"title"=>"Quarter-finals", title_vi: "Tứ kết", is_group_stage: false, "pos"=>15, "start_at"=>"2021-07-02", "end_at"=>"2021-07-04", "money_rate"=>30000},
+  {"title"=>"Semi-finals", title_vi: "Bán kết", is_group_stage: false, "pos"=>16, "start_at"=>"2021-07-07", "end_at"=>"2021-07-08", "money_rate"=>40000},
+  {"title"=>"Final", title_vi: "Chung kết", is_group_stage: false, "pos"=>17, "start_at"=>"2016-07-12", "end_at"=>"2016-07-12", "money_rate"=>50000}
 ]
 raw_data_rounds.each do |attribute|
   Round.create(attribute)
@@ -286,7 +280,7 @@ end
 end
 
 # Generate matches/games
-csv_matches_raw = File.read("#{Rails.root}/db/data/wc2018/matches.csv")
+csv_matches_raw = File.read("#{Rails.root}/db/data/euro2020/matches.csv")
 # Header: pos,play_at,team1_title_vi,team2_title_vi,round_pos,group_pos
 csv_matches = CSV.parse(csv_matches_raw, headers: true)
 csv_matches.each do |row|
@@ -321,3 +315,4 @@ unless admin
     admin.add_role :boss
   end
 end
+

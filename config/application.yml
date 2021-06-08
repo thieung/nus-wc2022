@@ -1,42 +1,42 @@
 defaults: &defaults
   nus_money_for_champion: 1000000
-  final_match_time: "2018/07/15 22:00:00 +7"
+  final_match_time: "2021/07/12 02:00:00 +7"
   group_stage:
-    start: 2018/06/13
-    end: 2018/06/29
+    start: 2021/06/12
+    end: 2021/06/24
   round_of_16:
-    start: 2018/06/29
-    end: 2018/07/04
+    start: 2021/06/26
+    end: 2021/06/30
   quarter_final:
-    start: 2018/07/05
-    end: 2018/07/08
+    start: 2021/07/02
+    end: 2021/07/04
   semi_final:
-    start: 2018/07/10
-    end: 2018/07/12
-  third_fourth:
-    start: 2018/07/13
-    end: 2018/07/14
+    start: 2021/07/07
+    end: 2021/07/08
+  # third_fourth:
+  #   start: 2021/07/13
+  #   end: 2021/07/14
   final:
-    start: 2018/07/14
-    end: 2018/07/15
+    start: 2021/07/11
+    end: 2021/07/12
   predict_champion_deadline:
-    first: "2018/06/14 21:30:00 +7"
-    second: "2018/06/30 20:30:00 +7"
-    third: "2018/07/06 20:30:00 +7"
+    first: "2021/06/12 01:30:00 +7"
+    second: "2021/06/26 22:30:00 +7"
+    third: "2021/07/02 22:30:00 +7"
   predict_champion_money:
     first: 100000
     second: 150000
     third: 200000
   top_scores_report_match_id:
-    first_round_group_stage: 16
-    second_round_group_stage: 32
-    third_round_group_stage: 48
-    round_of_16: 56
-    quarter_final: 60
-    semi_final: 62
-    third_fourth: 63
-    final: 64
-  is_demo: false
+    first_round_group_stage: 12
+    second_round_group_stage: 24
+    third_round_group_stage: 36
+    round_of_16: 44
+    quarter_final: 48
+    semi_final: 50
+    # third_fourth: 63
+    final: 51
+  is_demo: true
 
 development:
   <<: *defaults

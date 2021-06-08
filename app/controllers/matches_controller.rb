@@ -20,8 +20,8 @@ class MatchesController < ApplicationController
         redirect_to matches_path({type: 'quarter_final'}) and return
       elsif today <= Date.parse(Settings.semi_final.end)
         redirect_to matches_path({type: 'semi_final'}) and return
-      elsif today.to_date <= Date.parse(Settings.third_fourth.end)
-        redirect_to matches_path({type: 'third_fourth'}) and return
+      # elsif today.to_date <= Date.parse(Settings.third_fourth.end)
+      #   redirect_to matches_path({type: 'third_fourth'}) and return
       else
         redirect_to matches_path({type: 'final'}) and return
       end
@@ -166,8 +166,8 @@ class MatchesController < ApplicationController
             Mailer.process_staffs_top_scores_report_after_quarter_final unless Settings.is_turn_off_mail
           when Settings.top_scores_report_match_id.semi_final.to_i
             Mailer.process_staffs_top_scores_report_after_semi_final unless Settings.is_turn_off_mail
-          when Settings.top_scores_report_match_id.third_fourth.to_i
-            Mailer.process_staffs_top_scores_report_after_third_fourth unless Settings.is_turn_off_mail
+          # when Settings.top_scores_report_match_id.third_fourth.to_i
+          #   Mailer.process_staffs_top_scores_report_after_third_fourth unless Settings.is_turn_off_mail
           when Settings.top_scores_report_match_id.final.to_i
             Mailer.process_staffs_top_scores_report_after_final unless Settings.is_turn_off_mail
           end
@@ -192,7 +192,7 @@ class MatchesController < ApplicationController
     @err_msq = ''
     total_matches = params[:random_total_scores].to_i
     if total_matches < 1 || total_matches > 3
-      @err_msg = 'Có lỗi xảy ra, bạn chị có thể dự đoán tối đa 3 tỉ số hoặc tối thiểu 1 tỉ số'
+      @err_msg = 'Có lỗi xảy ra, bạn chỉ có thể dự đoán tối đa 3 tỉ số hoặc tối thiểu 1 tỉ số'
     else
       conditions = ['']
       if params[:random_winner_id].to_i == @game.team1_id

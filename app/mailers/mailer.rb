@@ -71,11 +71,11 @@ class Mailer
     end
   end
 
-  def self.process_staffs_top_scores_report_after_third_fourth
-    Settings.group_mails.each do |recipient|
-      UserMailer.staffs_top_scores_report_after_third_fourth(recipient).deliver_now
-    end
-  end
+  # def self.process_staffs_top_scores_report_after_third_fourth
+  #   Settings.group_mails.each do |recipient|
+  #     UserMailer.staffs_top_scores_report_after_third_fourth(recipient).deliver_now
+  #   end
+  # end
 
   def self.process_staffs_top_scores_report_after_final
     Settings.group_mails.each do |recipient|

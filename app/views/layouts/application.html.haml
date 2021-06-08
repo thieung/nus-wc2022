@@ -50,8 +50,8 @@
                       %a.navbar-lv2-item-link{href: matches_path({type: 'quarter_final'})} Tứ kết
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'semi_final' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: matches_path({type: 'semi_final'})} Bán kết
-                    %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'third_fourth' ? 'active' : ''}"}
-                      %a.navbar-lv2-item-link{href: matches_path({type: 'third_fourth'})} Tranh 3/4
+                    -# %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'third_fourth' ? 'active' : ''}"}
+                    -#   %a.navbar-lv2-item-link{href: matches_path({type: 'third_fourth'})} Tranh 3/4
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'matches' && action_name == 'index' && params[:type] == 'final' ? 'active' : ''}"}
                       %a.navbar-lv2-item-link{href: matches_path({type: 'final'})} Chung kết
                     %li.navbar-lv2-item{role: "presentation", class: "#{controller_name == 'users' && action_name == 'predict_champion' ? 'active' : ''}"}
