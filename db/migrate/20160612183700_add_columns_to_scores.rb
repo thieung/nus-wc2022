@@ -1,4 +1,4 @@
-class AddColumnsToScores < ActiveRecord::Migration
+class AddColumnsToScores < ActiveRecord::Migration[5.1]
   def change
     add_column :scores, :score1, :integer
     add_column :scores, :score2, :integer

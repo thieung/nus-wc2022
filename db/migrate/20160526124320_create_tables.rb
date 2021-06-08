@@ -1,4 +1,4 @@
-class CreateTables < ActiveRecord::Migration
+class CreateTables < ActiveRecord::Migration[5.1]
   def up
     create_table :user_alliances do |t|
       t.integer :alliance_id, null: false
