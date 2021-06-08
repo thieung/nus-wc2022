@@ -7,7 +7,7 @@
     - team = item.team
     %p{class: team.eliminated ? 'eliminated' : ''}
       %span.team-flag
-        %img.wc-flag{alt: team.try(:code), src: "/flags/#{team.try(:key) || 'placeholder'}.png", title: team.try(:code)}/
+        %img.wc-flag{alt: team.try(:code), src: "/flags_euro2020/#{team.try(:key) || 'placeholder'}.png", title: team.try(:code)}/
       %span.your-champion-predicted= team.title_vi
       %span.italic.text-desc.m-l-sm
         (Có

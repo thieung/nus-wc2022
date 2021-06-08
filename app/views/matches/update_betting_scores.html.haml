@@ -10,13 +10,13 @@
           .team-name
             %span.team-name_name= team1.try(:title_vi)||team1.try(:title)
           %span.team-flag
-            %img.wc-flag{alt: team1.try(:code), src: "/flags/#{team1.try(:key) || 'placeholder'}.png", title: team1.try(:code)}/
+            %img.wc-flag{alt: team1.try(:code), src: "/flags_euro2020/#{team1.try(:key) || 'placeholder'}.png", title: team1.try(:code)}/
         .text-center.match--score
           %span.match--score_score
             \-
         .team-away
           %span.team-flag
-            %img.wc-flag{alt: team2.try(:code), src: "/flags/#{team2.try(:key) || 'placeholder'}.png", title: team2.try(:code)}/
+            %img.wc-flag{alt: team2.try(:code), src: "/flags_euro2020/#{team2.try(:key) || 'placeholder'}.png", title: team2.try(:code)}/
           .team-code
             = team2.try(:code)
           .team-name

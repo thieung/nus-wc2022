@@ -9,7 +9,7 @@
     - if predicted_team
       %p
         %span.team-flag
-          %img.wc-flag{alt: predicted_team.try(:code), src: "/flags/#{predicted_team.try(:key) || 'placeholder'}.png", title: predicted_team.try(:code)}/
+          %img.wc-flag{alt: predicted_team.try(:code), src: "/flags_euro2020/#{predicted_team.try(:key) || 'placeholder'}.png", title: predicted_team.try(:code)}/
       %p
         %span= predicted_team.try(:title_vi)
     - else
