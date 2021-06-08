@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
-gem 'rails', '4.2.5'
+ruby '2.7.3'
+gem 'rails', '5.1.7'
 gem 'pg', '~> 0.18.4'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails'
 
 gem 'jquery-rails', '~> 4.1', '>= 4.1.1'
 gem 'jbuilder', '~> 2.0'
@@ -18,7 +18,7 @@ gem 'haml-rails', '~> 0.9.0'
 gem 'rolify', '~> 5.1'
 gem 'cancancan', '~> 1.14'
 gem 'settingslogic', '~> 2.0', '>= 2.0.9'
-gem 'rails-i18n', '~> 4.0', '>= 4.0.8'
+gem 'rails-i18n'
 gem 'stringex', '~> 2.6'
 gem 'mailgun-ruby'
 
@@ -29,7 +29,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'quiet_assets', '~> 1.1'
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'thin', '~> 1.6', '>= 1.6.4'
