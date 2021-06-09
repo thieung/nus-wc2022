@@ -40,9 +40,12 @@ defaults: &defaults
 
 development:
   <<: *defaults
-  staffs_group_mail: 'staff@example.com'
-  group_mails: ['staff@example.com', 'internship.dev@example.com', 'internship.ba_qc@example.com']
-  group_mails_with_hr: ['hr@example.com', 'staff@example.com', 'internship.dev@example.com', 'internship.ba_qc@example.com']
+  group_mails:
+    - 'staff@nustechnology.com'
+    - 'internship.dev@nustechnology.com'
+    - 'internship.ba_qc@nustechnology.com'
+    - 'thieunguyen.it@gmail.com'
+    - 'hoanghiep.stt@gmail.com'
   neat_setting: 800
   is_turn_off_mail: false
 
@@ -51,10 +54,10 @@ test:
 
 production:
   <<: *defaults
-  staffs_group_mail: 'staff@nustechnology.com'
-  group_mails: ['staff@nustechnology.com', 'internship.dev@nustechnology.com', 'internship.ba_qc@nustechnology.com']
-  group_mails_with_hr: ['hr@nustechnology.com', 'staff@nustechnology.com', 'internship.dev@nustechnology.com', 'internship.ba_qc@nustechnology.com']
+  group_mails:
+    - 'staff@nustechnology.com'
+    - 'internship.dev@nustechnology.com'
+    - 'internship.ba_qc@nustechnology.com'
+    - 'thieunguyen.it@gmail.com'
+    - 'hoanghiep.stt@gmail.com'
   is_turn_off_mail: false
-  sendgrid:
-    username: thieunv182
-    password: il0v3r0r182
