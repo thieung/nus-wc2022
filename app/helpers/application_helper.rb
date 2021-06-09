@@ -21,6 +21,8 @@ module ApplicationHelper
   end
 
   def can_play_music?
+    return false if DateTime.current.to_date < DateTime.parse(Settings.final.end).to_date
+
     days_remaining_after_final = (DateTime.current.to_date - DateTime.parse(Settings.final.end).to_date).to_i
     # Just only play music on Statistics page in 7 days after final match
     controller_name == 'statistics' && action_name == 'index' && days_remaining_after_final <= 7
