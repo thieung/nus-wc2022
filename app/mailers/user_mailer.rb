@@ -96,6 +96,6 @@ class UserMailer < ApplicationMailer
   end
 
   def send_test
-    mail(to: 'vanthieuuit@gmail.com', subject: "Test Schedule")
+    mail(to: 'thieunguyen.it@gmail.com', subject: "Test Schedule")
   end
 end
