@@ -25,4 +25,8 @@ namespace :db do
       end
     end
   end
+
+  task :update_special_staff, [:role] => :environment do
+    User.find_by(email: "hangncn@nustechnology.com").update_columns(full_name: "Hằng Nguyễn-Châu-Nhất")
+  end
 end
