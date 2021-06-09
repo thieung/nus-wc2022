@@ -22,8 +22,8 @@
     %span.text-desc Trận đấu đã diễn ra và đã được xử lý, không thể thao tác.
   - else
     - if game.team1_id && game.team2_id
-      = link_to 'Nhập dữ liệu cá cược', update_betting_scores_match_path(game.id)
-      \-
+      -# = link_to 'Nhập dữ liệu cá cược', update_betting_scores_match_path(game.id)
+      -# \-
       = link_to 'Nhập tỉ số trận đấu', update_match_score_match_path(game.id)
     - else
       = form_tag future_match_update_info_match_path(game.id), method: :post, remote: true do

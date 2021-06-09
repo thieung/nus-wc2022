@@ -44,8 +44,8 @@
       .admin-actions
         .block.m-b-xs
           = link_to "Cập nhật tỉ số", update_match_score_match_path(@game), class: 'btn btn-secondary'
-        .block.m-b-xs
-          = link_to "Cập nhật cá cược", update_betting_scores_match_path(@game), class: 'btn btn-secondary'
+        -# .block.m-b-xs
+        -#   = link_to "Cập nhật cá cược", update_betting_scores_match_path(@game), class: 'btn btn-secondary'
         - if Settings.is_demo
           .block
             = form_for(@game, url: send_report_email_to_all_staffs_match_path(@game), html: { method: :post }) do |f|
