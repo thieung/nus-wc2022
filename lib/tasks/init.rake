@@ -16,7 +16,7 @@ namespace :db do
         )
         if staff.save
           staff.add_role :staff
-          UserMailer.delay.send_password_to_staff(staff, generated_password) unless Settings.is_turn_off_mail
+          UserMailer.delay.send_password_to_staff(staff, generated_password) if !Settings.is_turn_off_mail && !Settings.is_demo
 
           # Generate predict champion data for each staff
           predict = staff.predict_champions.new(money: Settings.predict_champion_money.first)
