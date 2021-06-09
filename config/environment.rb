@@ -15,11 +15,11 @@ Rails.application.initialize!
 # }
 
 ActionMailer::Base.smtp_settings = {
-  :port           => ENV['MAILGUN_SMTP_PORT'],
-  :address        => ENV['MAILGUN_SMTP_SERVER'],
-  :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
-  :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+  :port           => '465',
+  :address        => 'smtp.nustechnology.com',
+  :user_name      => 'euro2020@nustechnology.com',
+  :password       => 'n%Llkpb7kGJpGlV0',
   :domain         => 'nus-euro2020.herokuapp.com',
-  :authentication => :plain,
+  :authentication => :plain
 }
 ActionMailer::Base.delivery_method = :smtp

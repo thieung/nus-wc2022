@@ -14,7 +14,7 @@ class UserMailer < ApplicationMailer
     @score_content = Score.where(id: bet_info.score_ids.map(&:to_i)).map(&:name).join(', ')
     @game = bet_info.game
     @match_content = "#{@game.team1.title_vi} - #{@game.team2.title_vi}"
-    mail(from: "#{@user.full_name.to_ascii} <no-reply@example.com>", to: recipient, subject: "[NUS Event - Euro 2020] Dự đoán tỉ số trận #{@match_content}")
+    mail(to: recipient, subject: "[NUS Event - Euro 2020] Dự đoán tỉ số trận #{@match_content}")
   end
 
   def notice_bet_result_updated_to_staffs recipient, bet_info
@@ -22,7 +22,7 @@ class UserMailer < ApplicationMailer
     @score_content = Score.where(id: bet_info.score_ids.map(&:to_i)).map(&:name).join(', ')
     @game = bet_info.game
     @match_content = "#{@game.team1.title_vi} - #{@game.team2.title_vi}"
-    mail(from: "#{@user.full_name.to_ascii} <no-reply@example.com>", to: recipient, subject: "[NUS Event - Euro 2020] [Update] Dự đoán tỉ số trận #{@match_content}")
+    mail(to: recipient, subject: "[NUS Event - Euro 2020] [Update] Dự đoán tỉ số trận #{@match_content}")
   end
 
   def notice_match_result_to_staffs recipient, game
@@ -36,7 +36,7 @@ class UserMailer < ApplicationMailer
     @user = predict_champion.user
     @team = predict_champion.team
     @fee = predict_champion.money
-    mail(from: "#{@user.full_name.to_ascii} <no-reply@example.com>", to: recipient, subject: "[NUS Event - Euro 2020] Dự đoán đội vô địch lần #{@user.total_teams_to_predict_champion}")
+    mail(to: recipient, subject: "[NUS Event - Euro 2020] Dự đoán đội vô địch lần #{@user.total_teams_to_predict_champion}")
   end
 
   def notice_all_bets_info_to_staffs recipient, game

@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "NUS Technology <no-reply@example.com>"
+  default from: 'NUS Euro 2020'
   layout 'mailer'
 end
