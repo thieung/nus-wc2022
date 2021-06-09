@@ -20,6 +20,7 @@ ActionMailer::Base.smtp_settings = {
   :user_name      => 'euro2020@nustechnology.com',
   :password       => 'n%Llkpb7kGJpGlV0',
   :domain         => 'nus-euro2020.herokuapp.com',
-  :authentication => :plain
+  :authentication => :login,
+  :ssl            => true
 }
 ActionMailer::Base.delivery_method = :smtp
