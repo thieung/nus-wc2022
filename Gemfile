@@ -21,6 +21,7 @@ gem 'settingslogic', '~> 2.0', '>= 2.0.9'
 gem 'rails-i18n'
 gem 'stringex', '~> 2.6'
 gem 'mailgun-ruby'
+gem 'sendgrid-ruby'
 
 group :development, :test do
   gem 'byebug'
