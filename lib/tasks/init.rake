@@ -29,4 +29,23 @@ namespace :db do
   task :update_special_staff, [:role] => :environment do
     User.find_by(email: "hangncn@nustechnology.com").update_columns(full_name: "Hằng Nguyễn-Châu-Nhất")
   end
+
+  task :generate_new_staff, [:role] => :environment do
+    generated_password = Settings.is_demo ? '12345678' : Devise.friendly_token.first(8)
+    staff = User.new(
+      full_name: 'Nguyễn Châu Nhị Hằng',
+      username: 'nhihangnguyen98',
+      email: 'nhihangnguyen98@gmail.com',
+      password: generated_password
+    )
+
+    if staff.save
+      staff.add_role :staff
+      UserMailer.delay.send_password_to_staff(staff, generated_password) if !Settings.is_turn_off_mail && !Settings.is_demo
+
+      # Generate predict champion data for each staff
+      predict = staff.predict_champions.new(money: Settings.predict_champion_money.first)
+      predict.save
+    end
+  end
 end
