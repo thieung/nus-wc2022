@@ -27,7 +27,7 @@ namespace :db do
   end
 
   task :update_special_staff, [:role] => :environment do
-    User.find_by(email: "hangncn@nustechnology.com").update_columns(full_name: "Hằng Nguyễn-Châu-Nhất")
+    User.find_by(email: "nhihangnguyen98@gmail.com").update_columns(full_name: "Hằng Nguyễn-Châu-Nhị")
   end
 
   task :generate_new_staff, [:role] => :environment do
