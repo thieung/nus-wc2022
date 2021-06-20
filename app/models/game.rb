@@ -68,10 +68,12 @@ class Game < ActiveRecord::Base
 
   def self.send_report_to_staffs
     current_time = DateTime.current
-    available_game = Game.not_locked.select{|g| !g.is_reported && g.deadline < current_time && current_time < g.play_at}.first
-    if available_game
-      Mailer.process_notice_all_bets_info_to_staffs(available_game) unless Settings.is_turn_off_mail
-      available_game.update_attributes(is_reported: true)
+    available_games = Game.not_locked.select{|g| !g.is_reported && g.deadline < current_time && current_time < g.play_at}
+    return if available_games.blank?
+
+    available_games.each do |ga|
+      Mailer.process_notice_all_bets_info_to_staffs(ga) unless Settings.is_turn_off_mail
+      ga.update_attributes(is_reported: true)
     end
   end
 
