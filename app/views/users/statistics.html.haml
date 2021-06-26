@@ -5,7 +5,11 @@
     %p.text-center.m-t-sm (Đơn vị: Points)
     %p.text-center.m-t-sm
       Nhà đầu tư:
-      %span.bold-text.staff-display-name= @user.display_name
+      %span.bold-text.staff-display-name
+        - if @user.is_active?
+          = @user.display_name
+        - else
+          %del= @user.display_name
     - if @user.is_alliance
       %p.text-center
         Các thành viên:

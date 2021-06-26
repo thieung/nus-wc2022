@@ -39,6 +39,9 @@ defaults: &defaults
   is_demo: false
   boss_contribute:
     -
+      game_id: 1
+      money: 1000000
+    -
       game_id: 37
       money: 1000000
 

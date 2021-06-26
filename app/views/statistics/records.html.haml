@@ -21,7 +21,11 @@
                 - match_info = "#{record[:round].is_group_stage? ? 'Vòng bảng' : record[:round].title_vi}, #{record[:team1].title_vi} #{record[:game].score1} - #{record[:game].score2} #{record[:team2].title_vi}"
                 %tr{class: css_class, "data-url" => match_url(record[:game].id)}
                   %td.text-center= index+1
-                  %td= record[:user].display_name
+                  %td
+                    - if record[:user].is_active
+                      = record[:user].display_name
+                    - else
+                      %del= record[:user].display_name
                   %td.text-center.tipso{"data-tipso"=>"#{match_info}"}
                     %span.team-flag
                       %img.wc-flag{alt: record[:team1].try(:code), src: "/flags_euro2020/#{record[:team1].try(:key) || 'placeholder'}.png", title: record[:team1].try(:code)}/

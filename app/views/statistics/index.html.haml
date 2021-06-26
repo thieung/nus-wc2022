@@ -38,7 +38,11 @@
               - css_class += index == 0 ? " success top1" : ([1,2].include?(index) ? ' active' : (@statistics.size-1 == index ? ' danger bottom1' : ([@statistics.size-2, @statistics.size-3].include?(index) ? ' warning' : '')))
               %tr{class: css_class, "data-url" => statistics_user_url(record[:user])}
                 %td.text-center= index+1
-                %td= record[:user].display_name
+                %td
+                  - if record[:user].is_active
+                    = record[:user].display_name
+                  - else
+                    %del= record[:user].display_name
                 %td.text-center= record[:total_matches]
                 %td.text-center= record[:total_scores]
                 %td.text-center= format_currency(record[:total_money_bet], false)
