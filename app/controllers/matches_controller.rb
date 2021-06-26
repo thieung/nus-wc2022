@@ -244,7 +244,8 @@ class MatchesController < ApplicationController
       previous_match: 0,
       this_match: 0,
       company_contribute: 0,
-      for_final: 0
+      for_final: 0,
+      boss_contribute: 0
     }
     money_statistic[:previous_match] = if game.first_match?
       0
@@ -256,6 +257,7 @@ class MatchesController < ApplicationController
     if money_statistic[:this_match].to_i > 0
       money_statistic[:company_contribute] = 3*game.round.money_rate
     end
+    money_statistic[:boss_contribute] = Settings.boss_contribute.find { |item| item['game_id'] == game.id }&.send(:[], 'money') || 0
     money_statistic
   end
 end

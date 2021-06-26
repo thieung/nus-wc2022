@@ -118,3 +118,9 @@
                 Công ty NUS:
               %td.play-font
                 = format_currency(money_statistic[:company_contribute])
+            - if money_statistic[:boss_contribute] > 0
+              %tr
+                %td
+                  Sếp Hiến:
+                %td.play-font
+                  = format_currency(money_statistic[:boss_contribute])
