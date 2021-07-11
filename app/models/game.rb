@@ -126,17 +126,18 @@ class Game < ActiveRecord::Base
       Investment.find_by(game_id: previous.id).try(:remaining) || 0
     end
     money_from_boss = Settings.boss_contribute.find { |item| item['game_id'] == id }&.send(:[], 'money') || 0
+    money_from_sponsor = Settings.sponsor_contribute.find_all { |item| item['game_id'] == @game.id }&.map(&:money).sum || 0
 
     # Reset total money win
     bets.update_all(total_money_win: 0, locked: true)
     if winners_ids.size > 0
       # Update total money win
-      money_for_each_people = ((investment.total + money_from_previous_match + money_from_boss + total_money_for_final).to_f / winners_ids.size).round
+      money_for_each_people = ((investment.total + money_from_previous_match + money_from_boss + money_from_sponsor + total_money_for_final).to_f / winners_ids.size).round
       bets.where(user_id: winners_ids).update_all(total_money_win: money_for_each_people)
       investment.update_attributes(remaining: 0)
     else
       # No winner
-      money_for_next_match = ((investment.total + money_from_previous_match + money_from_boss + total_money_for_final).to_f / 2).round
+      money_for_next_match = ((investment.total + money_from_previous_match + money_from_boss + money_from_sponsor + total_money_for_final).to_f / 2).round
       unless final_match?
         investment.update_attributes(remaining: money_for_next_match)
       end

@@ -34,6 +34,7 @@ class MatchesController < ApplicationController
 
   def show
     @money_statistic = calculate_money_for_match @game
+    @sponsor_detail = Settings.sponsor_contribute.find_all { |item| item['game_id'] == @game.id }
 
     if @game.has_score?
       @winners = @game.list_winners
@@ -245,7 +246,8 @@ class MatchesController < ApplicationController
       this_match: 0,
       company_contribute: 0,
       for_final: 0,
-      boss_contribute: 0
+      boss_contribute: 0,
+      sponsor_contribute: 0
     }
     money_statistic[:previous_match] = if game.first_match?
       0
@@ -258,6 +260,7 @@ class MatchesController < ApplicationController
       money_statistic[:company_contribute] = 3*game.round.money_rate
     end
     money_statistic[:boss_contribute] = Settings.boss_contribute.find { |item| item['game_id'] == game.id }&.send(:[], 'money') || 0
+    money_statistic[:sponsor_contribute] = Settings.sponsor_contribute.find_all { |item| item['game_id'] == @game.id }&.map(&:money).sum || 0
     money_statistic
   end
 end

@@ -124,3 +124,10 @@
                   Sếp Hiến:
                 %td.play-font
                   = format_currency(money_statistic[:boss_contribute])
+            - if @sponsor_detail.present?
+              - @sponsor_detail.each do |sponsor|
+                %tr
+                  %td
+                    = "#{sponsor['name']}:"
+                  %td.play-font
+                    = format_currency(sponsor['money'])

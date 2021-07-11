@@ -44,7 +44,11 @@ defaults: &defaults
     -
       game_id: 37
       money: 1000000
-
+  sponsor_contribute:
+    -
+      game_id: 51
+      money: 2000000
+      name: Đại gia Hiệp Nguyễn-Hoàng
 development:
   <<: *defaults
   group_mails:
