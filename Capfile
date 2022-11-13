@@ -31,7 +31,7 @@ install_plugin Capistrano::SCM::Git
 require 'capistrano/rails/migrations'
 require "capistrano/rbenv"
 # require "capistrano/chruby"
-# require "capistrano/bundler"
+require "capistrano/bundler"
 # require "capistrano/rails/assets"
 # require "capistrano/rails/migrations"
 require "capistrano/passenger"
@@ -41,3 +41,4 @@ Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
 
 set :rbenv_type, :user
 set :rbenv_ruby, File.read('.ruby-version').strip
+set :bundle_cmd, '/home/deploy/.rbenv/shims/bundle'
