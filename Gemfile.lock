@@ -40,13 +40,29 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    airbrussh (1.4.1)
+      sshkit (>= 1.6.1, != 1.7.0)
     arel (8.0.0)
     bcrypt (3.1.16)
-    binding_of_caller (1.0.0)
-      debug_inspector (>= 0.0.1)
+    bindex (0.8.1)
     builder (3.2.4)
     byebug (11.1.3)
     cancancan (1.17.0)
+    capistrano (3.17.1)
+      airbrussh (>= 1.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (2.1.0)
+      capistrano (~> 3.1)
+    capistrano-passenger (0.2.1)
+      capistrano (~> 3.0)
+    capistrano-rails (1.6.2)
+      capistrano (~> 3.1)
+      capistrano-bundler (>= 1.1, < 3)
+    capistrano-rbenv (2.2.0)
+      capistrano (~> 3.1)
+      sshkit (~> 1.3)
     coderay (1.1.3)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -58,7 +74,6 @@ GEM
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     daemons (1.4.0)
-    debug_inspector (1.1.0)
     delayed_job (4.1.9)
       activesupport (>= 3.0, < 6.2)
     delayed_job_active_record (4.1.6)
@@ -128,13 +143,16 @@ GEM
     mini_mime (1.1.0)
     mini_portile2 (2.5.3)
     minitest (5.14.4)
+    net-scp (4.0.0)
+      net-ssh (>= 2.6.5, < 8.0.0)
+    net-ssh (7.0.1)
     netrc (0.11.0)
     nio4r (2.5.7)
     nokogiri (1.11.7)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pg (0.18.4)
+    pg (1.4.4)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -168,11 +186,6 @@ GEM
     rails-i18n (5.1.3)
       i18n (>= 0.7, < 2)
       railties (>= 5.0, < 6)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.5)
-    rails_stdout_logging (0.0.5)
     railties (5.1.7)
       actionpack (= 5.1.7)
       activesupport (= 5.1.7)
@@ -214,6 +227,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sshkit (1.21.3)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     stringex (2.8.5)
     thin (1.8.1)
       daemons (~> 1.0, >= 1.0.9)
@@ -231,11 +247,11 @@ GEM
     unf_ext (0.0.7.7)
     warden (1.2.9)
       rack (>= 2.0.9)
-    web-console (2.3.0)
-      activemodel (>= 4.0)
-      binding_of_caller (>= 0.7.2)
-      railties (>= 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
+    web-console (3.7.0)
+      actionview (>= 5.0)
+      activemodel (>= 5.0)
+      bindex (>= 0.4.0)
+      railties (>= 5.0)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -246,6 +262,10 @@ PLATFORMS
 DEPENDENCIES
   byebug
   cancancan (~> 1.14)
+  capistrano (~> 3.11)
+  capistrano-passenger (~> 0.2.0)
+  capistrano-rails (~> 1.4)
+  capistrano-rbenv (~> 2.1, >= 2.1.4)
   coffee-rails
   delayed_job_active_record (~> 4.1, >= 4.1.1)
   devise (~> 4.1, >= 4.1.1)
@@ -255,12 +275,11 @@ DEPENDENCIES
   jquery-rails (~> 4.1, >= 4.1.1)
   letter_opener_web
   mailgun-ruby
-  pg (~> 0.18.4)
+  pg (~> 1.4, >= 1.4.4)
   pry-byebug
   pry-rails
   rails (= 5.1.7)
   rails-i18n
-  rails_12factor (~> 0.0.3)
   rolify (~> 5.1)
   sass-rails
   sendgrid-ruby
@@ -269,10 +288,10 @@ DEPENDENCIES
   stringex (~> 2.6)
   thin (~> 1.6, >= 1.6.4)
   uglifier (>= 1.3.0)
-  web-console (~> 2.0)
+  web-console (~> 3.3, >= 3.3.1)
 
 RUBY VERSION
-   ruby 2.7.3p183
+   ruby 2.7.6p219
 
 BUNDLED WITH
    2.1.4

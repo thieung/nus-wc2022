@@ -20,7 +20,7 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
-  username: postgres
+  username:
   password:
   timeout: 5000
   host: localhost
@@ -28,7 +28,7 @@ default: &default
 
 development:
   <<: *default
-  database: euro2020_local
+  database: wc2022_local
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -80,11 +80,5 @@ development:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
 production:
-  <<: *default
-  database: euro2016_production
-  username: euro2016
-  password: <%= ENV['EURO2016_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>

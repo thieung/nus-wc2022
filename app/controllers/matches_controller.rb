@@ -20,8 +20,8 @@ class MatchesController < ApplicationController
         redirect_to matches_path({type: 'quarter_final'}) and return
       elsif today <= Date.parse(Settings.semi_final.end)
         redirect_to matches_path({type: 'semi_final'}) and return
-      # elsif today.to_date <= Date.parse(Settings.third_fourth.end)
-      #   redirect_to matches_path({type: 'third_fourth'}) and return
+      elsif today.to_date <= Date.parse(Settings.third_fourth.end)
+        redirect_to matches_path({type: 'third_fourth'}) and return
       else
         redirect_to matches_path({type: 'final'}) and return
       end
@@ -34,7 +34,7 @@ class MatchesController < ApplicationController
 
   def show
     @money_statistic = calculate_money_for_match @game
-    @sponsor_detail = Settings.sponsor_contribute.find_all { |item| item['game_id'] == @game.id }
+    @sponsor_detail = Settings.sponsor_contribute&.find_all { |item| item['game_id'] == @game.id }
 
     if @game.has_score?
       @winners = @game.list_winners
@@ -167,8 +167,8 @@ class MatchesController < ApplicationController
             Mailer.process_staffs_top_scores_report_after_quarter_final unless Settings.is_turn_off_mail
           when Settings.top_scores_report_match_id.semi_final.to_i
             Mailer.process_staffs_top_scores_report_after_semi_final unless Settings.is_turn_off_mail
-          # when Settings.top_scores_report_match_id.third_fourth.to_i
-          #   Mailer.process_staffs_top_scores_report_after_third_fourth unless Settings.is_turn_off_mail
+          when Settings.top_scores_report_match_id.third_fourth.to_i
+            Mailer.process_staffs_top_scores_report_after_third_fourth unless Settings.is_turn_off_mail
           when Settings.top_scores_report_match_id.final.to_i
             Mailer.process_staffs_top_scores_report_after_final unless Settings.is_turn_off_mail
           end
@@ -259,8 +259,8 @@ class MatchesController < ApplicationController
     if money_statistic[:this_match].to_i > 0
       money_statistic[:company_contribute] = 3*game.round.money_rate
     end
-    money_statistic[:boss_contribute] = Settings.boss_contribute.find { |item| item['game_id'] == game.id }&.send(:[], 'money') || 0
-    money_statistic[:sponsor_contribute] = Settings.sponsor_contribute.find_all { |item| item['game_id'] == @game.id }&.map(&:money).sum || 0
+    money_statistic[:boss_contribute] = Settings.boss_contribute&.find { |item| item['game_id'] == game.id }&.send(:[], 'money') || 0
+    money_statistic[:sponsor_contribute] = Settings.sponsor_contribute&.find_all { |item| item['game_id'] == @game.id }&.map(&:money)&.sum || 0
     money_statistic
   end
 end

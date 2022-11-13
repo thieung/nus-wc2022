@@ -29,6 +29,6 @@ module ApplicationHelper
   end
 
   def team_logo(team)
-    team.try(:key) ? "/flags_euro2020/#{team.try(:key)}.png" : "/flags_euro2020/teamlogo_fallback.svg"
+    team.try(:key) ? "/flags_wc2022/#{team.try(:key)}.svg" : "/flags_wc2022/undefine.svg"
   end
 end

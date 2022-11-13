@@ -3,7 +3,7 @@
   - if game.team1_id
     = game.team1.try(:title_vi)||game.team1.try(:title)
   - else
-    - if game.is_third_fourth?
+    - if game.third_fourth_match?
       = select_tag "team1_id_#{game.id}", options_for_select(Team.join_tournament.eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control admin-select-team', prompt: "----- #{game.unknown_team1_title_vi}-----"
     - else
       = select_tag "team1_id_#{game.id}", options_for_select(Team.join_tournament.not_eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control admin-select-team', prompt: "----- #{game.unknown_team1_title_vi}-----"
@@ -11,7 +11,7 @@
   - if game.team2_id
     = game.team2.try(:title_vi)||game.team2.try(:title)
   - else
-    - if game.is_third_fourth?
+    - if game.third_fourth_match?
       = select_tag "team2_id_#{game.id}", options_for_select(Team.join_tournament.eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control admin-select-team', prompt: "----- #{game.unknown_team2_title_vi}-----"
     - else
       = select_tag "team2_id_#{game.id}", options_for_select(Team.join_tournament.not_eliminated.order_by_title_vi.collect{|t|[t.title_vi, t.id]}, nil), class: 'form-control admin-select-team', prompt: "----- #{game.unknown_team2_title_vi}-----"
