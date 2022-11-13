@@ -28,10 +28,10 @@
                       %del= record[:user].display_name
                   %td.text-center.tipso{"data-tipso"=>"#{match_info}"}
                     %span.team-flag
-                      %img.wc-flag{alt: record[:team1].try(:code), src: "/flags_euro2020/#{record[:team1].try(:key) || 'placeholder'}.png", title: record[:team1].try(:code)}/
+                      %img.wc-flag{alt: record[:team1].try(:code), src: "/flags_wc2022/#{record[:team1].try(:key) || 'undefine'}.svg", title: record[:team1].try(:code)}/
                     \-
                     %span.team-flag
-                      %img.wc-flag{alt: record[:team2].try(:code), src: "/flags_euro2020/#{record[:team2].try(:key) || 'placeholder'}.png", title: record[:team2].try(:code)}/
+                      %img.wc-flag{alt: record[:team2].try(:code), src: "/flags_wc2022/#{record[:team2].try(:key) || 'undefine'}.svg", title: record[:team2].try(:code)}/
                   %td.text-center= format_currency record[:total_money_win], false
   / Top 5 Earn Money
   .box-header

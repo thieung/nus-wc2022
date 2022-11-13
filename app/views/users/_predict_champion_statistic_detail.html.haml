@@ -20,7 +20,7 @@
               %td.text-center.uppercase
                 %p
                   %span.team-flag
-                    %img.wc-flag{alt: team.try(:code), src: "/flags_euro2020/#{team.try(:key) || 'placeholder'}.png", title: team.try(:code)}/
+                    %img.wc-flag{alt: team.try(:code), src: "/flags_wc2022/#{team.try(:key) || 'undefine'}.svg", title: team.try(:code)}/
                 %p
                   %span= team.try(:title_vi)
               %td.text-center.number-larger
@@ -52,7 +52,7 @@
                 %td.text-center.uppercase{class: predicted_team.try(:eliminated) ? 'eliminated' : ''}
                   %p
                     %span.team-flag
-                      %img.wc-flag{alt: predicted_team.try(:code), src: "/flags_euro2020/#{predicted_team.try(:key) || 'placeholder'}.png", title: predicted_team.try(:code)}/
+                      %img.wc-flag{alt: predicted_team.try(:code), src: "/flags_wc2022/#{predicted_team.try(:key) || 'undefine'}.svg", title: predicted_team.try(:code)}/
                   %p
                     %span= predicted_team.try(:title_vi)
               - else
@@ -60,7 +60,7 @@
                   - if get_predict_status_text(i, staff) == 'VIỆT NAM VÔ ĐỊCH'
                     %p
                       %span.team-flag
-                        %img{alt: 'VIE', src: "/flags_euro2020/vie.png", title: 'VIE'}/
+                        %img{alt: 'VIE', src: "/flags_wc2022/vie.png", title: 'VIE'}/
                   %p
                     %span
                       = get_predict_status_text(i, staff)

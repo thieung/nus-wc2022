@@ -63,7 +63,7 @@
                       - if index == 0
                         %td.middle.text-center.uppercase{rowspan: @winner_list.size}
                           %span.team-flag
-                            %img.wc-flag{alt: Team.champion.try(:code), src: "/flags_euro2020/#{Team.champion.try(:key) || 'placeholder'}.png", title: Team.champion.try(:code)}/
+                            %img.wc-flag{alt: Team.champion.try(:code), src: "/flags_wc2022/#{Team.champion.try(:key) || 'undefine'}.svg", title: Team.champion.try(:code)}/
                           %span= Team.champion.try(:title_vi)
                         %td.middle.text-center.money-win{rowspan: @winner_list.size}
                           = format_currency(@money_for_each_user||0)
