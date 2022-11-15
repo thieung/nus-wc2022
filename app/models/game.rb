@@ -44,7 +44,7 @@ class Game < ActiveRecord::Base
   end
 
   def available_to_bet
-    DateTime.now < deadline && !locked
+    DateTime.current < deadline && !locked
   end
 
   def final_match?
@@ -102,7 +102,7 @@ class Game < ActiveRecord::Base
 
   def can_show_match_stats?
     return true if Settings.is_demo
-    DateTime.now >= deadline
+    DateTime.current >= deadline
   end
 
   def self.started?
