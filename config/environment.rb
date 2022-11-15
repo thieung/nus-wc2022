@@ -5,13 +5,12 @@ require File.expand_path('../application', __FILE__)
 Rails.application.initialize!
 
 ActionMailer::Base.smtp_settings = {
-  :port           => 587,
+  :port           => 465,
   :address        => ENV['SMTP_HOST'],
   :user_name      => ENV['SMTP_USERNAME'],
   :password       => ENV['SMTP_PASSWORD'],
   :domain         => ENV['SMTP_DOMAIN'],
   :authentication => :plain,
-  :enable_starttls_auto => true,
   :ssl            => true
 }
 ActionMailer::Base.delivery_method = :smtp
