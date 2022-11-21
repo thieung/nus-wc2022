@@ -120,7 +120,7 @@ class Game < ActiveRecord::Base
       Investment.find_by(game_id: previous.id).try(:remaining) || 0
     end
     money_from_boss = Settings.boss_contribute&.find { |item| item['game_id'] == id }&.send(:[], 'money') || 0
-    money_from_sponsor = Settings.sponsor_contribute&.find_all { |item| item['game_id'] == id }&.map(&:money).sum || 0
+    money_from_sponsor = Settings.sponsor_contribute&.find_all { |item| item['game_id'] == id }&.map(&:money)&.sum || 0
 
     # Reset total money win
     bets.update_all(total_money_win: 0, locked: true)
