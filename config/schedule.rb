@@ -19,6 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 #
+set :bundle_command, "/home/deploy/.rbenv/shims/bundle exec"
 # Every hour at minute 40
 every '40 * * * *' do
   rake "scheduler:send_report_each_match"
